@@ -30,7 +30,7 @@ https://docs.google.com/spreadsheets/d/1bmyBLmHnn4NFDbJqat0Ty4VN9wqgdejzqYHz7MBw
 ## 画面遷移図
 https://docs.google.com/spreadsheets/d/1bmyBLmHnn4NFDbJqat0Ty4VN9wqgdejzqYHz7MBw4fU/edit#gid=907808007
 ## ワイヤーフレーム
-https://docs.google.com/spreadsheets/d/1bmyBLmHnn4NFDbJqat0Ty4VN9wqgdejzqYHz7MBw4fU/edit#gid=1616840452
+https://cacoo.com/diagrams/PfKXwpeo68GR5ckw#16930
 
 ## 使用Gem
 - carrierwave
