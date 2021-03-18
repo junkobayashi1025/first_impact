@@ -18,11 +18,11 @@
     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
       <% if user_signed_in? %>
         <%= link_to 'マイページ', user_path(current_user.id), class: 'dropdown-item' %>
-        <%= link_to "お気に入り", favorite_user_path(current_user.id), class: 'dropdown-item' %>
-        <%= link_to 'ログアウト', session_path(current_user.id), method: :delete, class: 'dropdown-item', id:'header_nav_submit' %>
+        <%= link_to "お気に入り", "", class: 'dropdown-item' %>
+        <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'dropdown-item', id:'header_nav_submit' %>
       <% else %>
-        <%= link_to '登録', "", class: 'dropdown-item' %>
-        <%= link_to 'ログイン', "", class: 'dropdown-item' %>
+        <%= link_to '登録', new_user_registration_path, class: 'dropdown-item' %>
+        <%= link_to 'ログイン', new_user_session_path, class: 'dropdown-item' %>
       <% end %>
     </div>
   </li>
