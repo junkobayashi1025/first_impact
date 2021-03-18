@@ -10,6 +10,21 @@
   </head>
 
   <body>
-    <%= yield %>
+    <%= render 'header' %>
+      <div class="container col-md-10">
+        <div class="col-md-4">
+        <% if flash[:notice] %>
+          <p class="alert alert-primary"><%= flash[:notice] %></p>
+        <% end %>
+        <% if flash[:success] %>
+          <p class="alert alert-success"><%= flash[:success] %></p>
+        <% end %>
+        <% if flash[:danger] %>
+          <p class="alert alert-danger"><%= flash[:danger] %></p>
+        <% end %>
+        </div>
+       </div>
+        <div class="container">
+        <%= yield %>
   </body>
 </html>
