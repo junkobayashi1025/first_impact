@@ -3,31 +3,16 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email,  autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
+<div class="col-md-4">
+ <div class="form-group">
+    <%= f.text_field :name, placeholder:"名前", class: 'form-control',autofocus: true %><br>
+    <%= f.email_field :email, placeholder:"メールアドレス", class: 'form-control', autocomplete: "email" %><br>
+    <%= f.password_field :password, placeholder:"パスワード(6文字以上)", class: 'form-control', autocomplete: "new-password" %><br>
+    <%= f.password_field :password_confirmation, placeholder:"パスワード確認", class: 'form-control', autocomplete: "new-password" %><br>
+    <%= f.file_field :icon %>
+    </div>
   <div class="actions">
-    <%= f.submit t('.sign_up') %>
+    <%= f.submit t('.sign_up'), class: 'btn btn-primary', id: 'user_form_submit' %>
   </div>
 <% end %>
 
