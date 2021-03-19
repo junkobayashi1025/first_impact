@@ -1,0 +1,19 @@
+<h2><%= t('.sign_up') %></h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+<div class="col-md-4">
+ <div class="form-group">
+    <%= f.text_field :name, placeholder:"名前", class: 'form-control',autofocus: true %><br>
+    <%= f.email_field :email, placeholder:"メールアドレス", class: 'form-control', autocomplete: "email" %><br>
+    <%= f.password_field :password, placeholder:"パスワード(6文字以上)", class: 'form-control', autocomplete: "new-password" %><br>
+    <%= f.password_field :password_confirmation, placeholder:"パスワード確認", class: 'form-control', autocomplete: "new-password" %><br>
+    <%= f.file_field :icon %>
+    </div>
+  <div class="actions">
+    <%= f.submit t('.sign_up'), class: 'btn btn-primary', id: 'user_form_submit' %>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>
