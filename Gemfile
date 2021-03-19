@@ -18,6 +18,7 @@ gem 'devise-i18n'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'rails_admin', '~> 2.0'
+gem 'cancancan'
 
 gem 'bootsnap', '>= 1.1.0', require: false
 
