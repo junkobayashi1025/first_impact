@@ -13,7 +13,9 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to user_path, notice: I18n.t('views.messages.update_profile')
+      bypass_sign_in(@user)
+      redirect_to user_path
+      flash[:success] = "ユーザー「#{@user.name}」を更新しました"
     else
       render 'edit'
     end
