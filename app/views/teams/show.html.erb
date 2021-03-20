@@ -1,12 +1,20 @@
 <div class="container">
   <table class="table">
     <tr>
-      <th><%= t('view.team_name') %>:</th>
+      <th><%= 'チーム名' %>:</th>
       <td><%= @team.name %></td>
     </tr>
     <tr>
-      <th><%= t('view.team_description') %>:</th>
-      <td><%= @team.description %></td>
+      <th><%= '備考' %>:</th>
+      <td><%= @team.remark %></td>
+    </tr>
+    <tr>
+      <th><%= '責任者' %>:</th>
+      <td><%= link_to "#{@team.owner.name}", user_path(@team.owner.id) %></td>
+    </tr>
+    <tr>
+      <th><%= '担当者' %>:</th>
+      <td><%= @team.owner.email %></td>
     </tr>
   </table>
 

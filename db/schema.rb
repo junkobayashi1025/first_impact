@@ -28,8 +28,8 @@ ActiveRecord::Schema.define(version: 2021_03_19_092750) do
     t.string "name", default: "", null: false
     t.string "icon"
     t.text "remark"
-    t.string "owner_id"
-    t.string "charge_in_person_id"
+    t.bigint "owner_id"
+    t.bigint "charge_in_person_id"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

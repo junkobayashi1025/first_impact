@@ -7,13 +7,13 @@ class TeamsController < ApplicationController
 
  def create
    @team = Team.new(teams_params)
-   @team.user_id = current_user.id
+
+   @team.owner_id = current_user.id
    if @team.save
      redirect_to team_path(@team), notice: 'グループを作成しました。'
    else
      render 'new'
    end
-
  end
 
  def index
@@ -29,8 +29,7 @@ class TeamsController < ApplicationController
  private
 
  def teams_params
-   params.require(:team).permit(:name, :icon, :remark, :owner_id,
-                                :charge_in_person_id, :user_id)
+   params.require(:team).permit(:name, :icon, :remark, :owner_id)
  end
 
  def set_team

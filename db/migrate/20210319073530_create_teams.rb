@@ -4,8 +4,8 @@ class CreateTeams < ActiveRecord::Migration[5.2]
       t.string :name,                null: false, default: ""
       t.string :icon
       t.text :remark
-      t.string :owner_id,            index: true
-      t.string :charge_in_person_id, index: true
+      t.bigint :owner_id,            index: true, foreign_key: true
+      t.bigint :charge_in_person_id, index: true, foreign_key: true
       t.references :user,            foreign_key: true
       t.timestamps
     end
