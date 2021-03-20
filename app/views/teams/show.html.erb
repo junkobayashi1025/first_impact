@@ -1,0 +1,15 @@
+<div class="container">
+  <table class="table">
+    <tr>
+      <th><%= t('view.team_name') %>:</th>
+      <td><%= @team.name %></td>
+    </tr>
+    <tr>
+      <th><%= t('view.team_description') %>:</th>
+      <td><%= @team.description %></td>
+    </tr>
+  </table>
+
+  <%= link_to t('view.edit'), edit_team_path(@team) %>
+  <%= link_to t('view.back'), teams_path %>
+</div>

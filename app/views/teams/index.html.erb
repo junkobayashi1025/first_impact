@@ -1,0 +1,34 @@
+<div class ="container">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="row">
+        <div class="col-xs-6">
+          グループ一覧
+        </div>
+
+        <div class="col-xs-6 text-right">
+          <%= link_to t('view.create_new_team'), new_team_path, class: "btn btn-primary btn-xs" %>
+        </div>
+      </div>
+    </div>
+      <table class="table panel-body">
+        <tr>
+          <th><%= t('view.team_name') %></th>
+          <th><%= t('view.team_description') %></th>
+          <th></th>
+          <th></th>
+        </tr>
+
+        <% @teams.each do |team| %>
+          <tr>
+            <td><%= link_to "#{team.name}", team_path(team.id) %></td>
+            <td><%= team.description %></td>
+            <td><%= link_to t('view.join'), teams_path(team.id),method: :post %></td>
+            <td><%= link_to t('view.edit'), edit_team_path(team.id) %></td>
+            <td><%= link_to t('view.delete'), team_path(team.id), method: :delete ,data: {confirm: '本当に削除していいですか？'} %></td>
+          </tr>
+        <% end %>
+      </table>
+
+  </div>
+</div>
