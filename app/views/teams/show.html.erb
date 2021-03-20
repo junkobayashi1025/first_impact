@@ -7,6 +7,7 @@
       <%= submit_tag '招待' %>
     <% end %>
     <% end %>
+
     <tr>
       <th><%= 'チーム名' %>:</th>
       <td><%= @team.name %></td>
@@ -26,15 +27,14 @@
   </table>
 
   <h2>チームメンバー</h2>
-<ul>
-  <% @team.assign_users.each do |assign_user| %>
-    <li>
-      <%= assign_user.name %>
-    </li>
-  <% end %>
-</ul>
+  <ul>
+    <% @team.assign_users.each do |assign_user| %>
+      <li>
+        <td><%= link_to "#{assign_user.name}", user_path(assign_user.id) %></td>
+      </li>
+    <% end %>
+  </ul>
 <hr>
-
   <%= link_to t('view.edit'), edit_team_path(@team) %>
   <%= link_to t('view.back'), teams_path %>
 </div>

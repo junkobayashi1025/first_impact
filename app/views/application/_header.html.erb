@@ -6,7 +6,6 @@
 
 <div class="collapse navbar-collapse" id="navbarSupportedContent">
 <ul class="navbar-nav mr-auto">
-
     <li class="nav-item dropdown">
     <% if user_signed_in? %>
     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -26,21 +25,24 @@
       <% end %>
     </div>
   </li>
+
+
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+     一覧</a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <%= link_to "報告書", "", class: 'dropdown-item' %>
+        <%= link_to "ユーザー", users_path, class: 'dropdown-item' %>
+        <%= link_to "チーム", teams_path, class: 'dropdown-item' %>
+    </div>
+  </li>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav ml-md-auto align-items-center">
       <li>
-        <%= link_to "投稿", "", class: "btn btn-primary" %>
-      </li>
-      <li>
-        <%= link_to "投稿一覧", "", class: "btn btn-primary" %>
-      </li>
-      <li>
-        <%= link_to "ユーザー一覧", users_path, class: "btn btn-primary" %>
-      </li>
-      <li>
-        <%= link_to "チーム一覧", teams_path, class: "btn btn-primary" %>
+        <%= link_to "チーム作成", new_team_path, class: "btn btn-primary" %>
       </li>
     </ul>
   </div>
+ </ul>
 </div>
 </nav>
