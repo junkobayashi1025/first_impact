@@ -12,4 +12,17 @@ class User < ApplicationRecord
     has_many :assign_teams, through: :assigns, source: :team
 
     mount_uploader :icon, ImageUploader
+
+    def self.find_or_create_by_email(email)
+    user = find_or_initialize_by(email: email)
+    if user.new_record?
+      user.password = generate_password
+      user.save
+    end
+    user
+  end
+
+  def self.generate_password
+    SecureRandom.hex(10)
+  end
 end

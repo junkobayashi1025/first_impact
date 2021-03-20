@@ -7,7 +7,6 @@ class TeamsController < ApplicationController
 
  def create
    @team = Team.new(teams_params)
-
    @team.owner_id = current_user.id
    if @team.save
      redirect_to team_path(@team), notice: 'グループを作成しました。'
