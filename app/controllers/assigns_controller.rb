@@ -10,9 +10,13 @@ class AssignsController < ApplicationController
 
   def destroy
     assign = Assign.find(params[:id])
-      if assign.team.owner == current_user
+      # if assign.team.owner == current_user && assign.team.charge_in_person.nil?
       assign.destroy
-      redirect_to team_url(params[:team_id]), notice: "ユーザー「#{assign.user.name}」を削除しました"
+      redirect_to team_url(params[:team_id])
+      flash[:success] = "ユーザー「#{assign.user.name}」を削除しました"
+      else
+      redirect_to team_url(params[:team_id])
+      flash[:danger] = "担当者権限を有するため削除できません"
       end
   end
 

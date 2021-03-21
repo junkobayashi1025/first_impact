@@ -35,6 +35,12 @@ class TeamsController < ApplicationController
    end
  end
 
+ def destroy
+    @team.destroy
+    redirect_to teams_path
+    flash[:danger] = "チーム「#{@team.name}」を削除しました"
+  end
+
  def change_owner
       @team = Team.find(params[:id])
       @user = User.find(params[:user_id])
