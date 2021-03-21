@@ -10,10 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_18_105404) do
+ActiveRecord::Schema.define(version: 2021_03_19_092750) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "assigns", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "team_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_assigns_on_team_id"
+    t.index ["user_id"], name: "index_assigns_on_user_id"
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.string "name", default: "", null: false
+    t.string "icon"
+    t.text "remark"
+    t.bigint "owner_id"
+    t.bigint "charge_in_person_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["charge_in_person_id"], name: "index_teams_on_charge_in_person_id"
+    t.index ["owner_id"], name: "index_teams_on_owner_id"
+    t.index ["user_id"], name: "index_teams_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name", default: "", null: false
@@ -36,4 +59,7 @@ ActiveRecord::Schema.define(version: 2021_03_18_105404) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "assigns", "teams"
+  add_foreign_key "assigns", "users"
+  add_foreign_key "teams", "users"
 end
