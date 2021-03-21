@@ -41,7 +41,8 @@
     <% end %>
   </ul>
 <hr>
-  <%= link_to '削除', team_path(@team.id), method: :delete ,data: {confirm: '本当に削除していいですか？'} if current_user == @team.owner %>
-  <%= link_to t('view.edit'), edit_team_path(@team) %>
-  <%= link_to t('view.back'), teams_path %>
+  <%  if current_user == @team.owner %>
+  <%= link_to '編集', edit_team_path(@team.id) %>
+  <%= link_to '削除', team_path(@team.id), method: :delete ,data: {confirm: '本当に削除していいですか？'}  %>
+  <% end %>
 </div>
