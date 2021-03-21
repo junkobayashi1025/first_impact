@@ -9,9 +9,7 @@ class AssignsController < ApplicationController
   end
 
   def destroy
-
     assign = Assign.find(params[:id])
-    # binding.pry
       if assign.team.owner == current_user
       assign.destroy
       redirect_to team_url(params[:team_id]), notice: "ユーザー「#{assign.user.name}」を削除しました"

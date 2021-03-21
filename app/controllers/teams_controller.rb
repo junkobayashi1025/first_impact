@@ -1,6 +1,10 @@
 class TeamsController < ApplicationController
   before_action :set_team, only: [:show, :edit, :update, :destroy]
 
+  def index
+    @teams = Team.all
+  end
+
  def new
    @team = Team.new
  end
@@ -9,14 +13,11 @@ class TeamsController < ApplicationController
    @team = Team.new(teams_params)
    @team.owner_id = current_user.id
    if @team.save
-     redirect_to team_path(@team), notice: 'グループを作成しました。'
+     redirect_to team_path(@team)
+     flash[:notice] = "チーム「#{@team.name}」を作成しました"
    else
      render 'new'
    end
- end
-
- def index
-   @teams = Team.all
  end
 
  def show
@@ -25,12 +26,28 @@ class TeamsController < ApplicationController
  def edit
  end
 
+ def update
+   if @team.update(teams_params)
+     redirect_to team_path(@team)
+     flash[:success] = "チーム「#{@team.name}」を編集しました"
+   else
+     render 'edit'
+   end
+ end
+
  def change_owner
       @team = Team.find(params[:id])
       @user = User.find(params[:user_id])
       @team.update(owner_id: params[:user_id])
       redirect_to @team
   end
+
+  def charge_in_person
+       @team = Team.find(params[:id])
+       @user = User.find(params[:user_id])
+       @team.update(charge_in_person_id: params[:user_id])
+       redirect_to @team
+   end
 
  private
 

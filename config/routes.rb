@@ -5,7 +5,8 @@ Rails.application.routes.draw do
 
   resources :teams do
     member do
-      get :change_owner
+      post :change_owner
+      post :charge_in_person
     end
     resources :assigns, only: [:create, :destroy]
   end

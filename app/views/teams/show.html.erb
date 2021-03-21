@@ -22,7 +22,7 @@
     </tr>
     <tr>
       <th><%= '担当者' %>:</th>
-      <td><%= @team.owner.email %></td>
+      <td><%= link_to "#{@team.charge_in_person.name}", user_path(@team.charge_in_person.id) %></td>
     </tr>
   </table>
 
@@ -33,6 +33,7 @@
         <td><%= link_to "#{assign_user.name}", user_path(assign_user.id) %></td>
         <% if @team.owner == current_user %>
         <td><%= link_to '削除', team_assign_path(@team, assign_user.assigns.ids), method: :delete, class: 'btn btn-sm btn-danger' %></td>
+        <td><%= link_to "担当者権限", charge_in_person_team_path(@team, user_id: assign_user.id), method: :post, class: 'btn btn-sm btn-primary' %></td>
         <% end %>
       </li>
     <% end %>

@@ -1,2 +1,28 @@
 <h2><%= 'チーム編集' %></h2>
-<%= render 'form' %>
+<div class="container">
+  <div class="form">
+    <%= form_with(model: @team, local: true) do |f| %>
+      <% if @team.errors.any? %>
+        <div id="error_explanation" class="alert alert-danger">
+          <h4><%= @team.errors.count %>件のエラーがあります。</h4>
+          <ul>
+            <% @team.errors.full_messages.each do|msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.text_field :name, placeholder:"チーム名", class: 'form-control',autofocus: true %><br>
+        <%= f.text_area :remark, placeholder:"備考", class: 'form-control' %><br>
+        <%= f.file_field :icon %>
+        <%= f.hidden_field :owner_id %>
+      </div>
+      <div class="form-group">
+        <%= f.submit '編集', class: "btn btn-primary", id: 'team_form_submit' %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
