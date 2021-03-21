@@ -10,6 +10,7 @@ class User < ApplicationRecord
     has_many :teams
     has_many :assigns
     has_many :assign_teams, through: :assigns, source: :team
+    has_many :reports
 
     mount_uploader :icon, ImageUploader
 
