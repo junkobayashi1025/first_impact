@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_19_092750) do
+ActiveRecord::Schema.define(version: 2021_03_21_104742) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,25 @@ ActiveRecord::Schema.define(version: 2021_03_19_092750) do
     t.datetime "updated_at", null: false
     t.index ["team_id"], name: "index_assigns_on_team_id"
     t.index ["user_id"], name: "index_assigns_on_user_id"
+  end
+
+  create_table "reports", force: :cascade do |t|
+    t.string "title", null: false
+    t.datetime "created_date"
+    t.string "author"
+    t.datetime "accrual_date"
+    t.string "site_of_occurrence"
+    t.text "trouble_content"
+    t.text "first_aid"
+    t.text "interim_measures"
+    t.text "permanent_measures"
+    t.text "confirmation_of_effectiveness"
+    t.bigint "user_id", null: false
+    t.bigint "team_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_reports_on_team_id"
+    t.index ["user_id"], name: "index_reports_on_user_id"
   end
 
   create_table "teams", force: :cascade do |t|
@@ -61,5 +80,7 @@ ActiveRecord::Schema.define(version: 2021_03_19_092750) do
 
   add_foreign_key "assigns", "teams"
   add_foreign_key "assigns", "users"
+  add_foreign_key "reports", "teams"
+  add_foreign_key "reports", "users"
   add_foreign_key "teams", "users"
 end
