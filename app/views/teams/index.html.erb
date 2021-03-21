@@ -1,0 +1,33 @@
+<div class ="container">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="row">
+        <div class="col-xs-6">
+          チーム一覧
+        </div>
+      </div>
+    </div>
+      <table class="table panel-body">
+        <tr>
+          <th><%= 'チーム名' %></th>
+          <th><%= '備考' %></th>
+          <th><%= '責任者' %></th>
+          <th><%= '担当者' %></th>
+          <th></th>
+          <th></th>
+        </tr>
+
+        <% @teams.each do |team| %>
+          <tr>
+            <td><%= link_to "#{team.name}", team_path(team.id) %></td>
+            <td><%= team.remark %></td>
+            <td><%= link_to "#{team.owner.name}", user_path(team.owner.id) %></td>
+            <td><%= link_to "#{team.charge_in_person_id}", team_path(team.id) %></td>
+            <td><%= link_to '編集', edit_team_path(team.id) if current_user == team.owner %></td>
+            <td><%= link_to '削除', team_path(team.id), method: :delete ,data: {confirm: '本当に削除していいですか？'} if current_user == team.owner %></td>
+          </tr>
+        <% end %>
+      </table>
+
+  </div>
+</div>
