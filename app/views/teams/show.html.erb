@@ -31,7 +31,6 @@
   <h2>チームメンバー</h2>
   <ul>
     <% @team.assign_users.each do |assign_user| %>
-
       <li>
         <td><%= link_to "#{assign_user.name}", user_path(assign_user.id) %></td>
         <% if @team.owner == current_user && assign_user.id != @team.charge_in_person.id %>
@@ -42,6 +41,7 @@
     <% end %>
   </ul>
 <hr>
+  <%= link_to '削除', team_path(@team.id), method: :delete ,data: {confirm: '本当に削除していいですか？'} if current_user == @team.owner %>
   <%= link_to t('view.edit'), edit_team_path(@team) %>
   <%= link_to t('view.back'), teams_path %>
 </div>

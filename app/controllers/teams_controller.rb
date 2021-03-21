@@ -12,6 +12,7 @@ class TeamsController < ApplicationController
  def create
    @team = Team.new(teams_params)
    @team.owner_id = current_user.id
+   @team.charge_in_person_id = current_user.id
    if @team.save
      redirect_to team_path(@team)
      flash[:notice] = "チーム「#{@team.name}」を作成しました"
@@ -38,7 +39,7 @@ class TeamsController < ApplicationController
  def destroy
     @team.destroy
     redirect_to teams_path
-    flash[:danger] = "チーム「#{@team.name}」を削除しました"
+    flash[:danger] = "チーム「#{@team.name}」を解散しました"
   end
 
  def change_owner
@@ -58,7 +59,7 @@ class TeamsController < ApplicationController
  private
 
  def teams_params
-   params.require(:team).permit(:name, :icon, :remark, :owner_id)
+   params.require(:team).permit(:name, :icon, :remark, :owner_id, :charge_in_person_id)
  end
 
  def set_team
