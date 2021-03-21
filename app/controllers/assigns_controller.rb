@@ -3,10 +3,19 @@ class AssignsController < ApplicationController
 
   def create
     team = Team.find(params[:team_id])
-    # binding.pry
     user = User.find_or_create_by_email(assign_params)
     team.invite_member(user)
     redirect_to team_url(team), notice: "ユーザー「#{user.name}」を招待しました"
+  end
+
+  def destroy
+
+    assign = Assign.find(params[:id])
+    # binding.pry
+      if assign.team.owner == current_user
+      assign.destroy
+      redirect_to team_url(params[:team_id]), notice: "ユーザー「#{assign.user.name}」を削除しました"
+      end
   end
 
   private

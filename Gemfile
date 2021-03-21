@@ -19,12 +19,13 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'rails_admin', '~> 2.0'
 gem 'cancancan'
-gem 'pry-rails'
+
 
 gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'pry-rails'
 end
 
 group :development do

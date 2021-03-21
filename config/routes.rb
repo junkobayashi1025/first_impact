@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   resources :users
 
   resources :teams do
+    member do
+      get :change_owner
+    end
     resources :assigns, only: [:create, :destroy]
   end
 

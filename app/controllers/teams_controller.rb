@@ -25,6 +25,13 @@ class TeamsController < ApplicationController
  def edit
  end
 
+ def change_owner
+      @team = Team.find(params[:id])
+      @user = User.find(params[:user_id])
+      @team.update(owner_id: params[:user_id])
+      redirect_to @team
+  end
+
  private
 
  def teams_params
