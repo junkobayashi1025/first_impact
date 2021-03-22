@@ -8,7 +8,7 @@ class ReportsController < ApplicationController
 
   def new
     @report = Report.new
-    @report.author = current_user
+    @report.author = current_user.name
     @team = Team.find(params[:team_id])
      # @report.photos.build
   end
@@ -21,7 +21,6 @@ class ReportsController < ApplicationController
     # @report = @team.reports.build(report_params)
     # binding.pry
     # @report = Report.new(report_params)
-
       if @report.save
        redirect_to reports_path
        flash[:success] = '投稿が保存されました'
@@ -65,7 +64,7 @@ class ReportsController < ApplicationController
   def report_params
     params.require(:report).permit(:title, :created_date, :author, :accrual_date, :site_of_occurrence,
                                     :trouble_content, :first_aid, :interim_measures,
-                                    :permanent_measures, :confirmation_of_effectiveness, :team_id).merge(user_id: current_user.id)
+                                    :permanent_measures, :confirmation_of_effectiveness, :checkbox_first, :checkbox_interim, :checkbox_final, :team_id).merge(user_id: current_user.id)
   end
 
   def set_report

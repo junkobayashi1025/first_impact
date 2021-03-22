@@ -35,6 +35,9 @@ ActiveRecord::Schema.define(version: 2021_03_21_104742) do
     t.text "interim_measures"
     t.text "permanent_measures"
     t.text "confirmation_of_effectiveness"
+    t.boolean "checkbox_first"
+    t.boolean "checkbox_interim"
+    t.boolean "checkbox_final"
     t.bigint "user_id", null: false
     t.bigint "team_id", null: false
     t.datetime "created_at", null: false

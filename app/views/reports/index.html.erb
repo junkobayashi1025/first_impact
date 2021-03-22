@@ -19,15 +19,16 @@
  <tbody>
    <% @reports.each do |report| %>
      <tr>
-       <td><%= report.title %></td>
-       <td><%= report.team.name %></td>
-       <td><%= report.team.charge_in_person.name %></td>
+       <td><%= link_to "#{report.title}", report_path(report.id) %></td>
+       <td><%= link_to "#{report.team.name}", team_path(report.team.id) %></td>
+       <td><%= link_to "#{report.team.charge_in_person.name}", user_path(report.team.charge_in_person.id) %></td>
        <td></td>
        <td></td>
        <td></td>
        <td><%= link_to '詳細', report_path(report.id), class: 'btn btn-primary mr-3', id: "report-index_detail-#{report.id}-submit" %></td>
-       <td><%= link_to '編集', edit_report_path(report.id), class: 'btn btn-success mr-3', id: "report_index_edit-#{report.id}-submit" %></td>
-       <td><%= link_to '削除', report_path(report.id), method: :delete, data: { confirm: "ユーザー「#{report.title}を削除します。よろしいでしょうか？」" }, class: 'btn btn-danger mr-3', id: "report_index_delete-#{report.id}-submit" %></td>
+       <td><%= link_to '編集', edit_report_path(report.id), class: 'btn btn-success mr-3', id: "report_index_edit-#{report.id}-submit" if current_user == report.team.owner || current_user == report.team.charge_in_person %></td>
+       <td><%= link_to '削除', report_path(report.id), method: :delete, data: { confirm: "ユーザー「#{report.title}を削除します。よろしいでしょうか？」" },
+             class: 'btn btn-danger mr-3', id: "report_index_delete-#{report.id}-submit" if current_user == report.team.owner %></td>
 
      </tr>
    <% end %>

@@ -11,6 +11,9 @@ class CreateReports < ActiveRecord::Migration[5.2]
       t.text :interim_measures
       t.text :permanent_measures
       t.text :confirmation_of_effectiveness
+      t.boolean :checkbox_first
+      t.boolean :checkbox_interim
+      t.boolean :checkbox_final
       t.references :user, foreign_key: true, index: true, null: false
       t.references :team, foreign_key: true, index: true, null: false
       t.timestamps
