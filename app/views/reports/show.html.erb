@@ -5,7 +5,7 @@
         報告書詳細画面
       </div>
       <div class="card-body">
-        <div class="test col-md-4">
+        <div class="float_right col-md-4">
           <div class="form-control">
             <%= "作成日：#{@report.created_date.strftime("%Y年 %m月 %d日")}" %>
           </div><br>
@@ -17,10 +17,10 @@
              <%= "タイトル：#{@report.title}" %>
            </div><br>
            <u>1.発生状況</u>
-           <div class="form-control col-md-6">
-             <%= "発生日：#{@report.accrual_date}" %>
+           <div class="form-control col-md-4">
+             <%= "発生日：#{@report.accrual_date.strftime("%Y年 %m月 %d日")}" %>
            </div><br>
-           <div class="form-control col-md-6">
+           <div class="form-control col-md-4">
              <%= "発生場所：#{@report.site_of_occurrence}" %>
            </div><br>
            <u>2.トラブル内容</u>
