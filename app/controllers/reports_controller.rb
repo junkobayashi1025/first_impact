@@ -7,13 +7,21 @@ class ReportsController < ApplicationController
   end
 
   def new
-     @report = Report.new
+    @report = Report.new
+    @report.author = current_user
+    @team = Team.find(params[:team_id])
      # @report.photos.build
   end
 
   def create
+    # binding.pry
+    @team = Team.find(params[:report][:team_id])
     @report = Report.new(report_params)
-    binding.pry
+    @report.team_id = @team.id
+    # @report = @team.reports.build(report_params)
+    # binding.pry
+    # @report = Report.new(report_params)
+
       if @report.save
        redirect_to reports_path
        flash[:success] = '投稿が保存されました'
@@ -55,9 +63,9 @@ class ReportsController < ApplicationController
 
   private
   def report_params
-    params.require(:report).permit(:title, :created_at, :author, :accrual_date, :site_of_occurrence,
+    params.require(:report).permit(:title, :created_date, :author, :accrual_date, :site_of_occurrence,
                                     :trouble_content, :first_aid, :interim_measures,
-                                    :permanent_measures, :confirmation_of_effectiveness).merge(user_id: current_user.id)
+                                    :permanent_measures, :confirmation_of_effectiveness, :team_id).merge(user_id: current_user.id)
   end
 
   def set_report

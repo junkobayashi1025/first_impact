@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       post :charge_in_person
     end
     resources :assigns, only: [:create, :destroy]
+    resources :reports
   end
 
   root 'users#index'
