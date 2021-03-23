@@ -34,11 +34,15 @@
           <td>第一報告の作成中</td>
        <% end %>
        <% if report.checkbox_final %>
-          <td>--------------------</td>
-       <% elsif report.checkbox_interim %>
-          <td><%= (report.confirmed_date).strftime("%Y年 %m月 %d日") %></td>
+         <td>--------------------</td>
        <% elsif report.checkbox_first %>
-          <td><%= (report.accrual_date+ 14.day).strftime("%Y年 %m月 %d日") %></td>
+            <% if report.checkbox_interim && report.confirmed_date %>
+          <td><%= (report.confirmed_date).strftime("%Y年 %m月 %d日") %></td>
+            <% elsif report.checkbox_interim && report.confirmed_date.nil? %>
+          <td>　未定 </td>
+          <% else %>
+            <td><%= (report.accrual_date+ 14.day).strftime("%Y年 %m月 %d日") %></td>
+          <% end %>
        <% else %>
           <td><%= (report.accrual_date+ 7.day).strftime("%Y年 %m月 %d日") %></td>
        <% end %>
