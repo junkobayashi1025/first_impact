@@ -11,9 +11,12 @@
               <%= f.label :作成日 %>
    　　　　　　<%= f.date_field :created_date, class: 'form-control' %>
             </div>
-            <div class="form-group">
-              <%= f.label :担当者 %>
-   　　　　　　<%= f.text_field :author, class: 'form-control' %>
+            <hr>
+            <div class="form-control">
+              <%= "責任者：#{@report.team.owner.name}" %>
+            </div><br>
+            <div class="form-control">
+              <%= "担当者：#{@report.author}" %>
             </div>
            </div>
            <div class="form-group  col-md-6">
@@ -69,7 +72,11 @@
                   <input class="checkbox" id="checkbox_interim" as="boolean" type="checkbox">責任者承認
                 <% end %>
               <% end %>
-  　　　　　　<%= f.text_area :permanent_measures, class: 'form-control', rows:10 %>
+              <% if @report.checkbox_first %>
+  　　　　　　   <%= f.text_area :permanent_measures, class: 'form-control', rows:10 %>
+              <% else %>
+                <%= f.text_area :permanent_measures, class: 'form-control none_function', rows:10 %>
+              <% end %>
            　</div>
             <div class="form-group">
              <u>6.有効性の確認</u>
@@ -78,13 +85,17 @@
                <%= f.check_box :checkbox_final, id: :checkbox_final,:as => :boolean %>
                <%= f.label :責任者承認 %>
              <% else %>
-               <% if @report.checkbox_first %>
+               <% if @report.checkbox_final %>
                  <input class="checkbox" id="checkbox_final" as="boolean" type="checkbox" checked>責任者承認
                <% else %>
                  <input class="checkbox" id="checkbox_final" as="boolean" type="checkbox">責任者承認
                <% end %>
              <% end %>
-  　　　　　　<%= f.text_area :confirmation_of_effectiveness, class: 'form-control', rows:10 %>
+             <% if @report.checkbox_interim %>
+  　　　　　　  <%= f.text_area :confirmation_of_effectiveness, class: 'form-control', rows:10 %>
+             <% else %>
+               <%= f.text_area :confirmation_of_effectiveness, class: 'form-control none_function', rows:10 %>
+             <% end %>
             </div>
 
          <!-- <div class ="mb-3">
