@@ -8,7 +8,7 @@ end
 20.times do |n|
   name = Faker::Name.name
   email = Faker::Internet.email
-  password = "password"
+  password = Faker::Internet.email
   User.create!(name: name,
                email: email,
                password: password,
