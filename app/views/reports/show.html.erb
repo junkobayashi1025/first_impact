@@ -10,6 +10,9 @@
             <%= "作成日：#{@report.created_date.strftime("%Y年 %m月 %d日")}" %>
           </div><br>
           <div class="form-control">
+            <%= "責任者：#{@report.team.owner.name}" %>
+          </div><br>
+          <div class="form-control">
             <%= "担当者：#{@report.author}" %>
           </div>
         </div>
@@ -27,9 +30,9 @@
            <u>2.トラブル内容</u>
            <%= "(提出〆切：#{(@report.accrual_date + 7.day).strftime("%Y年 %m月 %d日")})"%>
            <% if @report.checkbox_first %>
-             <input class="checkbox" id="checkbox_first" as="boolean" type="checkbox" checked>責任者承認
+             <input class="none_function" id="checkbox_first" as="boolean" type="checkbox" checked>責任者承認
            <% else %>
-             <input class="checkbox" id="checkbox_first" as="boolean" type="checkbox">責任者承認
+             <input class="none_function" id="checkbox_first" as="boolean" type="checkbox">責任者承認
            <% end %>
            <div class="form-control">
              <%= @report.trouble_content %>
@@ -45,18 +48,18 @@
            <u>5.恒久対策</u>
            <%= "(提出〆切：#{(@report.accrual_date + 7.day).strftime("%Y年 %m月 %d日")})"%>
            <% if @report.checkbox_interim %>
-             <input class="checkbox" id="checkbox_interim" as="boolean" type="checkbox" checked>責任者承認
+             <input class="none_function" id="checkbox_interim" as="boolean" type="checkbox" checked>責任者承認
            <% else %>
-             <input class="checkbox" id="checkbox_interim" as="boolean" type="checkbox">責任者承認
+             <input class="none_function" id="checkbox_interim" as="boolean" type="checkbox">責任者承認
            <% end %>
            <div class="form-control">
              <%= @report.permanent_measures %>
            </div><br>
            <u>6.有効性の確認</u>
            <% if @report.checkbox_final %>
-             <input class="checkbox" id="checkbox_final" as="boolean" type="checkbox" checked>責任者承認
+             <input class="none_function" id="checkbox_final" as="boolean" type="checkbox" checked>責任者承認
            <% else %>
-             <input class="checkbox" id="checkbox_final" as="boolean" type="checkbox">責任者承認
+             <input class="none_function" id="checkbox_final" as="boolean" type="checkbox">責任者承認
            <% end %>
            <div class="form-control">
              <%= @report.confirmation_of_effectiveness %>

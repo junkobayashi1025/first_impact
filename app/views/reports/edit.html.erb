@@ -34,8 +34,16 @@
            <div class="form-group clear">
              <u>2.トラブル内容</u>
              <%= "(提出〆切：#{(@report.accrual_date + 7.day).strftime("%Y年 %m月 %d日")})"%>
-             <%= f.check_box :checkbox_first, id: :checkbox_first,:as => :boolean if current_user == @report.team.owner %>
-             <%= f.label :責任者承認 %>
+             <% if current_user == @report.team.owner %>
+               <%= f.check_box :checkbox_first, id: :checkbox_first,:as => :boolean %>
+               <%= f.label :責任者承認 %>
+             <% else %>
+               <% if @report.checkbox_first %>
+                 <input class="checkbox" id="checkbox_first" as="boolean" type="checkbox" checked>責任者承認
+               <% else %>
+                 <input class="checkbox" id="checkbox_first" as="boolean" type="checkbox">責任者承認
+               <% end %>
+             <% end %>
   　　　　　　<%= f.text_area :trouble_content, class: 'form-control', rows:10 %>
            </div>
            <div class="form-group">
@@ -51,15 +59,31 @@
            <div class="form-group">
               <u>5.恒久対策</u>
               <%= "(提出〆切：#{(@report.accrual_date + 14.day).strftime("%Y年 %m月 %d日")})"%>
-              <%= f.check_box :checkbox_interim, id: :checkbox_interim, :as => :boolean %>
-              <%= f.label :責任者承認 %>
+              <% if current_user == @report.team.owner %>
+                <%= f.check_box :checkbox_interim, id: :checkbox_interim,:as => :boolean %>
+                <%= f.label :責任者承認 %>
+              <% else %>
+                <% if @report.checkbox_interim %>
+                  <input class="checkbox" id="checkbox_interim" as="boolean" type="checkbox" checked>責任者承認
+                <% else %>
+                  <input class="checkbox" id="checkbox_interim" as="boolean" type="checkbox">責任者承認
+                <% end %>
+              <% end %>
   　　　　　　<%= f.text_area :permanent_measures, class: 'form-control', rows:10 %>
            　</div>
             <div class="form-group">
              <u>6.有効性の確認</u>
              <%= "(提出〆切：#{(@report.accrual_date + 14.day).strftime("%Y年 %m月 %d日")})"%>
-             <%= f.check_box :checkbox_final, id: :checkbox_final, :as => :boolean %>
-             <%= f.label :責任者承認 %>
+             <% if current_user == @report.team.owner %>
+               <%= f.check_box :checkbox_final, id: :checkbox_final,:as => :boolean %>
+               <%= f.label :責任者承認 %>
+             <% else %>
+               <% if @report.checkbox_first %>
+                 <input class="checkbox" id="checkbox_final" as="boolean" type="checkbox" checked>責任者承認
+               <% else %>
+                 <input class="checkbox" id="checkbox_final" as="boolean" type="checkbox">責任者承認
+               <% end %>
+             <% end %>
   　　　　　　<%= f.text_area :confirmation_of_effectiveness, class: 'form-control', rows:10 %>
             </div>
 
