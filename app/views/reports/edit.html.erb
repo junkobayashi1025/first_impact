@@ -34,7 +34,7 @@
            <div class="form-group clear">
              <u>2.トラブル内容</u>
              <%= "(提出〆切：#{(@report.accrual_date + 7.day).strftime("%Y年 %m月 %d日")})"%>
-             <%= f.check_box :checkbox_first, id: :checkbox_first,:as => :boolean %>
+             <%= f.check_box :checkbox_first, id: :checkbox_first,:as => :boolean if current_user == @report.team.owner %>
              <%= f.label :責任者承認 %>
   　　　　　　<%= f.text_area :trouble_content, class: 'form-control', rows:10 %>
            </div>

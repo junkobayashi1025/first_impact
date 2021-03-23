@@ -21,7 +21,7 @@
      <tr>
        <td><%= link_to "#{report.title}", report_path(report.id) %></td>
        <td><%= link_to "#{report.team.name}", team_path(report.team.id) %></td>
-       <td><%= link_to "#{report.team.charge_in_person.name}", user_path(report.team.charge_in_person.id) %></td>
+       <td><%= link_to "#{report.author}", user_path(report.user.id) %></td>
        <td></td>
        <td></td>
        <td></td>
