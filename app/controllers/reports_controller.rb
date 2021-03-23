@@ -1,6 +1,7 @@
 class ReportsController < ApplicationController
   # before_action :authenticate_user
   before_action :set_report, only: [:show, :edit, :update, :destroy]
+  before_action :set_q, only: [:index, :search]
 
   def index
     @reports = Report.all.order(created_at: :desc)
@@ -60,6 +61,10 @@ class ReportsController < ApplicationController
     redirect_to reports_path(@report.user.id)
   end
 
+  def search
+    @results = @q.result
+  end
+
   private
   def report_params
     params.require(:report).permit(:title, :created_date, :confirmed_date, :author, :accrual_date, :site_of_occurrence,
@@ -69,5 +74,9 @@ class ReportsController < ApplicationController
 
   def set_report
     @report = Report.find_by(id: params[:id])
+  end
+
+  def set_q
+    @q = Report.ransack(params[:q])
   end
 end

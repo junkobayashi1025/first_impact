@@ -10,6 +10,7 @@
   <%= f.submit '検索' %>
   <%= link_to 'クリア', @repotrs_path %>
   <br>
+
 <% end %>
 
 <table class="table">
@@ -28,7 +29,7 @@
    </tr>
  </thead>
  <tbody>
-   <% @reports.each do |report| %>
+   <% @results.each do |report| %>
      <tr>
        <td><%= link_to "#{report.title}", report_path(report.id) %></td>
        <td><%= link_to "#{report.team.name}", team_path(report.team.id) %></td>

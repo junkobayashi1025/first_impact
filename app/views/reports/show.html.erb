@@ -27,7 +27,7 @@
            <div class="form-control col-md-4">
              <%= "発生場所：#{@report.site_of_occurrence}" %>
            </div><br>
-           <u>2.トラブル内容</u>
+           <u>2-1.トラブル内容</u>
            <%= "(提出〆切：#{(@report.accrual_date + 7.day).strftime("%Y年 %m月 %d日")})"%>
            <% if @report.checkbox_first %>
              <input class="none_function" id="checkbox_first" as="boolean" type="checkbox" checked>責任者承認
@@ -37,15 +37,15 @@
            <div class="form-control">
              <%= @report.trouble_content %>
            </div><br>
-           <u>3.応急対応</u>
+           <u>2-2.応急対応</u>
            <div class="form-control">
              <%= @report.first_aid %>
            </div><br>
-           <u>4.暫定対策</u>
+           <u>2-3.暫定対策</u>
            <div class="form-control">
              <%= @report.interim_measures %>
            </div><br>
-           <u>5.恒久対策</u>
+           <u>3.恒久対策</u>
            <%= "(提出〆切：#{(@report.accrual_date + 7.day).strftime("%Y年 %m月 %d日")})"%>
            <% if @report.checkbox_interim %>
              <input class="none_function" id="checkbox_interim" as="boolean" type="checkbox" checked>責任者承認
@@ -55,7 +55,7 @@
            <div class="form-control">
              <%= @report.permanent_measures %>
            </div><br>
-           <u>6.有効性の確認</u>
+           <u>4.有効性の確認</u>
            <% if @report.confirmed_date %>
             <%= "(提出〆切：#{(@report.confirmed_date).strftime("%Y年 %m月 %d日")})"%>
            <% else %>

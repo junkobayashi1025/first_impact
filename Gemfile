@@ -20,6 +20,7 @@ gem 'mini_magick'
 gem 'rails_admin', '~> 2.0'
 gem 'cancancan'
 gem 'faker'
+gem 'ransack'
 
 
 gem 'bootsnap', '>= 1.1.0', require: false
