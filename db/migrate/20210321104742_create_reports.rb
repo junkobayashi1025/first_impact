@@ -3,6 +3,7 @@ class CreateReports < ActiveRecord::Migration[5.2]
     create_table :reports do |t|
       t.string :title, null: false
       t.datetime :created_date
+      t.datetime :confirmed_date
       t.string :author
       t.datetime :accrual_date
       t.string :site_of_occurrence
