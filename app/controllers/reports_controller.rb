@@ -1,10 +1,20 @@
 class ReportsController < ApplicationController
   # before_action :authenticate_user
   before_action :set_report, only: [:show, :edit, :update, :destroy]
-  before_action :set_q, only: [:index, :search]
+  before_action :set_q, only: [:index]
 
   def index
-    @reports = Report.all.order(created_at: :desc)
+    @results = @q.result.order(created_date: :desc)
+    # binding.pry
+    # @results_confirmed = @results.where.not(confirmed_date:nil)
+    # @results_confirmed.each do |result_confirmed|
+    #   result_confirmed = result_confirmed.accrual_date.update(confirmed_date)
+    # end
+    # if @results.confirmed_date.present?
+    #
+    #   @results.accrual_date.update(@results.confirmed_date)
+    # end
+
   end
 
   def new
@@ -61,14 +71,14 @@ class ReportsController < ApplicationController
     redirect_to reports_path(@report.user.id)
   end
 
-  def search
-    @results = @q.result
-  end
+  # def search
+  #   @results = @q.result.order(created_date: :desc)
+  # end
 
   private
   def report_params
     params.require(:report).permit(:title, :created_date, :confirmed_date, :author, :accrual_date, :site_of_occurrence,
-                                    :trouble_content, :first_aid, :interim_measures,
+                                    :trouble_content, :first_aid, :interim_measures, :search_item,
                                     :permanent_measures, :confirmation_of_effectiveness, :checkbox_first, :checkbox_interim, :checkbox_final, :team_id).merge(user_id: current_user.id)
   end
 

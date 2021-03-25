@@ -1,11 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :users
-  resources :reports do
-    collection do
-      get :search
-    end
-  end
+  resources :reports 
 
   resources :teams do
     member do

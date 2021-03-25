@@ -46,7 +46,7 @@
              <%= @report.interim_measures %>
            </div><br>
            <u>3.恒久対策</u>
-           <%= "(提出〆切：#{(@report.accrual_date + 7.day).strftime("%Y年 %m月 %d日")})"%>
+           <%= "(提出〆切：#{(@report.accrual_date + 14.day).strftime("%Y年 %m月 %d日")})"%>
            <% if @report.checkbox_interim %>
              <input class="none_function" id="checkbox_interim" as="boolean" type="checkbox" checked>責任者承認
            <% else %>

@@ -2,7 +2,8 @@
   <h1>報告書一覧</h1>
 </div>
 
-<%= search_form_for @q, url: search_reports_path do |f| %>
+<%= search_form_for @q, url: reports_path do |f| %>
+  <%= f.select :search_item, options_for_select(Report.search_items) %>
   <%= f.search_field :title_cont, placeholder:"タイトル名.." %>
   <%= f.search_field :team_name_cont, placeholder:"チーム名.." %>
   <%= f.search_field :team_owner_name_cont, placeholder:"責任者.." %>
@@ -20,7 +21,8 @@
       <th>責任者</th>
       <th>担当者</th>
       <th>ステータス</th>
-      <th>提出〆切</th>
+      <th><%= sort_link(@q, :accrual_date '提出〆切', default_order: :asc)%></th>
+      <th>作成日</th>
       <th>ラベル</th>
       <th></th>
       <th></th>
@@ -28,7 +30,7 @@
    </tr>
  </thead>
  <tbody>
-   <% @reports.each do |report| %>
+   <% @results.each do |report| %>
      <tr>
        <td><%= link_to "#{report.title}", report_path(report.id) %></td>
        <td><%= link_to "#{report.team.name}", team_path(report.team.id) %></td>
@@ -47,7 +49,7 @@
          <td>--------------------</td>
        <% elsif report.checkbox_first %>
             <% if report.checkbox_interim && report.confirmed_date %>
-          <td><%= (report.confirmed_date).strftime("%Y年 %m月 %d日") %></td>
+          <td><%= report.accrual_date  %></td>
             <% elsif report.checkbox_interim && report.confirmed_date.nil? %>
           <td> 未定 </td>
           <% else %>
@@ -56,7 +58,9 @@
        <% else %>
           <td><%= (report.accrual_date+ 7.day).strftime("%Y年 %m月 %d日") %></td>
        <% end %>
+       <td><%= report.created_date.strftime("%Y年 %m月 %d日")%></td>
        <td></td>
+
        <td><%= link_to '詳細', report_path(report.id), class: 'btn btn-primary mr-3', id: "report-index_detail-#{report.id}-submit" %></td>
        <td><%= link_to '編集', edit_report_path(report.id), class: 'btn btn-success mr-3', id: "report_index_edit-#{report.id}-submit" if current_user == report.team.owner || current_user == report.user %></td>
        <td><%= link_to '削除', report_path(report.id), method: :delete, data: { confirm: "ユーザー「#{report.title}を削除します。よろしいでしょうか？」" },
