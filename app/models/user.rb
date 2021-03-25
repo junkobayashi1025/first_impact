@@ -11,6 +11,7 @@ class User < ApplicationRecord
     has_many :assigns
     has_many :assign_teams, through: :assigns, source: :team
     has_many :reports
+    has_many :bookmarks
     has_many :comments
 
     mount_uploader :icon, ImageUploader
@@ -26,5 +27,9 @@ class User < ApplicationRecord
 
   def self.generate_password
     SecureRandom.hex(10)
+  end
+
+  def liked_by?(report_id)
+    bookmarks.where(report_id: report_id).exists?
   end
 end

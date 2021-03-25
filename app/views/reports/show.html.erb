@@ -2,7 +2,14 @@
   <div class="col-xl-7 col-lg-8 col-md-10 col-sm-11 post-card">
     <div class="card">
       <div class="card-header">
-        報告書詳細画面
+        <strong>報告書詳細画面</strong>
+            <div id="report_<%= @report.id %>">
+              <% if current_user.liked_by?(@report.id) %>
+                <%= link_to 'いいねを外す', destroy_bookmark_path(@report), method: :DELETE, remote: true, class: "bookmarked hide-text" %>
+              <% else %>
+                <%= link_to 'いいね', create_bookmark_path(@report), method: :POST, remote: true, class: "bookmark hide-text" %>
+              <% end %>
+            </div>
       </div>
       <div class="card-body">
         <div class="float_right col-md-4">

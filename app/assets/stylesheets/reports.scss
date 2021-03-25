@@ -24,6 +24,29 @@
   clear:　both;
 }
 
+.bookmark {
+  background-image: image-url("parts1");
+  background-repeat: no-repeat;
+  height: 36px;
+  width: 36px;
+  background-size: 36px !important;
+}
+
+.bookmarked {
+  background-image: image-url("parts2");
+  background-repeat: no-repeat;
+  height: 36px;
+  width: 36px;
+  background-size: 36px !important;
+}
+
+.hide-text {
+   display: block;
+   overflow: hidden;
+   text-indent: 110%;
+   white-space: nowrap;
+}
+
 // .form-control {
 //   display:inline-block;
 // }
