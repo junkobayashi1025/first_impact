@@ -21,7 +21,7 @@
       <th>責任者</th>
       <th>担当者</th>
       <th>ステータス</th>
-      <th><%= sort_link(@q, :accrual_date '提出〆切', default_order: :asc)%></th>
+      <th><%= sort_link(@q, :deadline_date, '提出〆切', default_order: :asc)%></th>
       <th>作成日</th>
       <th>ラベル</th>
       <th></th>
@@ -45,22 +45,9 @@
        <% else %>
           <td>第一報告の作成中</td>
        <% end %>
-       <% if report.checkbox_final %>
-         <td>--------------------</td>
-       <% elsif report.checkbox_first %>
-            <% if report.checkbox_interim && report.confirmed_date %>
-          <td><%= report.accrual_date  %></td>
-            <% elsif report.checkbox_interim && report.confirmed_date.nil? %>
-          <td> 未定 </td>
-          <% else %>
-            <td><%= (report.accrual_date+ 14.day).strftime("%Y年 %m月 %d日") %></td>
-          <% end %>
-       <% else %>
-          <td><%= (report.accrual_date+ 7.day).strftime("%Y年 %m月 %d日") %></td>
-       <% end %>
+       <td><%= report.deadline_date.strftime("%Y年 %m月 %d日") %></td>
        <td><%= report.created_date.strftime("%Y年 %m月 %d日")%></td>
        <td></td>
-
        <td><%= link_to '詳細', report_path(report.id), class: 'btn btn-primary mr-3', id: "report-index_detail-#{report.id}-submit" %></td>
        <td><%= link_to '編集', edit_report_path(report.id), class: 'btn btn-success mr-3', id: "report_index_edit-#{report.id}-submit" if current_user == report.team.owner || current_user == report.user %></td>
        <td><%= link_to '削除', report_path(report.id), method: :delete, data: { confirm: "ユーザー「#{report.title}を削除します。よろしいでしょうか？」" },
