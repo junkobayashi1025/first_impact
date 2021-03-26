@@ -41,6 +41,8 @@ class ReportsController < ApplicationController
   end
 
   def show
+    @comment = Comment.new
+    @comments = @report.comments
   end
 
   def edit
@@ -79,7 +81,8 @@ class ReportsController < ApplicationController
   def report_params
     params.require(:report).permit(:title, :created_date, :confirmed_date, :author, :accrual_date, :site_of_occurrence,
                                     :trouble_content, :first_aid, :interim_measures, :search_item,
-                                    :permanent_measures, :confirmation_of_effectiveness, :checkbox_first, :checkbox_interim, :checkbox_final, :team_id).merge(user_id: current_user.id)
+                                    :permanent_measures, :confirmation_of_effectiveness, :checkbox_first, :checkbox_interim,
+                                    :checkbox_final, :team_id).merge(user_id: current_user.id)
   end
 
   def set_report

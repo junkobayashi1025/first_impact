@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :users
   resources :reports do
     resources :bookmarks, only: [:show, :destroy]
+    resources :comments,  only: [:create, :destroy]
   end
 
   resources :teams do
@@ -11,9 +12,7 @@ Rails.application.routes.draw do
       post :charge_in_person
     end
     resources :assigns, only: [:create, :destroy]
-    resources :reports do
-      resources :comments,  only: [:create, :destroy]
-    end
+    resources :reports
   end
 
   root 'users#index'
