@@ -1,4 +1,21 @@
-<div class="d-flex flex-column align-items-center mt-3">
+<!-- <div class="d-flex flex-column align-items-left mt-3 float_right"> -->
+  <div class="col-md-5 post-card float_right comment-padding-top">
+    <div class="card">
+      <div class="card-header">
+        <strong>コメント欄</strong>
+      </div>
+    <div class="card-body">
+        <div id="comments_area">
+          <%= render partial: 'comments/index', locals: { comments: @comments } %>
+        </div><hr>
+        <% if user_signed_in? %>
+          <%= render partial: 'comments/form', locals: { comment: @comment, report: @report } %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="flex-column align-items-left mt-3">
   <div class="col-xl-7 col-lg-8 col-md-10 col-sm-11 post-card">
     <div class="card">
       <div class="card-header">
@@ -12,7 +29,7 @@
             </div>
       </div>
       <div class="card-body">
-        <div class="float_right col-md-4">
+        <div class="float_right col-md-3.5">
           <div class="form-control">
             <%= "作成日：#{@report.created_date.strftime("%Y年 %m月 %d日")}" %>
           </div><br>
@@ -84,13 +101,3 @@
     </div>
   </div>
 </div>
-
-<div>
-    <h4>コメント</h4>
-    <div id="comments_area">
-      <%= render partial: 'comments/index', locals: { comments: @comments } %>
-    </div>
-    <% if user_signed_in? %>
-      <%= render partial: 'comments/form', locals: { comment: @comment, report: @report } %>
-    <% end %>
-  </div>

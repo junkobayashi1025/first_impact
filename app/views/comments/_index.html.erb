@@ -1,9 +1,17 @@
 <% comments.each do |comment| %>
+<% if comment.user == current_user %>
+  <p><%= link_to '', report_comment_path(comment.report_id, comment.id), method: :delete, remote: true, class: "delete-comment"  %></p>
+<% end %>
   <% unless comment.id.nil? %>
-    <p><%= link_to "#{comment.user.name}さん", user_path(comment.user.id) %></p>
-    <p>コメント：<%= comment.comment %></p>
-    <% if comment.user == current_user %>
-      <p><%= link_to '', report_comment_path(comment.report_id, comment.id), method: :delete, remote: true, class: "delete-comment" %></p>
-    <% end %>
+    <span>
+      <strong><%= link_to "#{comment.user.name}さん", user_path(comment.user.id), class: "no-text-decoration black-color" %>
+      </strong>
+    </span>
+    <span>
+      <%= comment.comment%>
+    </span>
+    <span class="post-time" >
+      <%= time_ago_in_words(comment.created_at).upcase + "前" %>
+    </span>
   <% end %>
 <% end %>
