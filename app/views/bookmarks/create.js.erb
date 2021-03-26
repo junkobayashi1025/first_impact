@@ -1,1 +1,4 @@
-document.getElementById('report_<%= @report.id %>').innerHTML = '<%= j(render @report) %>'
+$('#report_index_<%= @report.id %>').
+  html('<%= j(render @report) %>');
+$('#report_show_<%= @report.id %>').
+  html('<%= link_to 'いいねを外す', destroy_bookmark_path(@report), method: :DELETE, remote: true, class: "bookmarked hide-text" %>');

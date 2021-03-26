@@ -32,7 +32,7 @@
  </thead>
  <tbody>
    <% @results.each do |report| %>
-     <tr id="report_<%= report.id %>">
+     <tr id="report_index_<%= report.id %>">
        <%= render 'report', report: report %>
      </tr>
    <% end %>
