@@ -31,7 +31,7 @@
       <div class="card-body">
         <div class="float_right col-md-3.5">
           <div class="form-control">
-            <%= "作成日：#{@report.created_date.strftime("%Y年 %m月 %d日")}" %>
+            <%= "作成日：#{@report.created_at.strftime("%Y年 %m月 %d日")}" %>
           </div><br>
           <div class="form-control">
             <%= "責任者：#{@report.team.owner.name}" %>

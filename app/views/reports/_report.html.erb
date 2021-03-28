@@ -19,7 +19,7 @@
 <% unless report.checkbox_final %>
   <td><%= report.deadline_date %></td>
 <% end %>
-<td><%= report.created_date.strftime("%Y年 %m月 %d日")%></td>
+<td><%= report.created_at.strftime("%Y年 %m月 %d日")%></td>
 <td></td>
 <td><%= link_to '詳細', report_path(report.id), class: 'btn btn-primary mr-3', id: "report-index_detail-#{report.id}-submit" %></td>
 <td><%= link_to '編集', edit_report_path(report.id), class: 'btn btn-success mr-3', id: "report_index_edit-#{report.id}-submit" if current_user == report.team.owner || current_user == report.user %></td>
