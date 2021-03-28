@@ -7,16 +7,18 @@
 <td><%= link_to "#{report.team.name}", team_path(report.team.id) %></td>
 <td><%= link_to "#{report.team.owner.name}", user_path(report.team.owner.id) %></td>
 <td><%= link_to "#{report.author}", user_path(report.user.id) %></td>
-<% if report.checkbox_final %>
-   <td>完了</td>
-<% elsif report.checkbox_interim %>
-   <td>有効性の確認中</td>
-<% elsif report.checkbox_first %>
-   <td>中間報告の作成中</td>
-<% else %>
-   <td>第一報告の作成中</td>
+<% unless report.checkbox_final %>
+  <% if report.checkbox_interim %>
+     <td>有効性の確認中</td>
+  <% elsif report.checkbox_first %>
+     <td>中間報告の作成中</td>
+  <% else %>
+     <td>第一報告の作成中</td>
+  <% end %>
 <% end %>
-<td><%= report.deadline_date %></td>
+<% unless report.checkbox_final %>
+  <td><%= report.deadline_date %></td>
+<% end %>
 <td><%= report.created_date.strftime("%Y年 %m月 %d日")%></td>
 <td></td>
 <td><%= link_to '詳細', report_path(report.id), class: 'btn btn-primary mr-3', id: "report-index_detail-#{report.id}-submit" %></td>

@@ -2,9 +2,10 @@ class ReportsController < ApplicationController
   # before_action :authenticate_user
   before_action :set_report, only: [:show, :edit, :update, :destroy]
   before_action :set_q, only: [:index]
+  before_action :set_q_archive, only: [:archive]
 
   def index
-    @results = params[:q] ? @q.result : Report.order(created_date: :desc)
+    @results = params[:q] ? @q.result : Report.where.not(checkbox_final: true).order(created_date: :desc)
     # binding.pry
     # @results_confirmed = @results.where.not(confirmed_date:nil)
     # @results_confirmed.each do |result_confirmed|
@@ -14,7 +15,10 @@ class ReportsController < ApplicationController
     #
     #   @results.accrual_date.update(@results.confirmed_date)
     # end
+  end
 
+  def archive
+    @archives = params[:q] ? @q.result : Report.where(checkbox_final: true).order(created_date: :desc)
   end
 
   def new
@@ -90,7 +94,13 @@ class ReportsController < ApplicationController
   end
 
   def set_q
-    @q = Report.ransack(params[:q])
+    @q = Report.where.not(checkbox_final: true).ransack(params[:q])
+    # @q = Report.ransack(params[:q])
+    # @q = Report.where(user_id: current_user.id).ransack(params[:q])
+  end
+
+  def set_q_archive
+    @q = Report.where(checkbox_final: true).ransack(params[:q])
     # @q = Report.where(user_id: current_user.id).ransack(params[:q])
   end
 end

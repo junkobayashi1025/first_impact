@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users
   resources :reports do
+    collection do
+      get :archive
+    end
     resources :bookmarks, only: [:show, :destroy]
     resources :comments,  only: [:create, :destroy]
   end

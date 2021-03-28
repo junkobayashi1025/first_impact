@@ -1,5 +1,5 @@
 <div class="d-flex align-items-center">
-  <h1>報告書一覧(作成中)</h1>
+  <h1>報告書一覧(アーカイブ)</h1>
 </div>
 
 <%= search_form_for @q, url: reports_path do |f| %>
@@ -9,7 +9,7 @@
   <%= f.search_field :team_owner_name_cont, placeholder:"責任者.." %>
   <%= f.search_field :author_cont, placeholder:"担当者.." %>
   <%= f.submit '検索' %>
-  <%= link_to 'クリア', @repotrs_path %>
+  <%= link_to 'クリア', archive_reports_url %>
   <br>
 <% end %>
 
@@ -21,8 +21,6 @@
       <th>チーム名</th>
       <th>責任者</th>
       <th>担当者</th>
-      <th>ステータス</th>
-      <th><%= sort_link(@q, :deadline_date, '提出〆切', default_order: :asc)%></th>
       <th>作成日</th>
       <th>ラベル</th>
       <th></th>
@@ -31,7 +29,7 @@
    </tr>
  </thead>
  <tbody>
-   <% @results.each do |report| %>
+   <% @archives.each do |report| %>
      <tr id="report_index_<%= report.id %>">
        <%= render 'report', report: report %>
      </tr>
