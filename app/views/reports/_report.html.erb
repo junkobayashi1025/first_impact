@@ -16,7 +16,7 @@
 <% else %>
    <td>第一報告の作成中</td>
 <% end %>
-<td><%= report.deadline_date.strftime("%Y年 %m月 %d日") %></td>
+<td><%= report.deadline_date %></td>
 <td><%= report.created_date.strftime("%Y年 %m月 %d日")%></td>
 <td></td>
 <td><%= link_to '詳細', report_path(report.id), class: 'btn btn-primary mr-3', id: "report-index_detail-#{report.id}-submit" %></td>

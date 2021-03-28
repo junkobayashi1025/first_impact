@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_25_043733) do
+ActiveRecord::Schema.define(version: 2021_03_28_090741) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,6 +67,21 @@ ActiveRecord::Schema.define(version: 2021_03_25_043733) do
     t.index ["user_id"], name: "index_reports_on_user_id"
   end
 
+  create_table "tag_maps", force: :cascade do |t|
+    t.bigint "report_id"
+    t.bigint "tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["report_id"], name: "index_tag_maps_on_report_id"
+    t.index ["tag_id"], name: "index_tag_maps_on_tag_id"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "tag_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "teams", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.string "icon"
@@ -110,5 +125,7 @@ ActiveRecord::Schema.define(version: 2021_03_25_043733) do
   add_foreign_key "comments", "users"
   add_foreign_key "reports", "teams"
   add_foreign_key "reports", "users"
+  add_foreign_key "tag_maps", "reports"
+  add_foreign_key "tag_maps", "tags"
   add_foreign_key "teams", "users"
 end
