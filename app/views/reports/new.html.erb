@@ -53,8 +53,8 @@
            </div>
            <div class ="mb-3">
               <%= f.fields_for :attachments do |i| %>
-              <%= i.file_field :content %>
-              <%= i.hidden_field :content_cache %>
+              <%= i.file_field :contents, multiple: true %>
+              <!-- <%= i.hidden_field :contents_cache, multiple: true %> -->
               <% end %>
             </div>
             <bi>

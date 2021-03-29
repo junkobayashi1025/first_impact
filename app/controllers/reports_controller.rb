@@ -46,6 +46,7 @@ class ReportsController < ApplicationController
   end
 
   def show
+    binding.pry
     @comment = Comment.new
     @comments = @report.comments
   end
@@ -83,11 +84,11 @@ class ReportsController < ApplicationController
     params.require(:report).permit(:title, :created_date, :confirmed_date, :author, :accrual_date, :site_of_occurrence,
                                     :trouble_content, :first_aid, :interim_measures, :search_item,
                                     :permanent_measures, :confirmation_of_effectiveness, :checkbox_first, :checkbox_interim,
-                                    :checkbox_final, :team_id, attachments_attributes: [:content, :content_cache, :_destroy]).merge(user_id: current_user.id)
+                                    :checkbox_final, :team_id, attachments_attributes: [ {contents:[]}, :_destroy]).merge(user_id: current_user.id)
   end
- # { content:[] }, { content_cache:[] }
+
   def set_report
-    @report = Report.find_by(id: params[:id])
+    @report = Report.find(params[:id])
   end
 
   def set_q

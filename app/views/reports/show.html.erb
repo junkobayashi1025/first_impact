@@ -102,4 +102,7 @@
   </div>
 </div>
 
-<%= image_tag @report.attachments.first.content.url(:medium) %>
+
+  <% @report.attachments.first.contents.each do |content| %>
+    <%= image_tag content.url(:medium) %>
+  <% end %>
