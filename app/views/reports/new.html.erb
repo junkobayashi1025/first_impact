@@ -47,21 +47,20 @@
              <u>3.恒久対策</u>
   　　　　　　<%= f.text_area :permanent_measures, class: 'form-control', rows:10 %>
            </div>
-            <div class="form-group none_function">
+           <div class="form-group none_function">
              <u>4.有効性の確認</u>
-  　　　　　　<%= f.text_area :confirmation_of_effectiveness, class: 'form-control', rows:10 %>
+　　　　　　  <%= f.text_area :confirmation_of_effectiveness, class: 'form-control', rows:10 %>
+           </div>
+           <div class ="mb-3">
+              <%= f.fields_for :attachments do |i| %>
+              <%= i.file_field :content %>
+              <%= i.hidden_field :content_cache %>
+              <% end %>
             </div>
-
-         <!-- <div class ="mb-3">
-            <%= f.fields_for :photos do |i| %>
-            <%= i.file_field :image %>
-            <%= i.hidden_field :image_cache %>
-            <% end %>
-          </div> -->
-          <bi>
-           <%= f.hidden_field :team_id, value: @team.id %>
-           <%= f.submit "新規作成", class:"btn btn-primary" %>
-        <% end %>
+            <bi>
+            <%= f.hidden_field :team_id, value: @team.id %>
+            <%= f.submit "新規作成", class:"btn btn-primary" %>
+          <% end %>
       </div>
     </div>
   </div>

@@ -7,6 +7,8 @@ class ReportsController < ApplicationController
   def index
     @results = params[:q] ? @q.result : Report.where.not(checkbox_final: true).order(created_date: :desc)
     # binding.pry
+    # @results = Report.all
+    # binding.pry
     # @results_confirmed = @results.where.not(confirmed_date:nil)
     # @results_confirmed.each do |result_confirmed|
     #   result_confirmed = result_confirmed.accrual_date.update(confirmed_date)
@@ -24,8 +26,8 @@ class ReportsController < ApplicationController
   def new
     @report = Report.new
     @report.author = current_user.name
+    @report.attachments.build
     @team = Team.find(params[:team_id])
-     # @report.photos.build
   end
 
   def create
@@ -77,16 +79,12 @@ class ReportsController < ApplicationController
     redirect_to reports_path(@report.user.id)
   end
 
-  # def search
-  #   @results = @q.result.order(created_date: :desc)
-  # end
-
   private
   def report_params
     params.require(:report).permit(:title, :created_date, :confirmed_date, :author, :accrual_date, :site_of_occurrence,
                                     :trouble_content, :first_aid, :interim_measures, :search_item,
                                     :permanent_measures, :confirmation_of_effectiveness, :checkbox_first, :checkbox_interim,
-                                    :checkbox_final, :team_id).merge(user_id: current_user.id)
+                                    :checkbox_final, :team_id, attachments_attributes: [:id, :content, :content_cache, :_destroy]).merge(user_id: current_user.id)
   end
 
   def set_report

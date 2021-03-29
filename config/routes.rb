@@ -5,8 +5,9 @@ Rails.application.routes.draw do
     collection do
       get :archive
     end
-    resources :bookmarks, only: [:show, :destroy]
-    resources :comments,  only: [:create, :destroy]
+    resources :bookmarks,   only: [:show, :destroy]
+    resources :comments,    only: [:create, :destroy]
+    resources :attachments, only: [:create, :destroy]
   end
 
   resources :teams do

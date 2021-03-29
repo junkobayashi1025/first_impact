@@ -2,8 +2,9 @@ class Report < ApplicationRecord
   belongs_to :user
   belongs_to :team
   has_many :bookmarks, -> {order(created_at: :desc)}, dependent: :destroy
-  has_many :comments,  dependent: :destroy
-  # accepts_nested_attributes_for :attachments
+  has_many :comments,                                 dependent: :destroy
+  has_many :attachments,                              dependent: :destroy
+  accepts_nested_attributes_for :attachments, allow_destroy: true, reject_if: :all_blank
 
   enum search_item: {タイトル: 1, チーム名: 2, 責任者: 3, 担当者: 4}
 
@@ -19,10 +20,10 @@ class Report < ApplicationRecord
        elsif self.checkbox_interim && self.confirmed_date.nil?
          return '未定'
        else
-         return (self.accrual_date+ 14.day).strftime("%Y年 %m月 %d日")
+         return (self.accrual_date + 14.day).strftime("%Y年 %m月 %d日")
        end
      else
-       return (self.accrual_date+ 7.day).strftime("%Y年 %m月 %d日")
+       return (self.accrual_date + 7.day).strftime("%Y年 %m月 %d日")
      end
    end
 

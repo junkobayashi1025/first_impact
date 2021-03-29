@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_28_090741) do
+ActiveRecord::Schema.define(version: 2021_03_29_013658) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,14 @@ ActiveRecord::Schema.define(version: 2021_03_28_090741) do
     t.datetime "updated_at", null: false
     t.index ["team_id"], name: "index_assigns_on_team_id"
     t.index ["user_id"], name: "index_assigns_on_user_id"
+  end
+
+  create_table "attachments", force: :cascade do |t|
+    t.string "content"
+    t.bigint "report_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["report_id"], name: "index_attachments_on_report_id"
   end
 
   create_table "bookmarks", force: :cascade do |t|
@@ -54,9 +62,9 @@ ActiveRecord::Schema.define(version: 2021_03_28_090741) do
     t.text "interim_measures"
     t.text "permanent_measures"
     t.text "confirmation_of_effectiveness"
-    t.boolean "checkbox_first"
-    t.boolean "checkbox_interim"
-    t.boolean "checkbox_final"
+    t.boolean "checkbox_first", default: false
+    t.boolean "checkbox_interim", default: false
+    t.boolean "checkbox_final", default: false
     t.bigint "user_id", null: false
     t.bigint "team_id", null: false
     t.datetime "created_at", null: false
@@ -119,6 +127,7 @@ ActiveRecord::Schema.define(version: 2021_03_28_090741) do
 
   add_foreign_key "assigns", "teams"
   add_foreign_key "assigns", "users"
+  add_foreign_key "attachments", "reports"
   add_foreign_key "bookmarks", "reports"
   add_foreign_key "bookmarks", "users"
   add_foreign_key "comments", "reports"
