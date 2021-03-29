@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2021_03_29_013658) do
   end
 
   create_table "attachments", force: :cascade do |t|
-    t.string "contents", default: [], array: true
+    t.string "image"
     t.bigint "report_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
