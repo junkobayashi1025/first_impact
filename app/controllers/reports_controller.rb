@@ -5,7 +5,7 @@ class ReportsController < ApplicationController
   before_action :set_q_archive, only: [:archive]
 
   def index
-    @results = params[:q] ? @q.result : Report.where.not(checkbox_final: true).order(created_date: :desc)
+    @results = params[:q] ? @q.result : Report.where(checkbox_final: false).order(created_date: :desc)
     # binding.pry
     # @results = Report.all
     # binding.pry
@@ -31,7 +31,6 @@ class ReportsController < ApplicationController
   end
 
   def create
-    # binding.pry
     @team = Team.find(params[:report][:team_id])
     @report = Report.new(report_params)
     @report.team_id = @team.id
@@ -84,9 +83,9 @@ class ReportsController < ApplicationController
     params.require(:report).permit(:title, :created_date, :confirmed_date, :author, :accrual_date, :site_of_occurrence,
                                     :trouble_content, :first_aid, :interim_measures, :search_item,
                                     :permanent_measures, :confirmation_of_effectiveness, :checkbox_first, :checkbox_interim,
-                                    :checkbox_final, :team_id, attachments_attributes: [:id, :content, :content_cache, :_destroy]).merge(user_id: current_user.id)
+                                    :checkbox_final, :team_id, attachments_attributes: [:content, :content_cache, :_destroy]).merge(user_id: current_user.id)
   end
-
+ # { content:[] }, { content_cache:[] }
   def set_report
     @report = Report.find_by(id: params[:id])
   end
