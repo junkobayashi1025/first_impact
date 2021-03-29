@@ -26,7 +26,7 @@ class ReportsController < ApplicationController
   def new
     @report = Report.new
     @report.author = current_user.name
-    @report.attachments.build
+    5.times { @report.attachments.build }
     @team = Team.find(params[:team_id])
   end
 
@@ -52,6 +52,7 @@ class ReportsController < ApplicationController
   end
 
   def edit
+    @report.attachments.build
   end
 
   def update
@@ -81,10 +82,26 @@ class ReportsController < ApplicationController
 
   private
   def report_params
-    params.require(:report).permit(:title, :created_date, :confirmed_date, :author, :accrual_date, :site_of_occurrence,
-                                    :trouble_content, :first_aid, :interim_measures, :search_item,
-                                    :permanent_measures, :confirmation_of_effectiveness, :checkbox_first, :checkbox_interim,
-                                    :checkbox_final, :team_id, attachments_attributes: [ {contents:[]}, :_destroy]).merge(user_id: current_user.id)
+    params.require(:report).permit(
+      :title,
+      :created_date,
+      :confirmed_date,
+      :author,
+      :accrual_date,
+      :site_of_occurrence,
+      :trouble_content, :first_aid,
+      :interim_measures,
+      :search_item,
+      :permanent_measures,
+      :confirmation_of_effectiveness,
+      :checkbox_first,
+      :checkbox_interim,
+      :checkbox_final,
+      :team_id,
+      attachments_attributes: [
+        :image
+      ]
+    ).merge(user_id: current_user.id)
   end
 
   def set_report

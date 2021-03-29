@@ -8,12 +8,13 @@ class AttachmentsController < ApplicationController
 
    def destroy
      @attachment.destroy
+     redirect_to report_path(@attachment.report)
    end
 
    private
 
    def set_attachment
-     @attachment = Attachment.find(params[:attachments_id])
+     @attachment = Attachment.find(params[:id])
    end
 
    def attachment_params
