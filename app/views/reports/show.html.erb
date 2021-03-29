@@ -102,7 +102,7 @@
   </div>
 </div>
 
-
-  <% @report.attachments.first.contents.each do |content| %>
-    <%= image_tag content.url(:medium) %>
-  <% end %>
+<% @report.attachments.first.contents.each_with_index do |content, index| %>
+  <%= image_tag content.url(:medium) %>
+  <#%= link_to "Delete", report_attachment_path(report_id: @report.id, @report.attachments.index ), method: :delete, data: { confirm: "Are you sure you want to delete this image?" }%>
+<% end %>

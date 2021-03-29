@@ -101,6 +101,10 @@
                <%= f.text_area :confirmation_of_effectiveness, class: 'form-control none_function', rows:10 %>
              <% end %>
             </div>
+            <% @report.attachments.first.contents.each do |content| %>
+              <%= image_tag content.url(:medium) %>
+              <%= f.check_box :content_ids, {multiple: true}, content.ids, false %>
+            <% end %>
 
          <!-- <div class ="mb-3">
             <%= f.fields_for :photos do |i| %>
@@ -109,7 +113,7 @@
             <% end %>
           </div> -->
           <bi>
-           <%= f.hidden_field :team_id%>
+           <%= f.hidden_field :team_id %>
            <%= f.submit "変更", class:"btn btn-primary" %>
         <% end %>
       </div>
