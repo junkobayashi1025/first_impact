@@ -15,17 +15,29 @@ class Report < ApplicationRecord
     if self.checkbox_final
       return '--------------------'
     elsif self.checkbox_first
-       if self.checkbox_interim && self.confirmed_date
-         return (self.confirmed_date).strftime("%Y年 %m月 %d日")
-       elsif self.checkbox_interim && self.confirmed_date.nil?
-         return '未定'
-       else
-         return (self.accrual_date + 14.day).strftime("%Y年 %m月 %d日")
-       end
+     if self.checkbox_interim && self.confirmed_date
+       return (self.confirmed_date).strftime("%Y年 %m月 %d日")
+     elsif self.checkbox_interim && self.confirmed_date.nil?
+       return '未定'
      else
-       return (self.accrual_date + 7.day).strftime("%Y年 %m月 %d日")
+       return (self.accrual_date + 14.day).strftime("%Y年 %m月 %d日")
      end
-   end
+    else
+     return (self.accrual_date + 7.day).strftime("%Y年 %m月 %d日")
+    end
+  end
+
+  def build_attachment_for_form
+   self.attachments.build if saved_attachments.length < 5 && unsaved_attachments.length == 0
+  end
+
+  def saved_attachments
+   self.attachments.select(&:id)
+  end
+
+  def unsaved_attachments
+   self.attachments.select { |attachment| attachment.id.nil? }
+  end
 
   def bookmarked_by(user)
     Bookmark.find_by(user_id: user.id, report_id: id)

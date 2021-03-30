@@ -52,6 +52,7 @@
 　　　　　　  <%= f.text_area :confirmation_of_effectiveness, class: 'form-control', rows:10 %>
            </div>
            <div class ="mb-3">
+              <u>5.添付資料(添付資料は最大5つまで)</u><br>
               <%= f.fields_for :attachments do |i| %>
               <%= i.file_field :image %><br>
               <% end %>

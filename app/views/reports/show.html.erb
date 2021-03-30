@@ -95,13 +95,12 @@
                <%= @report.confirmation_of_effectiveness %>
              </div><br>
              <% if @report.attachments.present? %>
-               <u>5.添付資料</u>
+               <u>5.添付資料(添付資料は最大5つまで)</u>
                   <% @report.attachments.each_with_index do |attachment, index| %>
-                    <p>
+                    <li>
                        <a href="<%= asset_url(attachment.image.url) %>"><%= "#{index+1}.#{attachment.image.identifier}" %></a>
-                    </p>
+                    </li>
                   <% end %>
-
             <% end %>
           </div> <hr>
           <bi>
@@ -112,9 +111,3 @@
     </div>
   </div>
 </div>
-
-<% @report.attachments.each_with_index do |attachment, index| %>
-
-
-  <%= link_to "Delete", report_attachment_path(report_id: @report.id, id: attachment.id), method: :delete, data: { confirm: "Are you sure you want to delete this image?" }%>
-<% end %>

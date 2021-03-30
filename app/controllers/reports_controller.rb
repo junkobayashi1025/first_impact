@@ -34,6 +34,7 @@ class ReportsController < ApplicationController
     @team = Team.find(params[:report][:team_id])
     @report = Report.new(report_params)
     @report.team_id = @team.id
+
     # @report = @team.reports.build(report_params)
     # binding.pry
     # @report = Report.new(report_params)
@@ -51,7 +52,7 @@ class ReportsController < ApplicationController
   end
 
   def edit
-    @report.attachments.build
+    @report.build_attachment_for_form
   end
 
   def update

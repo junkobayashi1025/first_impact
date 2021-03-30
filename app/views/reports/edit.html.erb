@@ -101,15 +101,20 @@
                <%= f.text_area :confirmation_of_effectiveness, class: 'form-control none_function', rows:10 %>
              <% end %>
             </div>
-
-         <!-- <div class ="mb-3">
-            <%= f.fields_for :photos do |i| %>
-            <%= i.file_field :image %>
-            <%= i.hidden_field :image_cache %>
-            <% end %>
-          </div> -->
-          <bi>
-           <%= f.hidden_field :team_id%>
+            <% if @report.attachments %>
+              <u>5.添付資料(添付資料は最大5つまで)</u>
+              <%= f.fields_for :attachments do |i| %>
+                 <% if i.object.id.nil? %>
+                   <%= i.file_field :image %><br>
+                 <% elsif i.object.image.present? %>
+                   <li>
+                      <a href="<%= asset_url(i.object.image.url) %>"><%= "#{i.index + 1}. #{i.object.image.identifier}" %></a>
+                      <%= link_to "", report_attachment_path(report_id: @report.id, id: i.object.id), method: :delete, class: "delete-image", data: { confirm: "#{i.index + 1}.#{i.object.image.identifier}を削除してよろしいですか？" }%>
+                   </li>
+                 <% end %>
+              <% end %>
+           <% end %><hr>
+           <%= f.hidden_field :team_id %>
            <%= f.submit "変更", class:"btn btn-primary" %>
         <% end %>
       </div>
