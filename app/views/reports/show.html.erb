@@ -44,59 +44,70 @@
         <div class="form-control clear col-md-6">
           <%= @report.title %>
         </div><br>
-           <u>1.発生状況</u>
-           <div class="form-control col-md-4">
-             <%= "発生日：#{@report.accrual_date.strftime("%Y年 %m月 %d日")}" %>
-           </div><br>
-           <div class="form-control col-md-4">
-             <%= "発生場所：#{@report.site_of_occurrence}" %>
-           </div><br>
-           <u>2-1.トラブル内容</u>
-           <%= "(提出〆切：#{(@report.accrual_date + 7.day).strftime("%Y年 %m月 %d日")})"%>
-           <% if @report.checkbox_first %>
-             <input class="none_function" id="checkbox_first" as="boolean" type="checkbox" checked>責任者承認
-           <% else %>
-             <input class="none_function" id="checkbox_first" as="boolean" type="checkbox">責任者承認
-           <% end %>
-           <div class="form-control">
-             <%= @report.trouble_content %>
-           </div><br>
-           <u>2-2.応急対応</u>
-           <div class="form-control">
-             <%= @report.first_aid %>
-           </div><br>
-           <u>2-3.暫定対策</u>
-           <div class="form-control">
-             <%= @report.interim_measures %>
-           </div><br>
-           <u>3.恒久対策</u>
-           <%= "(提出〆切：#{(@report.accrual_date + 14.day).strftime("%Y年 %m月 %d日")})"%>
-           <% if @report.checkbox_interim %>
-             <input class="none_function" id="checkbox_interim" as="boolean" type="checkbox" checked>責任者承認
-           <% else %>
-             <input class="none_function" id="checkbox_interim" as="boolean" type="checkbox">責任者承認
-           <% end %>
-           <div class="form-control">
-             <%= @report.permanent_measures %>
-           </div><br>
-           <u>4.有効性の確認</u>
-           <% if @report.confirmed_date %>
-            <%= "(提出〆切：#{(@report.confirmed_date).strftime("%Y年 %m月 %d日")})"%>
-           <% else %>
-            <%= "(提出〆切：未定)"%>
-           <% end %>
-           <% if @report.checkbox_final %>
-             <input class="none_function" id="checkbox_final" as="boolean" type="checkbox" checked>責任者承認
-           <% else %>
-             <input class="none_function" id="checkbox_final" as="boolean" type="checkbox">責任者承認
-           <% end %>
-           <div class="form-control">
-             <%= @report.confirmation_of_effectiveness %>
-           </div><br>
+          <div>
+            <u>1.発生状況</u>
+             <div class="form-control col-md-4">
+               <%= "発生日：#{@report.accrual_date.strftime("%Y年 %m月 %d日")}" %>
+             </div><br>
+             <div class="form-control col-md-4">
+               <%= "発生場所：#{@report.site_of_occurrence}" %>
+             </div><br>
+             <u>2-1.トラブル内容</u>
+             <%= "(提出〆切：#{(@report.accrual_date + 7.day).strftime("%Y年 %m月 %d日")})"%>
+             <% if @report.checkbox_first %>
+               <input class="none_function" id="checkbox_first" as="boolean" type="checkbox" checked>責任者承認
+             <% else %>
+               <input class="none_function" id="checkbox_first" as="boolean" type="checkbox">責任者承認
+             <% end %>
+             <div class="form-control">
+               <%= @report.trouble_content %>
+             </div><br>
+             <u>2-2.応急対応</u>
+             <div class="form-control">
+               <%= @report.first_aid %>
+             </div><br>
+             <u>2-3.暫定対策</u>
+             <div class="form-control">
+               <%= @report.interim_measures %>
+             </div><br>
+             <u>3.恒久対策</u>
+             <%= "(提出〆切：#{(@report.accrual_date + 14.day).strftime("%Y年 %m月 %d日")})"%>
+             <% if @report.checkbox_interim %>
+               <input class="none_function" id="checkbox_interim" as="boolean" type="checkbox" checked>責任者承認
+             <% else %>
+               <input class="none_function" id="checkbox_interim" as="boolean" type="checkbox">責任者承認
+             <% end %>
+             <div class="form-control">
+               <%= @report.permanent_measures %>
+             </div><br>
+             <u>4.有効性の確認</u>
+             <% if @report.confirmed_date %>
+              <%= "(提出〆切：#{(@report.confirmed_date).strftime("%Y年 %m月 %d日")})"%>
+             <% else %>
+              <%= "(提出〆切：未定)"%>
+             <% end %>
+             <% if @report.checkbox_final %>
+               <input class="none_function" id="checkbox_final" as="boolean" type="checkbox" checked>責任者承認
+             <% else %>
+               <input class="none_function" id="checkbox_final" as="boolean" type="checkbox">責任者承認
+             <% end %>
+             <div class="form-control">
+               <%= @report.confirmation_of_effectiveness %>
+             </div><br>
+             <% if @report.attachments.present? %>
+               <u>5.添付資料</u>
+                  <% @report.attachments.each_with_index do |attachment, index| %>
+                    <p>
+                       <a href="<%= asset_url(attachment.image.url) %>"><%= "#{index+1}.#{attachment.image.identifier}" %></a>
+                    </p>
+                  <% end %>
+
+            <% end %>
+          </div> <hr>
           <bi>
-            <td><%= link_to '編集', edit_report_path(@report.id), class: 'btn btn-success mr-3', id: "report_show_edit-#{@report.id}-submit" if current_user == @report.team.owner || current_user == @report.user %></td>
-            <td><%= link_to '削除', report_path(@report.id), method: :delete, data: { confirm: "ユーザー「#{@report.title}を削除します。よろしいでしょうか？」" },
-                  class: 'btn btn-danger mr-3', id: "report_show_delete-#{@report.id}-submit" if current_user == @report.team.owner %></td>
+            <%= link_to '編集', edit_report_path(@report.id), class: 'btn btn-success mr-3', id: "report_show_edit-#{@report.id}-submit" if current_user == @report.team.owner || current_user == @report.user %>
+            <%= link_to '削除', report_path(@report.id), method: :delete, data: { confirm: "ユーザー「#{@report.title}を削除します。よろしいでしょうか？」" },
+                  class: 'btn btn-danger mr-3', id: "report_show_delete-#{@report.id}-submit" if current_user == @report.team.owner %>
       </div>
     </div>
   </div>
@@ -104,6 +115,6 @@
 
 <% @report.attachments.each_with_index do |attachment, index| %>
 
-  <a href="<%= asset_url(attachment.image.url) %>"><%= "#{attachment.image.identifier}" %></a>
+
   <%= link_to "Delete", report_attachment_path(report_id: @report.id, id: attachment.id), method: :delete, data: { confirm: "Are you sure you want to delete this image?" }%>
 <% end %>

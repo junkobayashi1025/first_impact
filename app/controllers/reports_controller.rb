@@ -46,7 +46,6 @@ class ReportsController < ApplicationController
   end
 
   def show
-    binding.pry
     @comment = Comment.new
     @comments = @report.comments
   end
