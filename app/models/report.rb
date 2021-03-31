@@ -1,4 +1,5 @@
 class Report < ApplicationRecord
+  acts_as_taggable
   belongs_to :user
   belongs_to :team
   has_many :bookmarks, -> {order(created_at: :desc)}, dependent: :destroy

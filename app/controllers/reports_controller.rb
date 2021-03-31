@@ -6,6 +6,9 @@ class ReportsController < ApplicationController
 
   def index
     @results = params[:q] ? @q.result : Report.where(checkbox_final: false).order(created_date: :desc)
+    if params[:tag_name]
+      @results = Report.tagged_with("#{params[:tag_name]}")
+    end
     # binding.pry
     # @results = Report.all
     # binding.pry
@@ -98,6 +101,7 @@ class ReportsController < ApplicationController
       :checkbox_interim,
       :checkbox_final,
       :team_id,
+      :tag_list,
       attachments_attributes: [
         :image
       ]
