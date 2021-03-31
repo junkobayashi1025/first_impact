@@ -5,10 +5,12 @@ class ReportsController < ApplicationController
   before_action :set_q_archive, only: [:archive]
 
   def index
-    @results = params[:q] ? @q.result : Report.where(checkbox_final: false).order(created_date: :desc)
     if params[:tag_name]
-      @results = Report.tagged_with("#{params[:tag_name]}")
+      @results = Report.where(checkbox_final: false).tagged_with("#{params[:tag_name]}")
+    else
+      @results = params[:q] ? @q.result : Report.where(checkbox_final: false).order(created_date: :desc)
     end
+
     # binding.pry
     # @results = Report.all
     # binding.pry
@@ -23,7 +25,11 @@ class ReportsController < ApplicationController
   end
 
   def archive
-    @archives = params[:q] ? @q.result : Report.where(checkbox_final: true).order(created_date: :desc)
+    if params[:tag_name]
+      @archives = Report.where(checkbox_final: true).tagged_with("#{params[:tag_name]}")
+    else
+      @archives = params[:q] ? @q.result : Report.where(checkbox_final: true).order(created_date: :desc)
+    end
   end
 
   def new
