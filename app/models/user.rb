@@ -32,4 +32,15 @@ class User < ApplicationRecord
   def liked_by?(report_id)
     bookmarks.where(report_id: report_id).exists?
   end
+
+  def self.find_or_create_by_email(email)
+    user = find_or_initialize_by(email: email)
+    if user.new_record?
+      user.password = generate_password
+      user.save!
+      AssignMailer.assign_mail(user.email, user.password).deliver
+    end
+    user
+  end
+  
 end

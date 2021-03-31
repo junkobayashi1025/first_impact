@@ -5,6 +5,11 @@ Rails.application.routes.draw do
     collection do
       get :archive
     end
+    member do
+      post :approval_request
+      post :approval
+      post :reject
+    end
     resources :bookmarks,   only: [:show, :destroy]
     resources :comments,    only: [:create, :destroy]
     resources :attachments, only: [:create, :destroy]

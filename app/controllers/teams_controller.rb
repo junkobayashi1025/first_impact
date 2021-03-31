@@ -14,6 +14,7 @@ class TeamsController < ApplicationController
    @team.owner_id = current_user.id
    @team.charge_in_person_id = current_user.id
    if @team.save
+     @team.invite_member(@team.owner)
      redirect_to team_path(@team)
      flash[:notice] = "チーム「#{@team.name}」を作成しました"
    else
