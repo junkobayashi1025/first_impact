@@ -102,18 +102,17 @@
              <% end %>
             </div>
             <% if @report.attachments %>
-              <u>5.添付資料(添付資料は最大5つまで)</u>
+              <u>5.添付資料(添付資料は最大5つまで)</u><br>
               <%= f.fields_for :attachments do |i| %>
                  <% if i.object.id.nil? %>
                    <%= i.file_field :image %><br>
                  <% elsif i.object.image.present? %>
                    <li>
                       <a href="<%= asset_url(i.object.image.url) %>"><%= "#{i.index + 1}. #{i.object.image.identifier}" %></a>
-                      <%= link_to "", report_attachment_path(report_id: @report.id, id: i.object.id), method: :delete, class: "delete-image", data: { confirm: "#{i.index + 1}.#{i.object.image.identifier}を削除してよろしいですか？" }%>
                    </li>
                  <% end %>
               <% end %>
-           <% end %><hr>
+            <% end %><hr>
            <%= f.hidden_field :team_id %>
            <%= f.submit "変更", class:"btn btn-primary" %>
         <% end %>

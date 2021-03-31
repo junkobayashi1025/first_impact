@@ -55,6 +55,7 @@
               <u>5.添付資料(添付資料は最大5つまで)</u><br>
               <%= f.fields_for :attachments do |i| %>
               <%= i.file_field :image %><br>
+              <%= i.hidden_field :remove_image %>
               <% end %>
             </div>
             <bi>

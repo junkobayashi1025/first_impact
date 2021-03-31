@@ -98,10 +98,11 @@
                <u>5.添付資料(添付資料は最大5つまで)</u>
                   <% @report.attachments.each_with_index do |attachment, index| %>
                     <li>
+                        <%= link_to "", report_attachment_path(report_id: @report.id, id: attachment.id), method: :delete, class: "delete-image", data: { confirm: "#{index + 1}.#{attachment.image.identifier}を削除してよろしいですか？" }%>
                        <a href="<%= asset_url(attachment.image.url) %>"><%= "#{index+1}.#{attachment.image.identifier}" %></a>
                     </li>
                   <% end %>
-            <% end %>
+             <% end %>
           </div> <hr>
           <bi>
             <%= link_to '編集', edit_report_path(@report.id), class: 'btn btn-success mr-3', id: "report_show_edit-#{@report.id}-submit" if current_user == @report.team.owner || current_user == @report.user %>
