@@ -19,6 +19,10 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'rails_admin', '~> 2.0'
 gem 'cancancan'
+gem 'faker'
+gem 'ransack'
+gem 'jquery-rails'
+gem 'acts-as-taggable-on', '~> 6.0'
 
 
 gem 'bootsnap', '>= 1.1.0', require: false
@@ -26,6 +30,8 @@ gem 'bootsnap', '>= 1.1.0', require: false
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry-rails'
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 group :development do

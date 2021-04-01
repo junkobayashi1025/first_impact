@@ -1,0 +1,8 @@
+<%= form_with(model: [report, comment] ) do |f| %>
+  <div>
+    <%= f.text_area :comment, class: "form-control comment-input border-0", placeholder: "コメント ...", autocomplete: :off %>
+  </div><br>
+  <div class="actions">
+    <%= f.submit "コメント投稿" %>
+  </div>
+<% end %>

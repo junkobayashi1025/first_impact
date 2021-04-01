@@ -1,0 +1,35 @@
+<% if current_user.liked_by?(report.id) %>
+   <td><%= link_to 'いいねを外す', destroy_bookmark_path(report), method: :DELETE, remote: true, class: "bookmarked hide-text" %></td>
+<% else %>
+   <td><%= link_to 'いいね', create_bookmark_path(report), method: :POST, remote: true, class: "bookmark hide-text" %></td>
+<% end %>
+<td><%= link_to "#{report.title}", report_path(report.id) %></td>
+<td><%= link_to "#{report.team.name}", team_path(report.team.id) %></td>
+<td><%= link_to "#{report.team.owner.name}", user_path(report.team.owner.id) %></td>
+<td><%= link_to "#{report.author}", user_path(report.user.id) %></td>
+<% unless report.checkbox_final %>
+  <% if report.checkbox_interim %>
+     <td>有効性の確認中</td>
+  <% elsif report.checkbox_first %>
+     <td>中間報告の作成中</td>
+  <% else %>
+     <td>第一報告の作成中</td>
+  <% end %>
+<% end %>
+<% unless report.checkbox_final %>
+  <td><%= report.deadline_date %></td>
+<% end %>
+<td><%= report.created_at.strftime("%Y年 %m月 %d日")%></td>
+<td>
+  <% report.tag_list.each do |tag| %>
+    <% if report.checkbox_final == false %>
+      <%= link_to "#{tag}", reports_path(tag_name: tag), class:"btn btn-warning" %>
+    <% else%>
+      <%= link_to "#{tag}", archive_reports_path(tag_name: tag), class:"btn btn-warning" %>
+    <% end %>
+  <% end %>
+</td>
+<td><%= link_to '詳細', report_path(report.id), class: 'btn btn-primary mr-3', id: "report-index_detail-#{report.id}-submit" %></td>
+<td><%= link_to '編集', edit_report_path(report.id), class: 'btn btn-success mr-3', id: "report_index_edit-#{report.id}-submit" if current_user == report.team.owner || current_user == report.user %></td>
+<td><%= link_to '削除', report_path(report.id), method: :delete, data: { confirm: "ユーザー「#{report.title}を削除します。よろしいでしょうか？」" },
+      class: 'btn btn-danger mr-3', id: "report_index_delete-#{report.id}-submit" if current_user == report.team.owner %></td>
