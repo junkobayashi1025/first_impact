@@ -22,17 +22,26 @@
         <strong>報告書詳細画面</strong>
             <div class="float_right_3" id="report_show_<%= @report.id %>">
               <% if current_user.liked_by?(@report.id) %>
-                <%= link_to 'いいねを外す', destroy_bookmark_path(@report), method: :DELETE, remote: true, class: "bookmarked hide-text" %>
+                <%= link_to 'いいねを外す', destroy_bookmark_path(id: @report), method: :DELETE, remote: true, class: "bookmarked hide-text" %>
               <% else %>
-                <%= link_to 'いいね', create_bookmark_path(@report), method: :POST, remote: true, class: "bookmark hide-text" %>
+                <%= link_to 'いいね', create_bookmark_path(id: @report), method: :POST, remote: true, class: "bookmark hide-text" %>
               <% end %>
             </div>
             <div class="float_right_3" id="report_show_<%= @report.id %>">
-              <% if current_user == @report.user && @report.approval == false %>
-                <%= link_to '承認依頼', approval_request_report_path(id: @report.id), method: :POST, class: 'btn btn-primary mr-3', id: "report_show_edit-#{@report.id}-submit" %>
-              <% elsif current_user == @report.user && @report.approval == true %>
-                <%= link_to '承認依頼中', edit_report_path(@report.id), class: 'btn btn-warning mr-3', id: "report_show_edit-#{@report.id}-submit" %>
-              <% end %>
+              <% if current_user != @report.team.owner %>
+                <% if current_user == @report.user && @report.approval == false %>
+                  <%= link_to '承認依頼', approval_request_report_path(id: @report.id), method: :POST, class: 'btn btn-primary mr-3', id: "report_show_approval_request-#{@report.id}-submit" %>
+                <% elsif current_user == @report.team.owner && @report.approval == true %>
+                  <%= link_to '承認', approval_report_path(id: @report.id), method: :POST, class: 'btn btn-success mr-3', id: "report_show_approval-#{@report.id}-submit" %>
+                  <%= link_to '拒否', reject_report_path(id: @report.id), method: :POST, class: 'btn btn-danger mr-3', id: "report_show_reject-#{@report.id}-submit" %>
+                <% elsif @report.approval == true %>
+                  <div class="btn btn-warning mr-3 none_function">承認依頼中
+                  </div>
+                <% else %>
+                  <div class="btn btn-primary mr-3 none_function">作成中
+                  </div>
+                <% end %>
+                <% end %>
             </div>
       </div>
       <div class="card-body">

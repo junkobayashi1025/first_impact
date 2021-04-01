@@ -1,6 +1,6 @@
 class ReportsController < ApplicationController
   # before_action :authenticate_user
-  before_action :set_report, only: [:show, :edit, :update, :destroy, :approval_request]
+  before_action :set_report, only: [:show, :edit, :update, :destroy, :approval_request, :approval, :reject]
   before_action :set_q, only: [:index]
   before_action :set_q_archive, only: [:archive]
 
@@ -95,9 +95,27 @@ class ReportsController < ApplicationController
   end
 
   def approval_request
-    @report.update(approval: true)
-    redirect_to report_path(@report)
-    flash[:notice] = "承認依頼をしました"
+    if current_user == @report.team.owner
+      @report.update(approval: true)
+      redirect_to report_path(@report)
+      flash[:notice] = "承認依頼をしました"
+    end
+  end
+
+  def approval
+    if current_user == @report.team.owner
+      @report.update(approval: false)
+      redirect_to report_path(@report)
+      flash[:notice] = "承認しました"
+    end
+  end
+
+  def reject
+    if current_user == @report.team.owner
+      @report.update(approval: false)
+      redirect_to report_path(@report)
+      flash[:notice] = "拒否しました"
+    end
   end
 
   private
