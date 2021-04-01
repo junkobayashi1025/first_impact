@@ -33,8 +33,10 @@
     <% @team.assign_users.each do |assign_user| %>
       <li>
         <td><%= link_to "#{assign_user.name}", user_path(assign_user.id) %></td>
-        <% if @team.owner == current_user && assign_user.id != @team.charge_in_person.id %>
+        <% if @team.owner == current_user || assign_user == current_user  %>
         <td><%= link_to '削除', team_assign_path(@team, assign_user.assigns.ids), method: :delete, class: 'btn btn-sm btn-danger' %></td>
+        <% end %>
+        <% if current_user.id == @team.owner_id && current_user != assign_user  %>
         <td><%= link_to "責任者権限", change_owner_team_path(@team, user_id: assign_user.id), method: :post, class: 'btn btn-sm btn-primary' %></td>
         <% end %>
       </li>
