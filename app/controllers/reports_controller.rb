@@ -95,7 +95,7 @@ class ReportsController < ApplicationController
   end
 
   def approval_request
-    if current_user == @report.team.owner
+    if current_user == @report.user
       @report.update(approval: true)
       redirect_to report_path(@report)
       flash[:notice] = "承認依頼をしました"
