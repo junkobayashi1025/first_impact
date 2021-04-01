@@ -27,6 +27,13 @@
                 <%= link_to 'いいね', create_bookmark_path(@report), method: :POST, remote: true, class: "bookmark hide-text" %>
               <% end %>
             </div>
+            <div class="float_right_3" id="report_show_<%= @report.id %>">
+              <% if current_user == @report.user && @report.approval == false %>
+                <%= link_to '承認依頼', approval_request_report_path(id: @report.id), method: :POST, class: 'btn btn-primary mr-3', id: "report_show_edit-#{@report.id}-submit" %>
+              <% elsif current_user == @report.user && @report.approval == true %>
+                <%= link_to '承認依頼中', edit_report_path(@report.id), class: 'btn btn-warning mr-3', id: "report_show_edit-#{@report.id}-submit" %>
+              <% end %>
+            </div>
       </div>
       <div class="card-body">
         <div class="float_right col-md-3.5">

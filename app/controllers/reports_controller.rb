@@ -1,6 +1,6 @@
 class ReportsController < ApplicationController
   # before_action :authenticate_user
-  before_action :set_report, only: [:show, :edit, :update, :destroy]
+  before_action :set_report, only: [:show, :edit, :update, :destroy, :approval_request]
   before_action :set_q, only: [:index]
   before_action :set_q_archive, only: [:archive]
 
@@ -89,6 +89,12 @@ class ReportsController < ApplicationController
     redirect_to reports_path(@report.user.id)
   end
 
+  def approval_request
+    @report.update(approval: true)
+    redirect_to report_path(@report)
+    flash[:notice] = "承認依頼をしました"
+  end
+
   private
   def report_params
     params.require(:report).permit(
@@ -108,6 +114,7 @@ class ReportsController < ApplicationController
       :checkbox_final,
       :team_id,
       :tag_list,
+      :approval,
       attachments_attributes: [
         :image
       ]
