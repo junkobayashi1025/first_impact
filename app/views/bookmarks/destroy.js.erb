@@ -1,0 +1,4 @@
+$('#report_index_<%= @report.id %>').
+  html('<%= j(render @report) %>');
+$('#report_show_<%= @report.id %>').
+  html('<%= link_to 'いいね', create_bookmark_path(@report), method: :POST, remote: true, class: "bookmark hide-text" %>');
