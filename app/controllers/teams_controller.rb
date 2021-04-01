@@ -26,6 +26,9 @@ class TeamsController < ApplicationController
  end
 
  def edit
+   if @team.owner != current_user
+    redirect_to @team, notice:"編集権限がありません"
+   end
  end
 
  def update
