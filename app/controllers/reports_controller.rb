@@ -61,7 +61,12 @@ class ReportsController < ApplicationController
   end
 
   def edit
-    @report.build_attachment_for_form
+    if current_user == @report.team.owner || @report.approval == false
+      @report.build_attachment_for_form
+    else
+      redirect_to report_path(@report)
+      flash[:notice] = '承認依頼中のため編集できません'
+    end
   end
 
   def update
