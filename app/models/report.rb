@@ -61,4 +61,12 @@ class Report < ApplicationRecord
     when 2 then return "第一報"
     end
   end
+
+  def step_status
+    if self.approval
+      return "承認依頼中"
+    else
+      return "作成中"
+    end
+  end
 end
