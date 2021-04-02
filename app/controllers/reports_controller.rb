@@ -52,6 +52,7 @@ class ReportsController < ApplicationController
       if @report.save
        redirect_to reports_path
        flash[:success] = '投稿が保存されました'
+       CreateReportMailer.create_report_mailer(@team, @report).deliver
       else
        render 'new'
       end
@@ -72,7 +73,6 @@ class ReportsController < ApplicationController
   end
 
   def update
-    binding.pry
    if params[:back]
      redirect_to report_path(@report)
    else
