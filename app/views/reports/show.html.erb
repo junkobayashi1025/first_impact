@@ -35,10 +35,10 @@
                   <%= link_to '承認', approval_report_path(id: @report.id), method: :POST, class: 'btn btn-success mr-3', id: "report_show_approval-#{@report.id}-submit" %>
                   <%= link_to '拒否', reject_report_path(id: @report.id), method: :POST, class: 'btn btn-danger mr-3', id: "report_show_reject-#{@report.id}-submit" %>
                 <% elsif @report.approval == false %>
-                   <div class="btn btn-primary mr-3 none_function">作成中
+                   <div class="btn btn-primary mr-3 none_function"><%= @report.status %>
                    </div>
                  <% else @report.approval == true %>
-                   <div class="btn btn-warning mr-3 none_function">承認依頼中
+                   <div class="btn btn-warning mr-3 none_function"><%= @report.status %>
                    </div>
                  <% end %>
               <% end %>

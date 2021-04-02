@@ -34,6 +34,7 @@ class ReportsController < ApplicationController
 
   def new
     @report = Report.new
+
     @report.author = current_user.name
     5.times { @report.attachments.build }
     @team = Team.find(params[:team_id])
@@ -42,6 +43,7 @@ class ReportsController < ApplicationController
   def create
     @team = Team.find(params[:report][:team_id])
     @report = Report.new(report_params)
+    @report.user_id = current_user.id
     @report.step_string
     @report.status_string
     # @report = @team.reports.build(report_params)
@@ -70,12 +72,12 @@ class ReportsController < ApplicationController
   end
 
   def update
+    binding.pry
    if params[:back]
      redirect_to report_path(@report)
    else
      if @report.update(report_params)
-         @report.step_string
-         @report.status_string
+        @report.step_string
         flash[:notice] = "コメントを変更しました"
      else
         render :edit
@@ -99,6 +101,7 @@ class ReportsController < ApplicationController
   def approval_request
     if current_user == @report.user
       @report.update(approval: true)
+      @report.status_string
       redirect_to report_path(@report)
       flash[:notice] = "承認依頼をしました"
       ApprovalRequestMailer.approval_request_mailer(@report).deliver
@@ -108,6 +111,7 @@ class ReportsController < ApplicationController
   def approval
     if current_user == @report.team.owner
       @report.update(approval: false)
+      @report.status_string
       redirect_to report_path(@report)
       flash[:notice] = "承認しました"
     end
@@ -116,6 +120,7 @@ class ReportsController < ApplicationController
   def reject
     if current_user == @report.team.owner
       @report.update(approval: false)
+      @report.status_string
       redirect_to report_path(@report)
       flash[:notice] = "拒否しました"
     end
@@ -146,7 +151,7 @@ class ReportsController < ApplicationController
       attachments_attributes: [
         :image
       ]
-    ).merge(user_id: current_user.id)
+    )
   end
 
   def set_report

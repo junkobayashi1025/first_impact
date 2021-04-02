@@ -63,11 +63,3 @@ class Report < ApplicationRecord
     end
   end
 end
-
-  # def step_string
-  #   case self.step
-  #   when 0 then return  self.step = "有効性の確認"
-  #   when 1 then return  self.step = "中間報告"
-  #   when 2 then return  self.step = "第一報"
-  #   end
-  # end
