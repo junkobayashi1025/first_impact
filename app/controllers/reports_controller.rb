@@ -114,6 +114,7 @@ class ReportsController < ApplicationController
       @report.status_string
       redirect_to report_path(@report)
       flash[:notice] = "承認しました"
+      ApprovalMailer.approval_mailer(@report).deliver
     end
   end
 
