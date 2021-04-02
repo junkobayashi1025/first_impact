@@ -8,6 +8,8 @@
   <%= f.search_field :team_name_cont, placeholder:"チーム名.." %>
   <%= f.search_field :team_owner_name_cont, placeholder:"責任者.." %>
   <%= f.search_field :author_cont, placeholder:"担当者.." %>
+  <%= f.search_field :step_cont, placeholder:"ステップ.." %>
+  <%= f.search_field :status_cont, placeholder:"ステータス.." %>
   <%= f.submit '検索' %>
   <%= link_to 'クリア', @repotrs_path %>
   <br>
@@ -21,8 +23,8 @@
       <th>チーム名</th>
       <th>責任者</th>
       <th>担当者</th>
-      <th><%= sort_link(@q, :step, 'ステップ', default_order: :asc)%></th></th>
-      <th>ステータス</th>
+      <th><%= sort_link(@q, :step, 'ステップ')%></th>
+      <th><%= sort_link(@q, :status, 'ステータス')%></th>
       <th><%= sort_link(@q, :deadline_date, '提出〆切', default_order: :asc)%></th>
       <th>作成日</th>
       <th>タグ</th>

@@ -42,8 +42,8 @@ class ReportsController < ApplicationController
   def create
     @team = Team.find(params[:report][:team_id])
     @report = Report.new(report_params)
-    @report.team_id = @team.id
-
+    @report.step_string
+    @report.status_string
     # @report = @team.reports.build(report_params)
     # binding.pry
     # @report = Report.new(report_params)
@@ -74,6 +74,8 @@ class ReportsController < ApplicationController
      redirect_to report_path(@report)
    else
      if @report.update(report_params)
+         @report.step_string
+         @report.status_string
         flash[:notice] = "コメントを変更しました"
      else
         render :edit
@@ -139,6 +141,8 @@ class ReportsController < ApplicationController
       :team_id,
       :tag_list,
       :approval,
+      :step,
+      :status,
       attachments_attributes: [
         :image
       ]

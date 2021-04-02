@@ -7,8 +7,8 @@
 <td><%= link_to "#{report.team.name}", team_path(report.team.id) %></td>
 <td><%= link_to "#{report.team.owner.name}", user_path(report.team.owner.id) %></td>
 <td><%= link_to "#{report.author}", user_path(report.user.id) %></td>
-<td><%= report.step_string %></td>
-<td><%= report.step_status %></td>
+<td><%= report.step %></td>
+<td><%= report.status %></td>
 <% unless report.checkbox_final %>
   <td><%= report.deadline_date %></td>
 <% end %>
