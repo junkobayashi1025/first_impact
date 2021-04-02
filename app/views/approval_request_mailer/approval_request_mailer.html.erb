@@ -1,3 +1,5 @@
 <h1>下記の報告書について承認依頼が届きました！</h1>
-<h4>報告書タイトル: <%= @report.title %></h4>
+<h5>※内容を確認の上、承認・拒否をしてください</h5>
+<h4>報告書タイトル: <%= link_to "#{@report.title}", report_url(@report.id) %></h4>
+<h4>ステップ:</h4>
 <h4>担当者: <%= @report.user.name %></h4>

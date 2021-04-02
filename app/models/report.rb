@@ -44,13 +44,21 @@ class Report < ApplicationRecord
     Bookmark.find_by(user_id: user.id, report_id: id)
   end
 
-  # def step
-  #   return 0
-  # end
-  #
-  # def step_string
-  #   case self.step
-  #   when 0: return "完了"
-  #   end
-  # end
+  def step
+    if self.checkbox_interim
+      return 0
+    elsif self.checkbox_first
+      return 1
+    else
+      return 2
+    end
+  end
+
+  def step_string
+    case self.step
+    when 0 then return "有効性の確認"
+    when 1 then return "中間報告"
+    when 2 then return "第一報"
+    end
+  end
 end
