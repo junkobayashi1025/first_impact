@@ -79,6 +79,7 @@ class ReportsController < ApplicationController
      if @report.update(report_params)
         @report.step_string
         flash[:notice] = "コメントを変更しました"
+        UpdateReportMailer.update_report_mailer(@report).deliver
      else
         render :edit
         flash[:danger] = "コメントを変更できませんでした"

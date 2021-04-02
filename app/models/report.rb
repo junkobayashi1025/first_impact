@@ -8,7 +8,6 @@ class Report < ApplicationRecord
   accepts_nested_attributes_for :attachments, allow_destroy: true, reject_if: :all_blank
 
   enum search_item: {タイトル: 1, チーム名: 2, 責任者: 3, 担当者: 4}
-  # enum step: {第一報告: 1, 中間報告: 2, 有効性の確認: 3}
 
   scope :sort_by_deadline_date_asc, lambda { all.sort_by(&:deadline_date) }
   scope :sort_by_deadline_date_desc, lambda { all.sort_by(&:deadline_date).reverse }
