@@ -124,6 +124,7 @@ class ReportsController < ApplicationController
       @report.status_string
       redirect_to report_path(@report)
       flash[:notice] = "拒否しました"
+      RejectMailer.reject_mailer(@report).deliver
     end
   end
 
