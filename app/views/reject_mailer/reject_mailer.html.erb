@@ -2,5 +2,6 @@
 <h5>※再度、編集し承認依頼をしてください</h5>
 <hr>
 <h4>報告書タイトル: <%= link_to "#{@report.title}", report_url(@report.id) %></h4>
-<h4>ステップ <%= @report.step %></h4>
+<h4>チーム名: <%= @report.team.name %></h4>
 <h4>担当者: <%= @report.user.name %></h4>
+<h4>ステップ <%= @report.step %></h4>
