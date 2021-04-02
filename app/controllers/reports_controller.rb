@@ -99,6 +99,7 @@ class ReportsController < ApplicationController
       @report.update(approval: true)
       redirect_to report_path(@report)
       flash[:notice] = "承認依頼をしました"
+      ApprovalRequestMailer.approval_request_mailer(@report).deliver
     end
   end
 
