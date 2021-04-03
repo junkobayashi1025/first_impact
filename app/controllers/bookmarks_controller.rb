@@ -13,10 +13,10 @@ class BookmarksController < ApplicationController
   # end
 
   def create
-    if @report.user.id != current_user.id
+    if current_user != @report.user && current_user != @report.team.owner
       Bookmark.create(user_id: current_user.id, report_id: params[:id])
     else
-      redirect_to user_path(@report.user), notice:"権限がありません"
+      redirect_to report_path(@report), notice:"権限がありません"
     end
     # if @bookmark.save
     #   respond_to :js
