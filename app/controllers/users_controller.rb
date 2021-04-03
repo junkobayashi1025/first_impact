@@ -6,6 +6,13 @@ class UsersController < ApplicationController
   end
 
   def show
+    if user_signed_in?
+      threshold = DateTime.now + 3.day
+      @expired_reports = @user.reports.where('accrual_date <= ?', threshold).where(user_id: current_user.id, checkbox_interim: false, checkbox_final: false)
+      .or(@user.reports.where('confirmed_date <= ?', threshold).where(user_id: current_user.id, checkbox_interim: true, checkbox_final: false))
+    else
+      redirect_to user_path(@user), notice:"権限がありません。"
+    end
   end
 
   def edit

@@ -37,3 +37,33 @@
     </div>
   </div>
 </div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+      期限切れ or 期限直前(1日以内)タスク一覧
+    </div>
+    <table class="table panel-body">
+      <% if @expired_reports.any? == true %>
+        <tr>
+          <th>タイトル</th>
+          <th>ユーザー</th>
+          <th>発生日</th>
+          <th>〆切</th>
+          <th></th>
+        </tr>
+
+        <% @expired_reports.each do |report| %>
+          <tr>
+            <td><%= link_to "#{report.title}", report_path(report.id) %></td>
+            <td><%= report.user.name %></td>
+            <td class="task_due_row">
+              <% if report.accrual_date %>
+                <%= report.accrual_date.strftime("%Y年 %m月 %d日") %>
+              <% end %>
+            </td>
+            <td><%= report.deadline_date%></td>
+          </tr>
+          <% end %>
+        <% end %>
+    </table>
+  </div>
