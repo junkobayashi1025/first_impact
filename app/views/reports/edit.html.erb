@@ -28,6 +28,7 @@
            <div class="form-group clear col-md-6">
              <%= f.label :タグ %>
   　　　　　　<%= f.text_field :tag_list, value: @report.tag_list.join(','), class: "form-control" %>
+             <p>※　,(カンマ)で複数のタグ作成</p>
            </div>
            <u>1.発生状況</u>
            <div class="form-group  col-md-6">
