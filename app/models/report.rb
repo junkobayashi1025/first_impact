@@ -21,10 +21,10 @@ class Report < ApplicationRecord
      elsif self.checkbox_interim && self.confirmed_date.nil?
        return '未定'
      else
-       return (self.accrual_date + 14.day).strftime("%Y年 %m月 %d日")
+       return (self.due).strftime("%Y年 %m月 %d日")
      end
     else
-     return (self.accrual_date + 7.day).strftime("%Y年 %m月 %d日")
+     return (self.due).strftime("%Y年 %m月 %d日")
     end
   end
 
@@ -46,11 +46,11 @@ class Report < ApplicationRecord
 
   def step_string
     if self.checkbox_interim && self.checkbox_first
-      return self.update(step:"3: 有効性の確認" )
+      return self.update(step:"3: 有効性の確認")
     elsif self.checkbox_first
-      return self.update(step:"2: 中間報告" )
+      return self.update(step:"2: 中間報告", due: self.accrual_date + 14.day )
     else
-      return self.update(step:"1: 第一報告" )
+      return self.update(step:"1: 第一報告", due: self.accrual_date + 7.day )
     end
   end
 

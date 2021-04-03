@@ -34,7 +34,6 @@ class ReportsController < ApplicationController
 
   def new
     @report = Report.new
-
     @report.author = current_user.name
     5.times { @report.attachments.build }
     @team = Team.find(params[:team_id])
@@ -151,6 +150,7 @@ class ReportsController < ApplicationController
       :approval,
       :step,
       :status,
+      :due,
       attachments_attributes: [
         :image
       ]
