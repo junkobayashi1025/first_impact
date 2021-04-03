@@ -20,13 +20,15 @@
     <div class="card">
       <div class="card-header">
         <strong>報告書詳細画面</strong>
-          <div class="float_right_3" id="report_show_<%= @report.id %>">
-            <% if current_user.liked_by?(@report.id) %>
-              <%= link_to 'いいねを外す', destroy_bookmark_path(id: @report), method: :DELETE, remote: true, class: "bookmarked hide-text" %>
-            <% else %>
-              <%= link_to 'いいね', create_bookmark_path(id: @report), method: :POST, remote: true, class: "bookmark hide-text" %>
+          <% if @report.user.id != current_user.id %>
+            <div class="float_right_3" id="report_show_<%= @report.id %>">
+              <% if current_user.liked_by?(@report.id) %>
+                <%= link_to 'いいねを外す', destroy_bookmark_path(id: @report), method: :DELETE, remote: true, class: "bookmarked hide-text" %>
+              <% else %>
+                <%= link_to 'いいね', create_bookmark_path(id: @report), method: :POST, remote: true, class: "bookmark hide-text" %>
+              <% end %>
+              </div>
             <% end %>
-            </div>
             <div class="float_right_3" id="report_show_<%= @report.id %>">
               <% if @report.user.id != @report.team.owner.id %>
                 <% if current_user.id == @report.user.id && @report.approval == false %>
