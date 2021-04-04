@@ -21,7 +21,7 @@
       <div class="card-header">
         <strong>報告書詳細画面</strong>
         <% if @report.team_id != nil || @report.user_id != nil %>
-          <% if current_user != @report.user && current_user != @report.team.owner %>
+          <% if current_user != @report.user && current_user != @report.team.owner && @report.checkbox_final != true %>
             <div class="float_right_3" id="report_show_<%= @report.id %>">
               <% if current_user.liked_by?(@report.id) %>
                 <%= link_to 'いいねを外す', destroy_bookmark_path(id: @report), method: :DELETE, remote: true, class: "bookmarked hide-text" %>
@@ -29,24 +29,25 @@
                 <%= link_to 'いいね', create_bookmark_path(id: @report), method: :POST, remote: true, class: "bookmark hide-text" %>
               <% end %>
               </div>
-              <div class="float_right_3" id="report_show_<%= @report.id %>">
-                <% if @report.user.id != @report.team.owner.id %>
-                  <% if current_user.id == @report.user.id && @report.approval == false %>
-                    <%= link_to '承認依頼', approval_request_report_path(id: @report.id), method: :POST, class: 'btn btn-primary mr-3', id: "report_show_approval_request-#{@report.id}-submit" %>
-                  <% elsif current_user.id == @report.team.owner.id && @report.approval == true  %>
-                    <%= link_to '承認', approval_report_path(id: @report.id), method: :POST, class: 'btn btn-success mr-3', id: "report_show_approval-#{@report.id}-submit" %>
-                    <%= link_to '拒否', reject_report_path(id: @report.id), method: :POST, class: 'btn btn-danger mr-3', id: "report_show_reject-#{@report.id}-submit" %>
-                  <% elsif @report.approval == false %>
-                     <div class="btn btn-primary mr-3 none_function"><%= @report.status %>
-                     </div>
-                   <% else @report.approval == true %>
-                     <div class="btn btn-warning mr-3 none_function"><%= @report.status %>
-                     </div>
-                   <% end %>
-                <% end %>
-              </div>
             <% end %>
-         <% end %>
+            <div class="float_right_3">
+              <% if @report.user.id != @report.team.owner.id %>
+                <% if current_user.id == @report.user.id && @report.approval == false %>
+                  <%= link_to '承認依頼', approval_request_report_path(id: @report.id), method: :POST, class: 'btn btn-primary mr-3', id: "report_show_approval_request-#{@report.id}-submit" %>
+                <% elsif current_user.id == @report.team.owner.id && @report.approval == true  %>
+                  <%= link_to '承認', approval_report_path(id: @report.id), method: :POST, class: 'btn btn-success mr-3', id: "report_show_approval-#{@report.id}-submit" %>
+                  <%= link_to '拒否', reject_report_path(id: @report.id), method: :POST, class: 'btn btn-danger mr-3', id: "report_show_reject-#{@report.id}-submit" %>
+                <% elsif @report.approval == false %>
+                   <div class="btn btn-primary mr-3 none_function"><%= @report.status %>
+                   </div>
+                 <% else @report.approval == true %>
+                   <div class="btn btn-warning mr-3 none_function"><%= @report.status %>
+                   </div>
+                 <% end %>
+              <% end %>
+            </div>
+          <% end %>
+          <!-- if @report.team_id != nil || @report.user_id != nil  -->
       </div>
       <div class="card-body">
         <div class="float_right col-md-3.5">
