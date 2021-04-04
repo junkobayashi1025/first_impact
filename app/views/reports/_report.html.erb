@@ -1,7 +1,11 @@
-<% if current_user.liked_by?(report.id) %>
-   <td><%= link_to 'いいねを外す', destroy_bookmark_path(report), method: :DELETE, remote: true, class: "bookmarked hide-text" %></td>
+<% if current_user != report.user %>
+  <% if current_user.liked_by?(report.id) %>
+     <td><%= link_to 'いいねを外す', destroy_bookmark_path(report), method: :DELETE, remote: true, class: "bookmarked hide-text" %></td>
+  <% else %>
+     <td><%= link_to 'いいね', create_bookmark_path(report), method: :POST, remote: true, class: "bookmark hide-text" %></td>
+  <% end %>
 <% else %>
-   <td><%= link_to 'いいね', create_bookmark_path(report), method: :POST, remote: true, class: "bookmark hide-text" %></td>
+  <td></td>
 <% end %>
 <td><%= link_to "#{report.title}", report_path(report.id) %></td>
 <td><%= link_to "#{report.team.name}", team_path(report.team.id) %></td>
