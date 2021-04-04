@@ -31,7 +31,7 @@
  <tbody>
    <% @archives.each do |report| %>
      <tr id="report_index_<%= report.id %>">
-       <%= render 'report', report: report %>
+       <%= render 'report_archive', report: report %>
      </tr>
    <% end %>
  </tbody>

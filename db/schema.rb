@@ -65,8 +65,8 @@ ActiveRecord::Schema.define(version: 2021_04_03_114022) do
     t.boolean "checkbox_first", default: false
     t.boolean "checkbox_interim", default: false
     t.boolean "checkbox_final", default: false
-    t.bigint "user_id", null: false
-    t.bigint "team_id", null: false
+    t.bigint "user_id"
+    t.bigint "team_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "confirmed_date"
@@ -148,8 +148,8 @@ ActiveRecord::Schema.define(version: 2021_04_03_114022) do
   add_foreign_key "bookmarks", "users"
   add_foreign_key "comments", "reports"
   add_foreign_key "comments", "users"
-  add_foreign_key "reports", "teams"
-  add_foreign_key "reports", "users"
+  add_foreign_key "reports", "teams", on_delete: :nullify
+  add_foreign_key "reports", "users", on_delete: :nullify
   add_foreign_key "taggings", "tags"
   add_foreign_key "teams", "users"
 end

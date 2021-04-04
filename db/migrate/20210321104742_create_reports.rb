@@ -14,8 +14,8 @@ class CreateReports < ActiveRecord::Migration[5.2]
       t.boolean :checkbox_first,   default: false
       t.boolean :checkbox_interim, default: false
       t.boolean :checkbox_final,   default: false
-      t.references :user, foreign_key: true, index: true, null: false
-      t.references :team, foreign_key: true, index: true, null: false
+      t.references :user, foreign_key: { on_delete: :nullify }, index: true
+      t.references :team, foreign_key: { on_delete: :nullify }, index: true
       t.timestamps
     end
   end

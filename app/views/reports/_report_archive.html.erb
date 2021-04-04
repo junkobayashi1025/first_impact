@@ -1,0 +1,27 @@
+<% if current_user.liked_by?(report.id) %>
+   <td><%= link_to 'いいねを外す', destroy_bookmark_path(report), method: :DELETE, remote: true, class: "bookmarked hide-text" %></td>
+<% else %>
+   <td><%= link_to 'いいね', create_bookmark_path(report), method: :POST, remote: true, class: "bookmark hide-text" %></td>
+<% end %>
+<td><%= link_to "#{report.title}", report_path(report.id) %></td>
+<td><%= report.author %></td>
+<% if report.checkbox_final != true %>
+  <td><%= report.step %></td>
+  <td><%= report.status %></td>
+  <% if report.checkbox_interim && report.confirmed_date == nil %>
+    <td><%= "未定" %></td>
+  <% else %>
+    <td><%= report.due.strftime("%Y年 %m月 %d日") %></td>
+  <% end %>
+<% end %>
+<td><%= report.created_at.strftime("%Y年 %m月 %d日") %></td>
+<td>
+  <% report.tag_list.each do |tag| %>
+    <% if report.checkbox_final == false %>
+      <%= link_to "#{tag}", reports_path(tag_name: tag), class:"btn btn-warning" %>
+    <% else%>
+      <%= link_to "#{tag}", archive_reports_path(tag_name: tag), class:"btn btn-warning" %>
+    <% end %>
+  <% end %>
+</td>
+<td><%= link_to '詳細', report_path(report.id), class: 'btn btn-primary mr-3', id: "report-index_detail-#{report.id}-submit" %></td>
