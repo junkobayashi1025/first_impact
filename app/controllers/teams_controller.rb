@@ -41,10 +41,16 @@ class TeamsController < ApplicationController
  end
 
  def destroy
-    @team.destroy
-    redirect_to teams_path
-    flash[:danger] = "チーム「#{@team.name}」を解散しました"
-  end
+   undone_reports = @team.reports.where(checkbox_final: false)
+   if undone_reports.count > 0
+     redirect_to team_path(@team)
+     flash[:danger] = "未完の報告書がある為、チームを解散できません"
+   else
+      @team.destroy
+      redirect_to teams_path
+      flash[:danger] = "チーム「#{@team.name}」を解散しました"
+   end
+ end
 
  def change_owner
       @team = Team.find(params[:id])

@@ -30,8 +30,11 @@ class UsersController < ApplicationController
 
   def destroy
      if @user.destroy
-     redirect_to new_user_session_path
-     flash[:danger] = "ユーザー「#{@user.name}」を削除しました"
+       redirect_to new_user_session_path
+       flash[:danger] = "ユーザー「#{@user.name}」を削除しました"
+     else
+       redirect_to user_path(@user)
+       flash[:danger] = "未完の報告書があるため、削除できません"
      end
    end
 
