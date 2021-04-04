@@ -45,8 +45,10 @@ class Report < ApplicationRecord
   end
 
   def step_string
-    if self.checkbox_interim && self.checkbox_first
+    if self.checkbox_interim && self.checkbox_first && self.confirmed_date.present?
       return self.update(step:"3: 有効性の確認", due: self.confirmed_date)
+    elsif self.checkbox_interim && self.checkbox_first
+      return self.update(step:"3: 有効性の確認", due: nil)
     elsif self.checkbox_first
       return self.update(step:"2: 中間報告", due: self.accrual_date + 14.day )
     else
@@ -56,9 +58,9 @@ class Report < ApplicationRecord
 
   def status_string
     if self.approval
-      return self.update(status:"承認依頼中")
+      return self.update(status: "承認依頼中")
     else
-      return self.update(status:"作成中")
+      return self.update(status: "作成中")
     end
   end
 end
