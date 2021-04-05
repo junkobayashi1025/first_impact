@@ -48,4 +48,8 @@ class User < ApplicationRecord
     owner_reports = Report.where(team_id: owner_team.ids, checkbox_final: false).order(created_at: :asc)
   end
 
+  def author_report
+    author_reports = self.reports.where(checkbox_final: false).order(created_at: :asc)
+  end
+
 end

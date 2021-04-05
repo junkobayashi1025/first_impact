@@ -41,7 +41,7 @@
     <h3><u>報告書一覧</u></h3>
       <div class="col-md-8 profile_date">
         <div class="row">
-          <main class="p-3">
+          <main class="p-0">
             <ul class="nav nav-tabs">
               <li class="nav-item">
                 <a href="#content1" class="nav-link active" data-toggle="tab">〆切間近</a>
@@ -61,11 +61,14 @@
               <%= render 'user_show_expired', expired_reports: @expired_reports %>
             </div>
             <div id="content2" class="tab-pane">
-              <%= render 'user_show_owner', user: @user %>  
+              <%= render 'user_show_owner', user: @user %>
             </div>
 
+
+
+
             <div id="content3" class="tab-pane">
-              <img src="images/content3.jpg" class="img-fluid" alt=""/>
+              <%= render 'user_show_author', user: @user %>
             </div>
             <div id="content4" class="tab-pane">
               <img src="images/content4.jpg" class="img-fluid" alt=""/>
