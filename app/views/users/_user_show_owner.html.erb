@@ -1,30 +1,30 @@
-  <div class="panel panel-default">
-    <div class="panel-heading float_left">
-      ※報告書の担当者になっているもの
-    </div>
-    <% if @user.owner_report.any? == true %>
-      <table class="table panel-body">
-        <tr>
-          <th>タイトル</th>
-          <th>チーム名</th>
-          <th>担当者</th>
-          <th>ステップ</th>
-          <th>ステータス</th>
-          <th>提出〆切</th>
-          <th></th>
-        </tr>
-        <% @user.owner_report.each do |report| %>
-          <tr>
-            <td><%= link_to "#{report.title}", report_path(report.id) %></td>
-            <td><%= link_to "#{report.team.name}", team_path(report.team.id) %></td>
-            <td><%= link_to "#{report.author}", user_path(report.team.owner.id) %></td>
-            <td><%= report.step %></td>
-            <td><%= report.status %></td>
-            <td><%= report.due.strftime("%Y年 %m月 %d日") %></td>
-          </tr>
-        <% end %>
-      </table>
-    <% else %>
-      <strong>該当する報告書はありません</strong>
-    <% end %>
+<div class="panel panel-default">
+  <div class="panel-heading float_left">
+    ※報告書の担当者になっているもの
   </div>
+  <% if @user.owner_report.any? == true %>
+    <table class="table panel-body">
+      <tr>
+        <th>タイトル</th>
+        <th>チーム名</th>
+        <th>担当者</th>
+        <th>ステップ</th>
+        <th>ステータス</th>
+        <th>提出〆切</th>
+        <th></th>
+      </tr>
+      <% @user.owner_report.each do |report| %>
+        <tr>
+          <td><%= link_to "#{report.title}", report_path(report.id) %></td>
+          <td><%= link_to "#{report.team.name}", team_path(report.team.id) %></td>
+          <td><%= link_to "#{report.author}", user_path(report.user.id) %></td>
+          <td><%= report.step %></td>
+          <td><%= report.status %></td>
+          <td><%= report.due.strftime("%Y年 %m月 %d日") %></td>
+        </tr>
+      <% end %>
+    </table>
+  <% else %>
+    <strong>該当する報告書はありません</strong>
+  <% end %>
+</div>

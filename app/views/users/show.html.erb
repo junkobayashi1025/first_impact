@@ -26,7 +26,7 @@
               <tr>
                 <td><%= link_to "#{assign.team.name}", team_path(assign.team.id) %></td>
                 <td><%= link_to '編集', edit_team_path(assign.team.id), class: 'btn btn-success mr-3', id: "user_show_edit-#{assign.team.id}-submit" if current_user == assign.team.owner %></td>
-                <td><%= link_to '解散', report_path(assign.team.id), method: :delete, data: { confirm: "チーム「#{assign.team.name}を削除します。よろしいでしょうか？」" },
+                <td><%= link_to '解散', team_path(assign.team.id), method: :delete, data: { confirm: "チーム「#{assign.team.name}を削除します。よろしいでしょうか？」" },
                       class: 'btn btn-danger mr-3', id: "user_show_delete-#{assign.team.id}-submit" if current_user == assign.team.owner %></td>
                 <td><%= link_to '離脱', team_assign_path(assign.team, assign.id), method: :delete, data: { confirm: "チーム「#{assign.team.name}を離脱します。よろしいでしょうか？」" },
                       class: 'btn btn-info mr-3', id: "user_show_dropout-#{assign.team.id}-submit" if current_user == assign.user && current_user != assign.team.owner %></td>
@@ -63,24 +63,15 @@
             <div id="content2" class="tab-pane">
               <%= render 'user_show_owner', user: @user %>
             </div>
-
-
-
-
             <div id="content3" class="tab-pane">
               <%= render 'user_show_author', user: @user %>
             </div>
             <div id="content4" class="tab-pane">
-              <img src="images/content4.jpg" class="img-fluid" alt=""/>
+              <%= render 'user_show_bookmark', user: @user %>
             </div>
           </div>
           </main>
         </div>
       </div>
     </div>
-
-
-
-
-
-</div>
+  </div>
