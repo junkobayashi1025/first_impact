@@ -30,7 +30,6 @@
                       class: 'btn btn-danger mr-3', id: "user_show_delete-#{assign.team.id}-submit" if current_user == assign.team.owner %></td>
                 <td><%= link_to '離脱', team_assign_path(assign.team, assign.id), method: :delete, data: { confirm: "チーム「#{assign.team.name}を離脱します。よろしいでしょうか？」" },
                       class: 'btn btn-info mr-3', id: "user_show_dropout-#{assign.team.id}-submit" if current_user == assign.user && current_user != assign.team.owner %></td>
-
               </tr>
              <% end %>
            </table>
