@@ -8,6 +8,8 @@ class ReportsController < ApplicationController
     if params[:tag_name]
       @results = Report.where(checkbox_final: false).tagged_with("#{params[:tag_name]}")
     else
+      # puts params[:q]
+      # puts "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@s"
       @results = params[:q] ? @q.result : Report.where(checkbox_final: false).order(created_date: :desc)
     end
 
@@ -162,8 +164,30 @@ class ReportsController < ApplicationController
   end
 
   def set_q
+    # case params[:q][:search_item]
+    # when 1 return  @colomn = title
+    # when 2 return  @colomn = team_name
+    # when 3 return  @colomn = team_owner_name
+    # when 4 return  @colomn = author
+    # end
     @q = Report.where.not(checkbox_final: true).ransack(params[:q])
-    # @q = Report.ransack(params[:q])
+    #飛んできたパラメータを受取る⇒変数化して、検索させたいカラムと検索ワードに分ける
+    #{
+    #  @colomn = team_owner_name
+    #  @keyword = admin
+    #}
+    #⇒
+    #ランサックのパラメーターに該当するカラムのところに検索ワードを入れる
+
+    # @ransack_q = @colom + "_cont"
+
+    # {
+    #    q = {"#{@ransack_q}"=>"admin"}
+    # }
+
+
+    # {"title_cont"=>"", "team_name_cont"=>"", "team_owner_name_cont"=>"", "author_cont"=>"", "step_cont"=>"", "status_cont"=>""}
+    # @q = Report.ransack(q)
     # @q = Report.where(user_id: current_user.id).ransack(params[:q])
   end
 

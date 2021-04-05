@@ -2,6 +2,7 @@
   <h1>報告書一覧(作成中)</h1>
 </div>
 
+
 <%= search_form_for @q, url: reports_path do |f| %>
   <%= f.select :search_item, options_for_select(Report.search_items) %>
   <%= f.search_field :title_cont, placeholder:"タイトル名.." %>
