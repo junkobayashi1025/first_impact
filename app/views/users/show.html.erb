@@ -58,36 +58,12 @@
             </ul>
           <div class="tab-content">
             <div id="content1" class="tab-pane active">
-              <div class="panel panel-default">
-                <div class="panel-heading float_left">
-                  ※期限切れ or 期限直前(3日以内)
-                </div>
-                <table class="table panel-body">
-                  <% if @expired_reports.any? == true %>
-                    <tr>
-                      <th>タイトル</th>
-                      <th>チーム名</th>
-                      <th>責任者</th>
-                      <th>ステップ</th>
-                      <th>提出〆切</th>
-                      <th></th>
-                    </tr>
-                    <% @expired_reports.each do |report| %>
-                      <tr>
-                        <td><%= link_to "#{report.title}", report_path(report.id) %></td>
-                        <td><%= link_to "#{report.team.name}", team_path(report.team.id) %></td>
-                        <td><%= link_to "#{report.team.owner.name}", user_path(report.team.owner.id) %></td>
-                        <td><%= report.step %></td>
-                        <td><%= report.due.strftime("%Y年 %m月 %d日") %></td>
-                      </tr>
-                      <% end %>
-                    <% end %>
-                  </table>
-                </div>
+              <%= render 'user_show_expired', expired_reports: @expired_reports %>
             </div>
             <div id="content2" class="tab-pane">
-              <img src="images/content2.jpg" class="img-fluid" alt=""/>
+              <%= render 'user_show_owner', user: @user %>  
             </div>
+
             <div id="content3" class="tab-pane">
               <img src="images/content3.jpg" class="img-fluid" alt=""/>
             </div>

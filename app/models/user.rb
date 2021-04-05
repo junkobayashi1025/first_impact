@@ -42,5 +42,10 @@ class User < ApplicationRecord
     end
     user
   end
-  
+
+  def owner_report
+    owner_team = self.assign_teams.where(owner_id: self.id)
+    owner_reports = Report.where(team_id: owner_team.ids, checkbox_final: false).order(created_at: :asc)
+  end
+
 end
