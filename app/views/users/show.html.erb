@@ -25,7 +25,7 @@
             <% @user.assigns.each do |assign| %>
               <tr>
                 <td><%= link_to "#{assign.team.name}", team_path(assign.team.id) %></td>
-                <td><%= link_to '編集', edit_report_path(assign.team.id), class: 'btn btn-success mr-3', id: "user_show_edit-#{assign.team.id}-submit" if current_user == assign.team.owner %></td>
+                <td><%= link_to '編集', edit_team_path(assign.team.id), class: 'btn btn-success mr-3', id: "user_show_edit-#{assign.team.id}-submit" if current_user == assign.team.owner %></td>
                 <td><%= link_to '解散', report_path(assign.team.id), method: :delete, data: { confirm: "チーム「#{assign.team.name}を削除します。よろしいでしょうか？」" },
                       class: 'btn btn-danger mr-3', id: "user_show_delete-#{assign.team.id}-submit" if current_user == assign.team.owner %></td>
                 <td><%= link_to '離脱', team_assign_path(assign.team, assign.id), method: :delete, data: { confirm: "チーム「#{assign.team.name}を離脱します。よろしいでしょうか？」" },
@@ -37,33 +37,71 @@
       </div>
     </div>
   </div>
-
-
-
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      期限切れ or 期限直前(3日以内)タスク一覧
+  <div class="profile-wrap">
+    <h3><u>報告書一覧</u></h3>
+      <div class="col-md-8 profile_date">
+        <div class="row">
+          <main class="p-3">
+            <ul class="nav nav-tabs">
+              <li class="nav-item">
+                <a href="#content1" class="nav-link active" data-toggle="tab">〆切間近</a>
+              </li>
+              <li class="nav-item">
+                <a href="#content2" class="nav-link" data-toggle="tab">責任</a>
+              </li>
+              <li class="nav-item">
+                <a href="#content3" class="nav-link" data-toggle="tab">担当</a>
+              </li>
+              <li class="nav-item">
+                <a href="#content4" class="nav-link" data-toggle="tab">ブックマーク</a>
+              </li>
+            </ul>
+          <div class="tab-content">
+            <div id="content1" class="tab-pane active">
+              <div class="panel panel-default">
+                <div class="panel-heading float_left">
+                  ※期限切れ or 期限直前(3日以内)
+                </div>
+                <table class="table panel-body">
+                  <% if @expired_reports.any? == true %>
+                    <tr>
+                      <th>タイトル</th>
+                      <th>チーム名</th>
+                      <th>責任者</th>
+                      <th>ステップ</th>
+                      <th>提出〆切</th>
+                      <th></th>
+                    </tr>
+                    <% @expired_reports.each do |report| %>
+                      <tr>
+                        <td><%= link_to "#{report.title}", report_path(report.id) %></td>
+                        <td><%= link_to "#{report.team.name}", team_path(report.team.id) %></td>
+                        <td><%= link_to "#{report.team.owner.name}", user_path(report.team.owner.id) %></td>
+                        <td><%= report.step %></td>
+                        <td><%= report.due.strftime("%Y年 %m月 %d日") %></td>
+                      </tr>
+                      <% end %>
+                    <% end %>
+                  </table>
+                </div>
+            </div>
+            <div id="content2" class="tab-pane">
+              <img src="images/content2.jpg" class="img-fluid" alt=""/>
+            </div>
+            <div id="content3" class="tab-pane">
+              <img src="images/content3.jpg" class="img-fluid" alt=""/>
+            </div>
+            <div id="content4" class="tab-pane">
+              <img src="images/content4.jpg" class="img-fluid" alt=""/>
+            </div>
+          </div>
+          </main>
+        </div>
+      </div>
     </div>
-    <table class="table panel-body">
-      <% if @expired_reports.any? == true %>
-        <tr>
-          <th>タイトル</th>
-          <th>チーム名</th>
-          <th>責任者</th>
-          <th>ステップ</th>
-          <th>提出〆切</th>
-          <th></th>
-        </tr>
-        <% @expired_reports.each do |report| %>
-          <tr>
-            <td><%= link_to "#{report.title}", report_path(report.id) %></td>
-            <td><%= link_to "#{report.team.name}", team_path(report.team.id) %></td>
-            <td><%= link_to "#{report.team.owner.name}", user_path(report.team.owner.id) %></td>
-            <td><%= report.step %></td>
-            <td><%= report.due.strftime("%Y年 %m月 %d日") %></td>
-          </tr>
-          <% end %>
-        <% end %>
-      </table>
-    </div>
+
+
+
+
+
 </div>

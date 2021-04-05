@@ -23,6 +23,8 @@ gem 'faker'
 gem 'ransack'
 gem 'jquery-rails'
 gem 'acts-as-taggable-on', '~> 6.0'
+# gem 'mini_racer', platforms: :ruby
+# gem 'coffee-script-source', '1.8.0'
 
 
 gem 'bootsnap', '>= 1.1.0', require: false
