@@ -14,10 +14,10 @@ class Team < ApplicationRecord
   end
 
   def prepared_report
-    prepared_reports = self.reports.where(checkbox_final: false, approval: false)
+    prepared_reports = self.reports.where(checkbox_final: false, approval: false).order(created_at: :asc)
   end
 
   def request_report
-    author_reports = self.reports.where(checkbox_final: false).order(created_at: :asc)
+    request_reports = self.reports.where(checkbox_final: false, approval: true).order(created_at: :asc)
   end
 end
