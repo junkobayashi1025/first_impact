@@ -1,8 +1,4 @@
 <div class="container">
-  <div class="col-md-4 text-center float_right profile-wrap">
-    <p>プロフィール画像</p>
-    <%= image_tag @user.icon.url, class: "round-img" %>
-  </div>
   <div class="profile-wrap">
     <h3 class="profile"><u>プロフィール</u>
       <div class="index_row_icon">
@@ -13,6 +9,10 @@
           id: "user_show_delete-#{@user}-submit" do %>
           <div class="delete-user-icon"></div>
         <% end %>
+      </div>
+      <div class="col-md-8 text-center float_right profile_image">
+        <h4>プロフィール画像</h4>
+        <%= image_tag @user.icon.url, class: "round-img" %>
       </div>
     </h3>
     <div class="row">
