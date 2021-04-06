@@ -51,10 +51,4 @@ class User < ApplicationRecord
   def author_report
     author_reports = self.reports.where(checkbox_final: false).order(created_at: :asc)
   end
-
-  # def bookmark_report
-  #   bookmarks = self.bookmarks
-  #   bookmark_reports = bookmarks.report.where(checkbox_final: false).order(created_at: :asc)
-  # end
-
 end

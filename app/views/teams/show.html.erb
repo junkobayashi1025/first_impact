@@ -1,51 +1,84 @@
 <div class="container">
-  <table class="table">
+  <div>
     <% if current_user == @team.owner %>
-    <h2>メンバー招待</h2>
+    <h3>チームメンバーの招待</h3>
     <%= form_with model: :assign, scope: :post, url: team_assigns_path(@team), local: true do |form| %>
       <%= text_field_tag :email %>
       <%= submit_tag '招待' %>
     <% end %>
     <% end %>
-
-    <tr>
-      <th><%= 'チーム名' %>:</th>
-      <td><%= @team.name %></td>
-    </tr>
-    <tr>
-      <th><%= '備考' %>:</th>
-      <td><%= @team.remark %></td>
-    </tr>
-    <tr>
-      <th><%= '責任者' %>:</th>
-      <td><%= link_to "#{@team.owner.name}", user_path(@team.owner.id) %></td>
-    </tr>
-    <tr>
-      <th><%= '担当者' %>:</th>
-      <% if @team.charge_in_person.present? %>
-      <td><%= link_to "#{@team.charge_in_person.name}", user_path(@team.charge_in_person.id) %></td>
-      <% end %>
-    </tr>
-  </table>
-
-  <h2>チームメンバー</h2>
-  <ul>
-    <% @team.assign_users.each do |assign_user| %>
-      <li>
-        <td><%= link_to "#{assign_user.name}", user_path(assign_user.id) %></td>
-        <% if @team.owner == current_user || assign_user == current_user  %>
-        <td><%= link_to '離脱', team_assign_path(@team, assign_user.assigns.ids), method: :delete, class: 'btn btn-sm btn-info' %></td>
-        <% end %>
-        <% if current_user.id == @team.owner_id && current_user != assign_user  %>
-        <td><%= link_to "責任者権限", change_owner_team_path(@team, user_id: assign_user.id), method: :post, class: 'btn btn-sm btn-primary' %></td>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
-<hr>
-  <%  if current_user == @team.owner %>
-  <%= link_to '編集', edit_team_path(@team.id) %>
-  <%= link_to '削除', team_path(@team.id), method: :delete ,data: {confirm: '本当に削除していいですか？'}  %>
-  <% end %>
-  <%= link_to '作成', new_team_report_path(@team.id) %>
+  </div>
+  <div class="team-wrap">
+    <h3 class="team"><u>チーム名</u>
+    </h3>
+    <div class="col-md-8 team_date">
+      <h4><%= @team.name %></h4>
+    </div>
+  </div>
+  <div class="team-wrap">
+    <h3 class="team"><u>備考</u>
+    </h3>
+    <div class="col-md-8 team_date form-control">
+      <h4><%= @team.remark %></h4>
+    </div>
+  </div>
+  <div class="team-wrap">
+    <h3 class="team"><u>責任者</u>
+    </h3>
+    <div class="col-md-8 team_date">
+      <h4><%= link_to "#{@team.owner.name}", team_path(@team.owner.id) %></h4>
+    </div>
+  </div>
+  <div class="team-wrap">
+    <h3 class="team"><u>チームメンバー</u></h3>
+    <div class="col-md-8">
+      <div class="row team_date">
+        <table>
+          <% @team.assign_users.each do |assign_user| %>
+            <tr>
+              <td><%= link_to "#{assign_user.name}", user_path(assign_user.id) %></td>
+              <% if @team.owner == current_user || assign_user == current_user  %>
+              <td><%= link_to '離脱', team_assign_path(@team, assign_user.assigns.ids), method: :delete, class: 'btn btn-info', id: "team_show_dropout_team-#{assign_user.id}-submit" %></td>
+              <% end %>
+              <% if current_user.id == @team.owner_id && current_user != assign_user %>
+              <td><%= link_to '責任権限', change_owner_team_path(@team, user_id: assign_user.id), method: :post,
+                    class: 'btn btn-primary', id: "team_show_owner_change-#{assign_user.id}-submit" %></td>
+              <% end %>
+            </tr>
+           <% end %>
+         </table>
+      </div>
+    </div>
+  </div>
+  <div class="profile-wrap">
+    <h3><u>報告書一覧</u></h3>
+      <div class="col-md-8 profile_date">
+        <div class="row">
+          <main class="p-0">
+            <ul class="nav nav-tabs">
+              <li class="nav-item">
+                <a href="#content1" class="nav-link active" data-toggle="tab">〆切間近</a>
+              </li>
+              <li class="nav-item">
+                <a href="#content2" class="nav-link" data-toggle="tab">作成中</a>
+              </li>
+              <li class="nav-item">
+                <a href="#content3" class="nav-link" data-toggle="tab">依頼中</a>
+              </li>
+              <li class="nav-item">
+                <a href="#content4" class="nav-link" data-toggle="tab">完了</a>
+              </li>
+            </ul>
+          <div class="tab-content">
+            <div id="content1" class="tab-pane active">
+              <%= render 'team_show_expired', expired_reports: @expired_reports %>
+            </div>
+            <div id="content2" class="tab-pane">
+              <%= render 'team_show_prepared', team: @team %>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  </div>
 </div>

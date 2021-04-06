@@ -1,9 +1,9 @@
 class TeamsController < ApplicationController
   before_action :set_team, only: [:show, :edit, :update, :destroy]
 
-  def index
-    @teams = Team.all
-  end
+ def index
+   @teams = Team.all
+ end
 
  def new
    @team = Team.new
@@ -23,6 +23,12 @@ class TeamsController < ApplicationController
  end
 
  def show
+   threshold = DateTime.now + 3.day
+   @expired_reports = @team.reports.where('due <= ?', threshold).order(due: :asc)
+   if @expired_reports.count > 0
+     number = @expired_reports.count
+     flash[:danger] = "期限切れ、期限直前のタスクが#{number}件あります。"
+   end
  end
 
  def edit

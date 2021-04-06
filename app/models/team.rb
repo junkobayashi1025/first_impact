@@ -12,4 +12,12 @@ class Team < ApplicationRecord
   def invite_member(user)
     assigns.create(user: user)
   end
+
+  def prepared_report
+    prepared_reports = self.reports.where(checkbox_final: false, approval: false)
+  end
+
+  def request_report
+    author_reports = self.reports.where(checkbox_final: false).order(created_at: :asc)
+  end
 end
