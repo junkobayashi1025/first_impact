@@ -4,7 +4,17 @@
     <%= image_tag @user.icon.url, class: "round-img" %>
   </div>
   <div class="profile-wrap">
-    <h3><u>プロフィール</u></h3>
+    <h3 class="profile"><u>プロフィール</u>
+      <div class="index_row_icon">
+        <%= link_to edit_user_path(@user), id: "user_show_edit-#{@user}-submit" do %>
+          <div class="edit-user-icon mr-1"></div>
+        <% end %>
+        <%= link_to user_path(@user), method: :delete, data: { confirm: "ユーザー「#{@user.name}を削除します。よろしいでしょうか？」" },
+          id: "user_show_delete-#{@user}-submit" do %>
+          <div class="delete-user-icon"></div>
+        <% end %>
+      </div>
+    </h3>
     <div class="row">
       <div class="col-md-8 profile_date">
         <div class="row">
@@ -25,11 +35,11 @@
             <% @user.assigns.each do |assign| %>
               <tr>
                 <td><%= link_to "#{assign.team.name}", team_path(assign.team.id) %></td>
-                <td><%= link_to '編集', edit_team_path(assign.team.id), class: 'btn btn-success mr-3', id: "user_show_edit-#{assign.team.id}-submit" if current_user == assign.team.owner %></td>
+                <td><%= link_to '編集', edit_team_path(assign.team.id), class: 'btn btn-success', id: "user_show_edit_team-#{assign.team.id}-submit" if current_user == assign.team.owner %></td>
                 <td><%= link_to '解散', team_path(assign.team.id), method: :delete, data: { confirm: "チーム「#{assign.team.name}を削除します。よろしいでしょうか？」" },
-                      class: 'btn btn-danger mr-3', id: "user_show_delete-#{assign.team.id}-submit" if current_user == assign.team.owner %></td>
+                      class: 'btn btn-danger', id: "user_show_delete_team-#{assign.team.id}-submit" if current_user == assign.team.owner %></td>
                 <td><%= link_to '離脱', team_assign_path(assign.team, assign.id), method: :delete, data: { confirm: "チーム「#{assign.team.name}を離脱します。よろしいでしょうか？」" },
-                      class: 'btn btn-info mr-3', id: "user_show_dropout-#{assign.team.id}-submit" if current_user == assign.user && current_user != assign.team.owner %></td>
+                      class: 'btn btn-info', id: "user_show_dropout_team-#{assign.team.id}-submit" if current_user == assign.user && current_user != assign.team.owner %></td>
               </tr>
              <% end %>
            </table>
@@ -70,8 +80,8 @@
               <%= render 'user_show_bookmark', user: @user %>
             </div>
           </div>
-          </main>
-        </div>
+        </main>
       </div>
     </div>
   </div>
+</div>
