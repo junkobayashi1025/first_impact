@@ -15,7 +15,7 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
   def default_url(*args)
-    "default.png"
+    "https://source.unsplash.com/random/300x200"
   #   # For Rails 3.1+ asset pipeline compatibility:
   #   # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
   #
@@ -29,7 +29,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   #   # do something
   # end
   version :medium do
-    process resize_to_fill: [1080, 1080]
+    process  resize_to_fill: [50, 100, "Center"]
   end
 
   # Create different versions of your uploaded files:
