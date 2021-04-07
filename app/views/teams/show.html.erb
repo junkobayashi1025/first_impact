@@ -10,23 +10,28 @@
   </div><hr>
   <div class="team-wrap">
     <h3 class="team"><u>チーム名</u>
+      <div class="index_row_icon">
+        <%= link_to edit_team_path(@team), id: "team_show_edit-#{@team}-submit" do %>
+          <div class="edit-team-icon mr-1"></div>
+        <% end %>
+        <%= link_to team_path(@team), method: :delete, data: { confirm: "チーム「#{@team.name}を解散します。よろしいでしょうか？」" },
+          id: "team_show_delete-#{@team}-submit" do %>
+          <div class="delete-team-icon"></div>
+        <% end %>
+      </div>
+      <div class="new-report">
+        <%= link_to '報告書を作成する', new_team_report_path(@team), class: 'btn btn-warning border-dark', id: "new_report-submit" %>
+      </div>
     </h3>
     <div class="col-md-8 team_date">
       <h4><%= @team.name %></h4>
     </div>
   </div><hr>
   <div class="team-wrap">
-    <h3 class="team"><u>備考</u>
-    </h3>
-    <div class="col-md-8 team_date form-control">
-      <h4><%= @team.remark %></h4>
-    </div>
-  </div><hr>
-  <div class="team-wrap">
     <h3 class="team"><u>責任者</u>
     </h3>
     <div class="col-md-8 team_date">
-      <h4><%= link_to "#{@team.owner.name}", team_path(@team.owner.id) %></h4>
+      <h4><%= link_to "#{@team.owner.name}", user_path(@team.owner.id) %></h4>
     </div>
   </div><hr>
   <div class="team-wrap">
@@ -48,6 +53,13 @@
            <% end %>
          </table>
       </div>
+    </div>
+  </div><hr>
+  <div class="team-wrap">
+    <h3 class="team"><u>備考</u>
+    </h3>
+    <div class="col-md-8 team_date form-control">
+      <h4><%= @team.remark %></h4>
     </div>
   </div><hr>
   <div class="team">
