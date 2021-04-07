@@ -18,6 +18,7 @@
 
 .profile-wrap {
   padding-top: 20px;
+  position:relative
 }
 
 .profile {
@@ -68,4 +69,10 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
+}
+
+.nav-tab-report {
+  position: absolute;
+  top: 0rem;
+  left: 1rem;
 }
