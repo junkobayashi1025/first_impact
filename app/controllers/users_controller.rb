@@ -2,6 +2,10 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :set_q, only: [:index]
 
+  def current_user_home
+    redirect_to current_user
+  end
+
   def index
    # @users = User.all.order(created_at: :desc)
    @users = @q.result(distinct: true).order(created_at: :desc)
