@@ -7,17 +7,19 @@
       <% @teams.each do |team| %>
       <div class="col-md-3">
         <div class="card border-secondary" style="max-width: 18rem;">
-          <div class="card-header">
+          <div class="card-header team">
             <%= link_to "#{team.name}", team_path(team.id) %>
             <% if current_user == team.owner %>
+            <div class="team-icon">
               <%= link_to edit_team_path(team), id: "team_index_edit-#{team}-submit" do %>
-                <div class="edit-user-icon mr-1"></div>
+                <div class="edit-team-icon mr-1"></div>
               <% end %>
               <%= link_to team_path(team), method: :delete, data: { confirm: "チーム「#{team.name}を削除します。よろしいでしょうか？」" },
                   id: "team_index_delete-#{team}-submit" do %>
-                <div class="delete-user-icon"></div>
+                <div class="delete-team-icon"></div>
               <% end %>
             <% end %>
+            </div>
             </div>
             <%= image_tag team.icon.url(:medium), class: "card-img-top rectangle-img" %>
             <div class="card-body">
