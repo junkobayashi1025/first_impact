@@ -2,47 +2,56 @@
   <div class="d-flex align-items-center">
     <h1>チーム一覧</h1>
   </div>
+
+  <%= search_form_for @q, url: teams_path do |f| %>
+    <%= f.search_field :name_or_remark_or_owner_name_cont, placeholder:"キーワード.." %>
+    <%= f.submit '検索' %>
+    <%= link_to 'クリア', @teams_path %>
+    <br>
+  <% end %>
+
+
   <div class="card-deck">
     <div class="row o-3column">
       <% @teams.each do |team| %>
-      <div class="col-md-4">
-        <div class="card border-secondary" style="max-width: 25rem;">
-          <div class="card-header team">
-            <%= link_to "#{team.name}", team_path(team.id) %>
-            <% if current_user == team.owner %>
-            <div class="team-icon">
-              <%= link_to edit_team_path(team), id: "team_index_edit-#{team}-submit" do %>
-                <div class="edit-team-icon mr-1"></div>
-              <% end %>
-              <%= link_to team_path(team), method: :delete, data: { confirm: "チーム「#{team.name}を削除します。よろしいでしょうか？」" },
-                  id: "team_index_delete-#{team}-submit" do %>
-                <div class="delete-team-icon"></div>
-              <% end %>
-            <% end %>
-            </div>
-            </div>
-            <%= image_tag team.icon.url(:medium), class: "card-img-top rectangle-img" %>
-            <div class="card-body team">
-              <div class="card-title">
-                <div class="team-owner-icon"></div>
-                <div class="team-owner-name"><%= link_to "#{team.owner.name}", team_path(team.owner.id) %></div>
-                <div class="team-member-icon"></div>
-                <div class="team-count"><%= "#{team.assigns.count}" %></div>
-              </div>
-              <div class="remark-box">
-                <% if team.remark.present? %>
-                <p class="card-text"><%= "#{team.remark}" %></p>
-                <% else %>
-                <p class="card-text">備考欄：記入なし</p>
+        <div class="col-md-4">
+          <div class="card border-secondary" style="max-width: 25rem;">
+            <div class="card-header team">
+              <%= link_to "#{team.name}", team_path(team.id) %>
+              <% if current_user == team.owner %>
+              <div class="team-icon">
+                <%= link_to edit_team_path(team), id: "team_index_edit-#{team}-submit" do %>
+                  <div class="edit-team-icon mr-1"></div>
                 <% end %>
+                <%= link_to team_path(team), method: :delete, data: { confirm: "チーム「#{team.name}を削除します。よろしいでしょうか？」" },
+                    id: "team_index_delete-#{team}-submit" do %>
+                  <div class="delete-team-icon"></div>
+                <% end %>
+              <% end %>
+              </div>
+              </div>
+              <%= image_tag team.icon.url(:medium), class: "card-img-top rectangle-img" %>
+              <div class="card-body team">
+                <div class="card-title">
+                  <div class="team-owner-icon"></div>
+                  <div class="team-owner-name"><%= link_to "#{team.owner.name}", team_path(team.owner.id) %></div>
+                  <div class="team-member-icon"></div>
+                  <div class="team-count"><%= "#{team.assigns.count}" %></div>
+                </div>
+                <div class="remark-box">
+                  <% if team.remark.present? %>
+                  <p class="card-text"><%= "#{team.remark}" %></p>
+                  <% else %>
+                  <p class="card-text">備考欄：記入なし</p>
+                  <% end %>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
-</div>
 
 <table class="table">
   <thead class="thead-dark">

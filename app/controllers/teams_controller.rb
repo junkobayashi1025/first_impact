@@ -1,8 +1,9 @@
 class TeamsController < ApplicationController
   before_action :set_team, only: [:show, :edit, :update, :destroy]
+  before_action :set_q, only: [:index]
 
  def index
-   @teams = Team.all
+   @teams = @q.result(distinct: true)
  end
 
  def new
@@ -80,6 +81,10 @@ class TeamsController < ApplicationController
 
  def set_team
    @team = Team.find_by(id: params[:id])
+ end
+
+ def set_q
+   @q = Team.ransack(params[:q])
  end
 
 end
