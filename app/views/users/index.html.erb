@@ -3,6 +3,13 @@
     <h1>ユーザー一覧</h1>
   </div>
 
+  <%= search_form_for @q, url: users_path do |f| %>
+    <%= f.search_field :name_or_email_cont, placeholder:"キーワード.." %>
+    <%= f.submit '検索' %>
+    <%= link_to 'クリア', @teams_path %>
+    <br>
+  <% end %>
+
   <table class="table">
     <thead class="thead-dark">
       <tr>

@@ -1,8 +1,10 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_q, only: [:index]
 
   def index
-   @users = User.all.order(created_at: :desc)
+   # @users = User.all.order(created_at: :desc)
+   @users = @q.result(distinct: true).order(created_at: :desc)
   end
 
   def show
@@ -51,5 +53,10 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :email, :password,
                                  :password_confirmation, :icon)
+
+  end
+
+  def set_q
+    @q = User.ransack(params[:q])
   end
 end
