@@ -5,8 +5,8 @@
   <div class="card-deck">
     <div class="row o-3column">
       <% @teams.each do |team| %>
-      <div class="col-md-3">
-        <div class="card border-secondary" style="max-width: 18rem;">
+      <div class="col-md-4">
+        <div class="card border-secondary" style="max-width: 25rem;">
           <div class="card-header team">
             <%= link_to "#{team.name}", team_path(team.id) %>
             <% if current_user == team.owner %>
@@ -22,9 +22,20 @@
             </div>
             </div>
             <%= image_tag team.icon.url(:medium), class: "card-img-top rectangle-img" %>
-            <div class="card-body">
-              <h5 class="card-title">Light card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <div class="card-body team">
+              <div class="card-title">
+                <div class="team-owner-icon"></div>
+                <div class="team-owner-name"><%= link_to "#{team.owner.name}", team_path(team.owner.id) %></div>
+                <div class="team-member-icon"></div>
+                <div class="team-count"><%= "#{team.assigns.count}" %></div>
+              </div>
+              <div class="remark-box">
+                <% if team.remark.present? %>
+                <p class="card-text"><%= "#{team.remark}" %></p>
+                <% else %>
+                <p class="card-text">備考欄：記入なし</p>
+                <% end %>
+              </div>
             </div>
           </div>
         </div>

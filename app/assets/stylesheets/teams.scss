@@ -13,7 +13,7 @@
 .team-icon {
   position: absolute;
   top: 0.2rem;
-  right: 18.5rem;
+  right: 11rem;
 }
 
 .nav-tab-report {
@@ -60,6 +60,58 @@
   object-fit: cover;
 }
 
-.o-3column .col-md-3 {
+.o-3column .col-md-4 {
   padding: 10px 1px;
+}
+
+.team-owner-name {
+  position: absolute;
+  top: 0rem;
+  left: 2.5rem;
+}
+
+.team-count {
+  position: absolute;
+  top: 1.5rem;
+  left: 2.5rem;
+}
+
+.team-owner-icon {
+  background-image: image-url("parts6");
+  background-repeat: no-repeat;
+  width: 40px;
+  height: 40px;
+  background-size: 40px !important;
+  color: #262626;
+  font-size: 20px;
+  position: absolute;
+  top: 0rem;
+  left: 0rem;
+}
+
+.team-member-icon {
+  background-image: image-url("parts7");
+  background-repeat: no-repeat;
+  width: 35px;
+  height: 35px;
+  background-size: 35px !important;
+  color: #262626;
+  font-size: 20px;
+  position: absolute;
+  top: 1.5rem;
+  left: 0rem;
+}
+
+.remark-box {
+  margin-top: 3rem;
+  padding: 1rem;
+  color: #5d627b;
+  background: white;
+  border-top: solid 5px #5d627b;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+}
+
+.remark-box p {
+  margin: 0;
+  padding: 0;
 }
