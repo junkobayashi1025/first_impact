@@ -17,23 +17,17 @@
         <th>ユーザー名</th>
         <th>メールアドレス</th>
         <th>登録日時</th>
-        <th></th>
-        <th></th>
-        <th></th>
+
      </tr>
    </thead>
    <tbody>
      <% @users.each do |user| %>
-       <tr>
-         <td><%= image_tag user.icon.url, class: "user-index-round-img" %></td>
-         <td><%= link_to "#{user.name}", user_path(user.id), id: "user-index_detail-#{user.id}-submit" %></td>
-         <td><%= user.email %></td>
-         <td><%= user.created_at.strftime("%Y年 %m月 %d日") %></td>
-         <% if user == current_user %>
-         <td><%= link_to '編集', edit_user_path(user.id), class: 'btn btn-success mr-3', id: "user_index_edit-#{user.id}-submit" %></td>
-         <td><%= link_to '削除', user_path(user.id), method: :delete, data: { confirm: "ユーザー「#{user.name}を削除します。よろしいでしょうか？」" }, class: 'btn btn-danger mr-3', id: "user_index_delete-#{user.id}-submit" %></td>
-         <% end %>
-       </tr>
+     <tr>
+       <td><%= image_tag user.icon.url, class: "user-index-round-img" %></td>
+       <td><%= link_to "#{user.name}", user_path(user.id), id: "user-index_detail-#{user.id}-submit" %></td>
+       <td><%= user.email %></td>
+       <td><%= user.created_at.strftime("%Y年 %m月 %d日") %></td>
+     </tr>
      <% end %>
    </tbody>
   </table>

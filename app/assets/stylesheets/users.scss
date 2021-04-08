@@ -49,9 +49,6 @@
   background-size: 20px !important;
   color: #262626;
   font-size: 20px;
-  position: absolute;
-  top: 0.5rem;
-  left: 13rem;
 }
 
 .edit-user-icon {
@@ -62,9 +59,22 @@
   background-size: 20px !important;
   color: #262626;
   font-size: 20px;
+}
+
+.delete-show-icon {
+  position: absolute;
+  top: 0.5rem;
+  left: 13rem;
+}
+
+.edit-show-icon {
   position: absolute;
   top: 0.5rem;
   left: 11rem;
+}
+
+.table-profile {
+  position: relative;
 }
 
 .index_row_icon {

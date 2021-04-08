@@ -24,7 +24,10 @@ Rails.application.routes.draw do
     resources :reports
   end
 
-  root 'users#index'
+  devise_scope :user do
+    root to: "devise/sessions#new"
+  end
+  
   post 'bookmark/:id' => 'bookmarks#create', as: 'create_bookmark'
   delete 'bookmark/:id' => 'bookmarks#destroy', as: 'destroy_bookmark'
 
