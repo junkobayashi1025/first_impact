@@ -12,3 +12,13 @@ $(function() {
       readURL(this);
   });
 });
+
+$(function() {
+  var $textarea = $('#textarea');
+  var lineHeight = parseInt($textarea.css('lineHeight'));
+  $textarea.on('input', function(evt) {
+    var lines = ($(this).val() + '\n').match(/\n/g).length;
+    $(this).height(lineHeight * lines);
+  });
+  console.log($textarea)
+});

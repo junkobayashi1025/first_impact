@@ -58,8 +58,8 @@
   <div class="team-wrap">
     <h3 class="team"><u>備考</u>
     </h3>
-    <div class="col-md-8 team_date form-control">
-      <h4><%= @team.remark %></h4>
+    <div class="col-md-6 team_date remark_show">
+      <p><%= safe_join(@team.remark.split("\n"),tag(:br)) %></p>
     </div>
   </div><hr>
   <div class="team">

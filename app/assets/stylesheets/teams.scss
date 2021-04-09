@@ -116,9 +116,27 @@
   padding: 0;
 }
 
+.remark_show {
+  padding: 0.5em 1em;
+  font-weight: bold;
+  border: solid 1px #000000;
+}
+
+.remark_show p {
+  margin: 0;
+  padding: 0;
+}
+
 .box-remark label {
   font-weight: 700;
   font-size: 13px;
   padding-left: 2px;
   padding-bottom: 2px;
+}
+
+#textarea {
+  width: 350px;
+  height: 100px;
+  padding: 8px;
+  line-height: 20px;
 }
