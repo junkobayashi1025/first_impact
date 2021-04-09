@@ -2,6 +2,16 @@
   <div class="d-flex margin-top">
     <h1>アカウント編集</h1>
   </div>
+  <% if @user.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger">
+      <h4><%= @user.errors.count %>件のエラーがあります。</h4>
+      <ul>
+        <% @user.errors.full_messages.each do|msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
   <div class="col-md-4">
   <%= form_with(model: @user, local: true) do |f| %>
     <div class="form-group profile">
@@ -31,8 +41,7 @@
         <%= f.file_field :icon, id: :user_img %>
       </div>
      </div>
-    </div>
-    <%= f.submit '編集', value:'編集', class: 'btn btn-primary', id: 'user_edit_submit' %>
+     <%= f.submit '編集', value:'編集', class: 'btn btn-primary', id: 'user_edit_submit' %>
+   <% end %>
   </div>
-  <% end %>
 </div>
