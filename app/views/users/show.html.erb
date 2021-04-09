@@ -36,7 +36,7 @@
               <% @user.assigns.each do |assign| %>
                 <tr>
                   <td><%= link_to "#{assign.team.name}", team_path(assign.team.id) %></td>
-                  <td><%= link_to '編集', edit_team_path(assign.team.id), class: 'btn btn-success', id: "user_show_edit_team-#{assign.team.id}-submit" if current_user == assign.team.owner %></td>
+                  <td><%= link_to '編集', edit_team_path(assign.team.id), class: 'btn btn-success mr-3', id: "user_show_edit_team-#{assign.team.id}-submit" if current_user == assign.team.owner %></td>
                   <td><%= link_to '解散', team_path(assign.team.id), method: :delete, data: { confirm: "チーム「#{assign.team.name}を削除します。よろしいでしょうか？」" },
                         class: 'btn btn-danger', id: "user_show_delete_team-#{assign.team.id}-submit" if current_user == assign.team.owner %></td>
                   <td><%= link_to '離脱', team_assign_path(assign.team, assign.id), method: :delete, data: { confirm: "チーム「#{assign.team.name}を離脱します。よろしいでしょうか？」" },

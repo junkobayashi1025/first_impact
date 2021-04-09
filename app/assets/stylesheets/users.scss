@@ -2,8 +2,13 @@
 //   outline: 1px solid #ff0000;
 // }
 
+.margin-top {
+  margin-top: 2rem;
+}
+
 .user-show-round-img {
   border-radius: 50%;
+  border: 1px solid black;
   width: 200px;
   height: 200px;
 }
@@ -90,4 +95,10 @@
   position: absolute;
   top: 0rem;
   left: 1rem;
+}
+
+.image-field {
+  position: absolute;
+  top: 0rem;
+  left: 25rem;
 }
