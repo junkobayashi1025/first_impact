@@ -17,3 +17,42 @@
 <% end %>
 
 <%= render "devise/shared/links" %>
+
+<div class="box">
+  <div class="box-inner">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <h1>アカウントを作成</h1>
+      <div class="box-email">
+        <%= f.label :name, "名前" %><br />
+        <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+      </div>
+      <div class="box-email">
+        <%= f.label :email, "Eメール" %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      </div>
+      <div class="box-password">
+        <%= f.label :password, "パスワード" %><br />
+        <%= f.password_field :password, autofocus: true, autocomplete: "password", placeholder:"パスワード(6文字以上)" %>
+      </div>
+      <div class="box-password">
+        <%= f.label :password_confirmation, "もう一度パスワードを入力してください" %><br />
+        <%= f.password_field :password_confirmation, autofocus: true, autocomplete: "password_confirmation" %>
+      </div>
+      <div class="box-login">
+        <%= f.submit "アカウントを作成" %>
+        <div class="legal-text">
+          ログインすることにより、(仮)の
+          <%= link_to "利用規約", "#" %>
+          および
+          <%= link_to "プライバシー規約", "#" %>
+          に同意するものとみなされます。
+          <p>※すでにアカウントをお持ちですか？<span><%= link_to "サインイン", new_user_session_path %></span></p>
+        </div>
+
+      </div>
+    <% end %>
+
+
+  </div>
+</div>
