@@ -46,10 +46,10 @@ li {
 }
 
 .hide-text {
-   display: block;
-   overflow: hidden;
-   text-indent: 110%;
-   white-space: nowrap;
+  display: block;
+  overflow: hidden;
+  text-indent: 110%;
+  white-space: nowrap;
 }
 
 .delete-comment {
@@ -83,4 +83,104 @@ li {
 
 .comment-padding-top {
   padding-top: 1rem;
+}
+
+.report_content {
+  padding: 0.5em 1em;
+  font-weight: bold;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+}
+
+.report_content p {
+  margin: 0;
+  padding: 0;
+}
+
+.text {
+　line-height: 24px;
+}
+
+.readmore-btn {
+　text-align: right;
+　display: none;
+}
+
+.readmore{
+  position: relative;
+  box-sizing: border-box;
+  padding: 0.1em 0.5em;
+  font-weight: bold;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  font-size: 1rem;
+  font-weight: 400
+}
+
+.readmore-content{
+  position: relative;
+  overflow: hidden;
+  /*以下お好み*/
+  /*高さの初期値*/
+  height: 100px;
+}
+
+.readmore-content p {
+  margin: 0;
+  padding: 0;
+}
+
+.readmore-content::before {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  content: "";
+  /*以下お好み グラデーションの色と高さ 高さはreadmoreのheight以下にすること*/
+  height: 50px;
+  background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.8) 50%, #fff 100%);
+  background: linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.8) 50%, #fff 100%);
+}
+
+/* 続きを読むボタン */
+.readmore-label{
+  display: table;
+  bottom: 5px;
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  margin: 0 auto;
+  z-index: 2;
+  padding: 0 10px;
+  background-color: #FFF;
+  border-radius: 10px;
+  color: #00F;
+}
+.readmore-label:before{
+  content: '続きを読む';
+}
+
+.readmore-check{
+  display: none;
+}
+
+.readmore-check:checked ~ .readmore-label{
+  position: static;
+  transform: translateX(0);
+  -webkit-transform: translateX(0);
+
+}
+.readmore-check:checked ~ .readmore-label:before{
+  content: '閉じる';
+}
+
+.readmore-check:checked ~ .readmore-content{
+  height: auto;
+}
+
+.readmore-check:checked ~ .readmore-content::before {
+  display: none;
 }

@@ -54,17 +54,17 @@
                  <input class="none_function" id="checkbox_first" as="boolean" type="checkbox">責任者承認
                <% end %>
              <% end %>
-  　　　　　　<%= f.text_area :trouble_content, class: 'form-control', rows:10 %>
+  　　　　　　<%= f.text_area :trouble_content, class: 'form-control', rows:5 %>
            </div>
            <div class="form-group">
              <u>2-2.応急対応</u>
               <%= "(提出〆切：#{(@report.accrual_date + 7.day).strftime("%Y年 %m月 %d日")})"%>
-  　　　　　　 <%= f.text_area :first_aid, class: 'form-control', rows:10 %>
+  　　　　　　 <%= f.text_area :first_aid, class: 'form-control', rows:5 %>
            </div>
            <div class="form-group">
              <u>2-3.暫定対策</u>
              <%= "(提出〆切：#{(@report.accrual_date + 7.day).strftime("%Y年 %m月 %d日")})"%>
-  　　　　　　<%= f.text_area :interim_measures, class: 'form-control', rows:10%>
+  　　　　　　<%= f.text_area :interim_measures, class: 'form-control', rows:5%>
            </div>
            <div class="form-group">
               <u>3.恒久対策</u>
@@ -80,9 +80,9 @@
                 <% end %>
               <% end %>
               <% if @report.checkbox_first %>
-  　　　　　　   <%= f.text_area :permanent_measures, class: 'form-control', rows:10 %>
+  　　　　　　   <%= f.text_area :permanent_measures, class: 'form-control', rows:5 %>
               <% else %>
-                <%= f.text_area :permanent_measures, class: 'form-control none_function', rows:10 %>
+                <%= f.text_area :permanent_measures, class: 'form-control none_function', rows:5 %>
               <% end %>
            　</div>
             <div class="form-group">
@@ -101,9 +101,9 @@
                <% end %>
              <% end %>
              <% if @report.checkbox_interim %>
-  　　　　　　  <%= f.text_area :confirmation_of_effectiveness, class: 'form-control', rows:10 %>
+  　　　　　　  <%= f.text_area :confirmation_of_effectiveness, class: 'form-control', rows:5 %>
              <% else %>
-               <%= f.text_area :confirmation_of_effectiveness, class: 'form-control none_function', rows:10 %>
+               <%= f.text_area :confirmation_of_effectiveness, class: 'form-control none_function', rows:5 %>
              <% end %>
             </div>
             <% if @report.attachments %>

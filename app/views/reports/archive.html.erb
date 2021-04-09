@@ -1,33 +1,33 @@
-<div class="d-flex align-items-center">
-  <h1>報告書一覧(アーカイブ)</h1>
-</div>
+<div class="container col-md-12 margin-top">
+  <div class="d-flex align-items-center">
+    <h1>報告書一覧(アーカイブ)</h1>
+  </div>
 
-<%= search_form_for @q, url: reports_path do |f| %>
-  <%= f.select :search_item, options_for_select(Report.search_items) %>
-  <%= f.search_field :title_cont, placeholder:"タイトル名.." %>
-  <%= f.search_field :team_name_cont, placeholder:"チーム名.." %>
-  <%= f.search_field :team_owner_name_cont, placeholder:"責任者.." %>
-  <%= f.search_field :author_cont, placeholder:"担当者.." %>
-  <%= f.submit '検索' %>
-  <%= link_to 'クリア', archive_reports_url %>
-  <br>
-<% end %>
+  <%= search_form_for @q, url: reports_path do |f| %>
+    <%= f.select :search_item, options_for_select(Report.search_items) %>
+    <%= f.search_field :title_cont, placeholder:"タイトル名.." %>
+    <%= f.search_field :author_cont, placeholder:"担当者.." %>
+    <%= f.submit '検索' %>
+    <%= link_to 'クリア', archive_reports_url %>
+    <br>
+  <% end %>
 
-<table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th>タイトル</th>
-      <th>担当者</th>
-      <th>作成日</th>
-      <th>タグ</th>
-      <th></th>
-   </tr>
- </thead>
- <tbody>
-   <% @archives.each do |report| %>
-     <tr id="report_index_<%= report.id %>">
-       <%= render 'report_archive', report: report %>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th>タイトル</th>
+        <th>担当者</th>
+        <th>作成日</th>
+        <th>タグ</th>
+        <th></th>
      </tr>
-   <% end %>
- </tbody>
-</table>
+   </thead>
+   <tbody>
+     <% @archives.each do |report| %>
+       <tr id="report_index_<%= report.id %>">
+         <%= render 'report_archive', report: report %>
+       </tr>
+     <% end %>
+   </tbody>
+  </table>
+</div>

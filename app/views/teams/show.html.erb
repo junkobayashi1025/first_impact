@@ -59,7 +59,11 @@
     <h3 class="team"><u>備考</u>
     </h3>
     <div class="col-md-6 team_date remark_show">
+      <% if @team.remark.present? %>
       <p><%= safe_join(@team.remark.split("\n"),tag(:br)) %></p>
+      <% else %>
+      <p>備考欄の記入はありません</p>
+      <% end %>
     </div>
   </div><hr>
   <div class="team">
