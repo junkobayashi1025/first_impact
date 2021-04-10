@@ -85,7 +85,7 @@
                 <%= f.text_area :permanent_measures, class: 'form-control none_function', rows:5 %>
               <% end %>
            　</div>
-            <div class="form-group">
+            <div class="form-group report">
              <u>4.有効性の確認</u>
              <% if current_user == @report.team.owner %>
                <%= "(提出〆切："%>
@@ -103,6 +103,7 @@
              <% if @report.checkbox_interim %>
   　　　　　　  <%= f.text_area :confirmation_of_effectiveness, class: 'form-control', rows:5 %>
              <% else %>
+               <span class="balloon">3.恒久対策において、責任者の承認が得られるまで記入できません</span>
                <%= f.text_area :confirmation_of_effectiveness, class: 'form-control none_function', rows:5 %>
              <% end %>
             </div>
