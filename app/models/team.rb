@@ -7,6 +7,8 @@ class Team < ApplicationRecord
   has_many :assign_users, through: :assigns, source: :user
   has_many :reports
 
+  validates :name, presence: true, length: { maximum: 30 }
+
   mount_uploader :icon, ImageUploader
 
   def invite_member(user)

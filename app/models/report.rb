@@ -7,6 +7,18 @@ class Report < ApplicationRecord
   has_many :attachments,                              dependent: :destroy
   accepts_nested_attributes_for :attachments, allow_destroy: true, reject_if: :all_blank
 
+  validates :title,            presence: true, length: { maximum: 30 }
+  validates :accrual_date,     presence: true
+  validates :site_of_occurrence,               length: { minimum: 30 }
+  validates :trouble_content,  presence: true
+  validates :first_aid,        presence: true
+  validates :interim_measures, presence: true
+
+
+
+
+
+
   enum search_item: {タイトル: 1, チーム名: 2, 責任者: 3, 担当者: 4}
 
   scope :sort_by_deadline_date_asc, lambda { all.sort_by(&:deadline_date) }

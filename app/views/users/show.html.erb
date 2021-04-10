@@ -1,6 +1,7 @@
 <div class="container">
   <div class="profile-wrap">
     <h3 class="profile"><u>プロフィール</u>
+      <% if @user.id == current_user.id %>
       <div class="index_row_icon">
         <%= link_to edit_user_path(@user), id: "user_show_edit-#{@user}-submit" do %>
           <div class="edit-user-icon edit-show-icon mr-1"></div>
@@ -10,6 +11,7 @@
           <div class="delete-user-icon delete-show-icon"></div>
         <% end %>
       </div>
+      <% end %>
       <div class="text-center profile_image">
         <h4>プロフィール画像</h4>
         <%= image_tag @user.icon.url, class: "user-show-round-img" %>
