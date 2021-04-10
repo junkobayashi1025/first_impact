@@ -8,8 +8,8 @@ class Report < ApplicationRecord
   accepts_nested_attributes_for :attachments, allow_destroy: true, reject_if: :all_blank
 
   validates :title,            presence: true, length: { maximum: 30 }
-  validates :accrual_date,     presence: true
-  validates :site_of_occurrence,               length: { minimum: 30 }
+  validates :accrual_date, presence: true
+  validates :site_of_occurrence,               length: { maximum: 30 }
   validates :trouble_content,  presence: true
   validates :first_aid,        presence: true
   validates :interim_measures, presence: true

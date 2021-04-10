@@ -4,7 +4,7 @@ class CreateReports < ActiveRecord::Migration[5.2]
       t.string :title, null: false
       t.datetime :created_date
       t.string :author
-      t.datetime :accrual_date
+      t.datetime :accrual_date, default: Date.current
       t.string :site_of_occurrence
       t.text :trouble_content
       t.text :first_aid
