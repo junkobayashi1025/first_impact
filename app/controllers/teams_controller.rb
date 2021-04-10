@@ -1,6 +1,7 @@
 class TeamsController < ApplicationController
   before_action :set_team, only: [:show, :edit, :update, :destroy]
   before_action :set_q, only: [:index]
+  before_action :authenticate_user!
 
  def index
    @teams = @q.result(distinct: true)

@@ -10,6 +10,7 @@
   </div><hr>
   <div class="team-wrap">
     <h3 class="team"><u>チーム名</u>
+      <% if current_user == @team.owner %>
       <div class="index_row_icon">
         <%= link_to edit_team_path(@team), id: "team_show_edit-#{@team}-submit" do %>
           <div class="edit-team-icon mr-1"></div>
@@ -19,6 +20,7 @@
           <div class="delete-team-icon"></div>
         <% end %>
       </div>
+      <% end %>
       <div class="new-report">
         <%= link_to '報告書を作成する', new_team_report_path(@team), class: 'btn btn-warning border-dark', id: "new_report-submit" %>
       </div>

@@ -2,6 +2,7 @@ class ReportsController < ApplicationController
   before_action :set_report, only: [:show, :edit, :update, :destroy, :approval_request, :approval, :reject]
   before_action :set_q, only: [:index]
   before_action :set_q_archive, only: [:archive]
+  before_action :authenticate_user!
 
   def index
     if params[:tag_name]
@@ -78,11 +79,11 @@ class ReportsController < ApplicationController
    else
      if @report.update(report_params)
         @report.step_string
-        flash[:notice] = "コメントを変更しました"
+        flash[:notice] = "報告書を更新しました"
         UpdateReportMailer.update_report_mailer(@report).deliver
      else
         render :edit
-        flash[:danger] = "コメントを変更できませんでした"
+        flash[:danger] = "報告書を変更できませんでした"
       end
         redirect_to report_path(@report)
      end
@@ -91,10 +92,10 @@ class ReportsController < ApplicationController
   def destroy
     if current_user == @report.user || current_user == @report.team.owner
       if @report.destroy
-        flash[:success] = '投稿が削除されました'
+        flash[:success] = '報告書が削除されました'
       end
     else
-      flash[:danger] = '投稿の削除に失敗しました'
+      flash[:danger] = '報告書の削除に失敗しました'
     end
     redirect_to reports_path(@report.user.id)
   end
