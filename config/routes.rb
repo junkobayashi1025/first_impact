@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
   devise_for :users
-
-
-
-
   devise_scope :user do
     authenticated :user do
       root :to => 'users#current_user_home', as: :authenticated_root
