@@ -92,7 +92,7 @@
                <div class="readmore-content">
                  <p><%= safe_join(@report.trouble_content.split("\n"),tag(:br)) %></p>
                </div>
-               <% if @report.trouble_content.present? %>
+               <% if @report.trouble_content.split("\n").count > 4 %>
                <label class="readmore-label" for="check1"></label>
                <% end %>
              </div><br>
@@ -102,7 +102,7 @@
                <div class="readmore-content">
                  <p><%= safe_join(@report.first_aid.split("\n"),tag(:br)) %></p>
                </div>
-               <% if @report.first_aid.present? %>
+               <% if @report.first_aid.split("\n").count > 4 %>
                <label class="readmore-label" for="check2"></label>
                <% end %>
              </div><br>
@@ -112,7 +112,7 @@
                <div class="readmore-content">
                  <p><%= safe_join(@report.interim_measures.split("\n"),tag(:br)) %></p>
                </div>
-               <% if @report.interim_measures.present? %>
+               <% if @report.interim_measures.split("\n").count > 4 %>
                <label class="readmore-label" for="check3"></label>
                <% end %>
              </div><br>
@@ -128,7 +128,7 @@
                <div class="readmore-content">
                  <p><%= safe_join(@report.permanent_measures.split("\n"),tag(:br)) %></p>
                </div>
-               <% if @report.permanent_measures.present? %>
+               <% if @report.permanent_measures.split("\n").count > 4 %>
                <label class="readmore-label" for="check4"></label>
                <% end %>
              </div><br>
@@ -148,7 +148,7 @@
                <div class="readmore-content">
                  <p><%= safe_join(@report.confirmation_of_effectiveness.split("\n"),tag(:br)) %></p>
                </div>
-               <% if @report.confirmation_of_effectiveness.present? %>
+               <% if @report.confirmation_of_effectiveness.split("\n").count > 4 %>
                <label class="readmore-label" for="check5"></label>
                <% end %>
              </div><br>
