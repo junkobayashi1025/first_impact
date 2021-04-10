@@ -166,7 +166,7 @@
           <% if @report.team_id != nil || @report.user_id != nil %>
             <%= link_to '編集', edit_report_path(@report.id), class: 'btn btn-success mr-3', id: "report_show_edit-#{@report.id}-submit" if current_user == @report.team.owner || current_user == @report.user %>
             <%= link_to '削除', report_path(@report.id), method: :delete, data: { confirm: "ユーザー「#{@report.title}を削除します。よろしいでしょうか？」" },
-                  class: 'btn btn-danger mr-3', id: "report_show_delete-#{@report.id}-submit" if current_user == @report.team.owner %>
+                  class: 'btn btn-danger mr-3', id: "report_show_delete-#{@report.id}-submit" if current_user == @report.team.owner || current_user == @report.user %>
           <% end %>
       </div>
     </div>

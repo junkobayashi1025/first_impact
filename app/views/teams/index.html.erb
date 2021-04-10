@@ -34,7 +34,7 @@
               <div class="card-body team">
                 <div class="card-title">
                   <div class="team-owner-icon"></div>
-                  <div class="team-owner-name"><%= link_to "#{team.owner.name}", team_path(team.owner.id) %></div>
+                  <div class="team-owner-name"><%= link_to "#{team.owner.name}", user_path(team.owner.id) %></div>
                   <div class="team-member-icon"></div>
                   <div class="team-count"><%= "#{team.assigns.count}" %></div>
                 </div>

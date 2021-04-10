@@ -1,5 +1,4 @@
 class ReportsController < ApplicationController
-  # before_action :authenticate_user
   before_action :set_report, only: [:show, :edit, :update, :destroy, :approval_request, :approval, :reject]
   before_action :set_q, only: [:index]
   before_action :set_q_archive, only: [:archive]
@@ -65,7 +64,7 @@ class ReportsController < ApplicationController
   end
 
   def edit
-    if current_user == @report.team.owner || @report.approval == false
+    if current_user == @report.team.owner || current_user == @report.user && @report.approval == false
       @report.build_attachment_for_form
     else
       redirect_to report_path(@report)
@@ -90,7 +89,7 @@ class ReportsController < ApplicationController
   end
 
   def destroy
-    if @report.user == current_user
+    if current_user == @report.user || current_user == @report.team.owner
       if @report.destroy
         flash[:success] = '投稿が削除されました'
       end

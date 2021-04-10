@@ -34,7 +34,7 @@ class TeamsController < ApplicationController
 
  def edit
    if @team.owner != current_user
-    redirect_to @team, notice:"編集権限がありません"
+    redirect_to @team, notice:"権限がありません"
    end
  end
 
@@ -49,12 +49,14 @@ class TeamsController < ApplicationController
 
  def destroy
    undone_reports = @team.reports.where(checkbox_final: false)
-   if undone_reports.count > 0
+   if @team.owner != current_user
+    redirect_to @team, notice:"権限がありません"
+   elsif undone_reports.count > 0
      redirect_to team_path(@team)
      flash[:danger] = "未完の報告書がある為、チームを解散できません"
    else
       @team.destroy
-      redirect_to teams_path
+      redirect_to current_user
       flash[:danger] = "チーム「#{@team.name}」を解散しました"
    end
  end
@@ -65,13 +67,6 @@ class TeamsController < ApplicationController
       @team.update(owner_id: params[:user_id])
       redirect_to @team
   end
-
-  def charge_in_person
-       @team = Team.find(params[:id])
-       @user = User.find(params[:user_id])
-       @team.update(charge_in_person_id: params[:user_id])
-       redirect_to @team
-   end
 
  private
 
