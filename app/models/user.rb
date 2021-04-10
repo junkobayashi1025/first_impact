@@ -58,4 +58,18 @@ class User < ApplicationRecord
       user.name = 'ゲスト'
     end
   end
+
+  def destroy_step
+    if self.assigns.empty? && undone_reports.count == 0
+      self.destroy
+      redirect_to new_user_session_path
+      flash[:success] = "ユーザー「#{self.name}」を削除しました"
+    elsif undone_reports.count > 0
+      redirect_to user_path(self)
+      flash[:danger] = "未完の報告書がある為、削除できません"
+    else
+      redirect_to user_path(self)
+      flash[:danger] = "チームに所属している為、削除できません"
+     end
+   end
 end

@@ -23,6 +23,11 @@ class UsersController < ApplicationController
     # .or(@user.reports.where('confirmed_date <= ?', threshold).where(user_id: current_user.id, checkbox_interim: true, checkbox_final: false))
 
   def edit
+    if @user.id == current_user.id
+    else
+      redirect_to user_path(@user)
+      flash[:notice] = "権限がありません"
+    end
   end
 
   def update
@@ -37,17 +42,12 @@ class UsersController < ApplicationController
 
   def destroy
     undone_reports = @user.reports.where(checkbox_final: false)
-    if @user.assigns.empty? && undone_reports.count == 0
-      @user.destroy
-      redirect_to new_user_session_path
-      flash[:success] = "ユーザー「#{@user.name}」を削除しました"
-    elsif undone_reports.count > 0
-      redirect_to user_path(@user)
-      flash[:danger] = "未完の報告書がある為、削除できません"
+    if @user.id == current_user.id
+      @user.destroy_step
     else
       redirect_to user_path(@user)
-      flash[:danger] = "チームに所属している為、削除できません"
-     end
+      flash[:notice] = "権限がありません"
+    end
    end
 
   private
@@ -63,5 +63,10 @@ class UsersController < ApplicationController
 
   def set_q
     @q = User.ransack(params[:q])
+  end
+
+  def current_user?
+
+
   end
 end
