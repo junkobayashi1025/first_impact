@@ -1,19 +1,46 @@
-<h2><%= t('.sign_up') %></h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-
-<div class="col-md-4">
- <div class="form-group">
-    <%= f.text_field :name, placeholder:"名前", class: 'form-control',autofocus: true %><br>
-    <%= f.email_field :email, placeholder:"メールアドレス", class: 'form-control', autocomplete: "email" %><br>
-    <%= f.password_field :password, placeholder:"パスワード(6文字以上)", class: 'form-control', autocomplete: "new-password" %><br>
-    <%= f.password_field :password_confirmation, placeholder:"パスワード確認", class: 'form-control', autocomplete: "new-password" %><br>
-    <%= f.file_field :icon %>
-    </div>
-  <div class="actions">
-    <%= f.submit t('.sign_up'), class: 'btn btn-primary', id: 'user_new_submit' %>
+<div class="container">
+  <% if @user.errors.any? %>
+  <div id="error_explanation" class="alert alert-danger">
+    <h4><%= @user.errors.count %>件のエラーがあります。</h4>
+    <ul>
+      <% @user.errors.full_messages.each do|msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
   </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+  <% end %>
+  <div class="box">
+    <div class="box-inner">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <h1>アカウントを作成</h1>
+        <div class="box-name">
+          <%= f.label :name, "名前" %><br />
+          <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+        </div>
+        <div class="box-email">
+          <%= f.label :email, "Eメール" %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        </div>
+        <div class="box-password">
+          <%= f.label :password, "パスワード" %><br />
+          <%= f.password_field :password, autofocus: true, autocomplete: "password", placeholder:"パスワード(6文字以上)" %>
+        </div>
+        <div class="box-password">
+          <%= f.label :password_confirmation, "もう一度パスワードを入力してください" %><br />
+          <%= f.password_field :password_confirmation, autofocus: true, autocomplete: "password_confirmation" %>
+        </div>
+        <div class="box-login">
+          <%= f.submit "アカウントを作成" %>
+          <div class="legal-text">
+            ログインすることにより、(仮)の
+            <%= link_to "利用規約", "#" %>
+            および
+            <%= link_to "プライバシー規約", "#" %>
+            に同意するものとみなされます。
+            <p>※すでにアカウントをお持ちですか？<span><%= link_to "サインイン", new_user_session_path %></span></p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

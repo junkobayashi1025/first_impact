@@ -1,0 +1,35 @@
+<div class="panel panel-default">
+  <div class="panel-heading float_left">
+    ※ブックマークした報告書
+  </div>
+  <% if @user.bookmarks.any? == true %>
+    <table class="table panel-body">
+      <tr>
+        <th>タイトル</th>
+        <th>チーム名</th>
+        <th>担当者</th>
+        <th>ステップ</th>
+        <th>ステータス</th>
+        <th>提出〆切</th>
+      </tr>
+      <% @user.bookmarks.each do |bookmarks| %>
+        <tr>
+          <td><%= link_to "#{bookmarks.report.title}", report_path(bookmarks.report.id) %></td>
+          <td><%= link_to "#{bookmarks.report.team.name}", team_path(bookmarks.report.team.id) %></td>
+          <td><%= link_to "#{bookmarks.report.author}", user_path(bookmarks.report.user.id) %></td>
+          <% unless bookmarks.report.checkbox_final == true %>
+            <td><%= bookmarks.report.step %></td>
+            <td><%= bookmarks.report.status %></td>
+            <td><%= bookmarks.report.due.strftime("%Y年 %m月 %d日") %></td>
+          <% else %>
+            <td>------------</td>
+            <td>------------</td>
+            <td>完了</td>
+          <% end %>
+        </tr>
+      <% end %>
+    </table>
+  <% else %>
+    <strong>該当する報告書はありません</strong>
+  <% end %>
+</div>

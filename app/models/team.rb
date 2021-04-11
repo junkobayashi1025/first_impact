@@ -7,9 +7,23 @@ class Team < ApplicationRecord
   has_many :assign_users, through: :assigns, source: :user
   has_many :reports
 
+  validates :name, presence: true, length: { maximum: 30 }
+
   mount_uploader :icon, ImageUploader
 
   def invite_member(user)
     assigns.create(user: user)
+  end
+
+  def prepared_report
+    prepared_reports = self.reports.where(checkbox_final: false, approval: false).order(created_at: :asc)
+  end
+
+  def request_report
+    request_reports = self.reports.where(checkbox_final: false, approval: true).order(created_at: :asc)
+  end
+
+  def done_report
+    done_reports = self.reports.where(checkbox_final: true).order(updated_at: :asc)
   end
 end

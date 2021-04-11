@@ -1,0 +1,21 @@
+<div class="panel panel-default">
+  <div class="panel-heading float_left">
+    ※チーム内の完了した報告書
+  </div>
+  <% if team.done_report.any? == true %>
+    <table class="table panel-body">
+      <tr>
+        <th>タイトル</th>
+        <th>担当者</th>
+      </tr>
+      <% team.done_report.each do |report| %>
+        <tr>
+          <td><%= link_to "#{report.title}", report_path(report.id) %></td>
+          <td><%= link_to "#{report.author}", user_path(report.user.id) %></td>
+        </tr>
+        <% end %>
+      </table>
+    <% else %>
+      <strong>該当する報告書はありません</strong>
+    <% end %>
+  </div>

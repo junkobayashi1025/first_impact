@@ -1,0 +1,25 @@
+<div class="panel panel-default">
+  <div class="panel-heading float_left">
+    ※期限切れ or 期限直前(3日以内)
+  </div>
+  <% if expired_reports.any? == true %>
+    <table class="table panel-body">
+      <tr>
+        <th>タイトル</th>
+        <th>担当者</th>
+        <th>ステップ</th>
+        <th>提出〆切</th>
+      </tr>
+      <% expired_reports.each do |report| %>
+        <tr>
+          <td><%= link_to "#{report.title}", report_path(report.id) %></td>
+          <td><%= link_to "#{report.author}", user_path(report.user.id) %></td>
+          <td><%= report.step %></td>
+          <td><%= report.due.strftime("%Y年 %m月 %d日") %></td>
+        </tr>
+        <% end %>
+      </table>
+    <% else %>
+      <strong>該当する報告書はありません</strong>
+    <% end %>
+  </div>

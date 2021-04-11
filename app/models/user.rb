@@ -42,5 +42,34 @@ class User < ApplicationRecord
     end
     user
   end
-  
+
+  def owner_report
+    owner_team = self.assign_teams.where(owner_id: self.id)
+    owner_reports = Report.where(team_id: owner_team.ids, checkbox_final: false).order(created_at: :asc)
+  end
+
+  def author_report
+    author_reports = self.reports.where(checkbox_final: false).order(created_at: :asc)
+  end
+
+  def self.guest
+    find_or_create_by!(email: 'guest@example.com') do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.name = 'ゲスト'
+    end
+  end
+
+  def destroy_step
+    if self.assigns.empty? && undone_reports.count == 0
+      self.destroy
+      redirect_to new_user_session_path
+      flash[:success] = "ユーザー「#{self.name}」を削除しました"
+    elsif undone_reports.count > 0
+      redirect_to user_path(self)
+      flash[:danger] = "未完の報告書がある為、削除できません"
+    else
+      redirect_to user_path(self)
+      flash[:danger] = "チームに所属している為、削除できません"
+     end
+   end
 end

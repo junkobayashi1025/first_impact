@@ -1,0 +1,6 @@
+<h1>下記の報告書が更新されました！</h1>
+<hr>
+<h4>報告書タイトル: <%= link_to "#{@report.title}", report_url(@report.id) %></h4>
+<h4>チーム名: <%= @report.team.name %></h4>
+<h4>担当者: <%= @report.user.name %></h4>
+<h4>ステップ <%= @report.step %></h4>

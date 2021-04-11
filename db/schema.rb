@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_31_061628) do
+ActiveRecord::Schema.define(version: 2021_04_03_114022) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 2021_03_31_061628) do
     t.string "title", null: false
     t.datetime "created_date"
     t.string "author"
-    t.datetime "accrual_date"
+    t.datetime "accrual_date", default: "2021-04-10 00:00:00"
     t.string "site_of_occurrence"
     t.text "trouble_content"
     t.text "first_aid"
@@ -65,13 +65,16 @@ ActiveRecord::Schema.define(version: 2021_03_31_061628) do
     t.boolean "checkbox_first", default: false
     t.boolean "checkbox_interim", default: false
     t.boolean "checkbox_final", default: false
-    t.bigint "user_id", null: false
-    t.bigint "team_id", null: false
+    t.bigint "user_id"
+    t.bigint "team_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "confirmed_date"
     t.integer "search_item", default: 0
     t.boolean "approval", default: false
+    t.string "step"
+    t.string "status"
+    t.datetime "due"
     t.index ["team_id"], name: "index_reports_on_team_id"
     t.index ["user_id"], name: "index_reports_on_user_id"
   end
@@ -145,8 +148,8 @@ ActiveRecord::Schema.define(version: 2021_03_31_061628) do
   add_foreign_key "bookmarks", "users"
   add_foreign_key "comments", "reports"
   add_foreign_key "comments", "users"
-  add_foreign_key "reports", "teams"
-  add_foreign_key "reports", "users"
+  add_foreign_key "reports", "teams", on_delete: :nullify
+  add_foreign_key "reports", "users", on_delete: :nullify
   add_foreign_key "taggings", "tags"
   add_foreign_key "teams", "users"
 end

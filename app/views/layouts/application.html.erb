@@ -7,10 +7,13 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
   </head>
 
   <body>
+    <% unless current_page?(unauthenticated_root_path) %>
     <%= render 'header' %>
+    <% end %>
       <div class="container col-md-10">
         <div class="col-md-4">
         <% if flash[:notice] %>
@@ -25,6 +28,6 @@
         </div>
        </div>
         <!-- <div class="container"> -->
-        <%= yield %>
+       <%= yield %>
   </body>
 </html>

@@ -20,14 +20,17 @@
     <div class="card">
       <div class="card-header">
         <strong>報告書詳細画面</strong>
-          <div class="float_right_3" id="report_show_<%= @report.id %>">
-            <% if current_user.liked_by?(@report.id) %>
-              <%= link_to 'いいねを外す', destroy_bookmark_path(id: @report), method: :DELETE, remote: true, class: "bookmarked hide-text" %>
-            <% else %>
-              <%= link_to 'いいね', create_bookmark_path(id: @report), method: :POST, remote: true, class: "bookmark hide-text" %>
-            <% end %>
-            </div>
+        <% if @report.team_id != nil || @report.user_id != nil %>
+          <% if current_user != @report.user && current_user != @report.team.owner && @report.checkbox_final != true %>
             <div class="float_right_3" id="report_show_<%= @report.id %>">
+              <% if current_user.liked_by?(@report.id) %>
+                <%= link_to 'いいねを外す', destroy_bookmark_path(id: @report), method: :DELETE, remote: true, class: "bookmarked hide-text" %>
+              <% else %>
+                <%= link_to 'いいね', create_bookmark_path(id: @report), method: :POST, remote: true, class: "bookmark hide-text" %>
+              <% end %>
+              </div>
+            <% end %>
+            <div class="float_right_3">
               <% if @report.user.id != @report.team.owner.id %>
                 <% if current_user.id == @report.user.id && @report.approval == false %>
                   <%= link_to '承認依頼', approval_request_report_path(id: @report.id), method: :POST, class: 'btn btn-primary mr-3', id: "report_show_approval_request-#{@report.id}-submit" %>
@@ -35,23 +38,27 @@
                   <%= link_to '承認', approval_report_path(id: @report.id), method: :POST, class: 'btn btn-success mr-3', id: "report_show_approval-#{@report.id}-submit" %>
                   <%= link_to '拒否', reject_report_path(id: @report.id), method: :POST, class: 'btn btn-danger mr-3', id: "report_show_reject-#{@report.id}-submit" %>
                 <% elsif @report.approval == false %>
-                   <div class="btn btn-primary mr-3 none_function">作成中
+                   <div class="btn btn-primary mr-3 none_function"><%= @report.status %>
                    </div>
                  <% else @report.approval == true %>
-                   <div class="btn btn-warning mr-3 none_function">承認依頼中
+                   <div class="btn btn-warning mr-3 none_function"><%= @report.status %>
                    </div>
                  <% end %>
               <% end %>
             </div>
+          <% end %>
+          <!-- if @report.team_id != nil || @report.user_id != nil  -->
       </div>
       <div class="card-body">
         <div class="float_right col-md-3.5">
           <div class="form-control">
             <%= "作成日：#{@report.created_at.strftime("%Y年 %m月 %d日")}" %>
           </div><br>
-          <div class="form-control">
-            <%= "責任者：#{@report.team.owner.name}" %>
-          </div><br>
+          <% if @report.team_id != nil || @report.user_id != nil %>
+            <div class="form-control">
+              <%= "責任者：#{@report.team.owner.name}" %>
+            </div><br>
+          <% end %>
           <div class="form-control">
             <%= "担当者：#{@report.author}" %>
           </div><br>
@@ -80,16 +87,34 @@
              <% else %>
                <input class="none_function" id="checkbox_first" as="boolean" type="checkbox">責任者承認
              <% end %>
-             <div class="form-control">
-               <%= @report.trouble_content %>
+             <div class="readmore">
+               <input id="check1" class="readmore-check" type="checkbox">
+               <div class="readmore-content">
+                 <p><%= safe_join(@report.trouble_content.split("\n"),tag(:br)) %></p>
+               </div>
+               <% if @report.trouble_content.split("\n").count > 4 %>
+               <label class="readmore-label" for="check1"></label>
+               <% end %>
              </div><br>
              <u>2-2.応急対応</u>
-             <div class="form-control">
-               <%= @report.first_aid %>
+             <div class="readmore">
+               <input id="check2" class="readmore-check" type="checkbox">
+               <div class="readmore-content">
+                 <p><%= safe_join(@report.first_aid.split("\n"),tag(:br)) %></p>
+               </div>
+               <% if @report.first_aid.split("\n").count > 4 %>
+               <label class="readmore-label" for="check2"></label>
+               <% end %>
              </div><br>
              <u>2-3.暫定対策</u>
-             <div class="form-control">
-               <%= @report.interim_measures %>
+             <div class="readmore">
+               <input id="check3" class="readmore-check" type="checkbox">
+               <div class="readmore-content">
+                 <p><%= safe_join(@report.interim_measures.split("\n"),tag(:br)) %></p>
+               </div>
+               <% if @report.interim_measures.split("\n").count > 4 %>
+               <label class="readmore-label" for="check3"></label>
+               <% end %>
              </div><br>
              <u>3.恒久対策</u>
              <%= "(提出〆切：#{(@report.accrual_date + 14.day).strftime("%Y年 %m月 %d日")})"%>
@@ -98,8 +123,14 @@
              <% else %>
                <input class="none_function" id="checkbox_interim" as="boolean" type="checkbox">責任者承認
              <% end %>
-             <div class="form-control">
-               <%= @report.permanent_measures %>
+             <div class="readmore">
+               <input id="check4" class="readmore-check" type="checkbox">
+               <div class="readmore-content">
+                 <p><%= safe_join(@report.permanent_measures.split("\n"),tag(:br)) %></p>
+               </div>
+               <% if @report.permanent_measures.split("\n").count > 4 %>
+               <label class="readmore-label" for="check4"></label>
+               <% end %>
              </div><br>
              <u>4.有効性の確認</u>
              <% if @report.confirmed_date %>
@@ -112,23 +143,31 @@
              <% else %>
                <input class="none_function" id="checkbox_final" as="boolean" type="checkbox">責任者承認
              <% end %>
-             <div class="form-control">
-               <%= @report.confirmation_of_effectiveness %>
+             <div class="readmore">
+               <input id="check5" class="readmore-check" type="checkbox">
+               <div class="readmore-content">
+                 <p><%= safe_join(@report.confirmation_of_effectiveness.split("\n"),tag(:br)) %></p>
+               </div>
+               <% if @report.confirmation_of_effectiveness.split("\n").count > 4 %>
+               <label class="readmore-label" for="check5"></label>
+               <% end %>
              </div><br>
              <% if @report.attachments.present? %>
                <u>5.添付資料(添付資料は最大5つまで)</u>
                   <% @report.attachments.each_with_index do |attachment, index| %>
                     <li>
-                        <%= link_to "", report_attachment_path(report_id: @report.id, id: attachment.id), method: :delete, class: "delete-image", data: { confirm: "#{index + 1}.#{attachment.image.identifier}を削除してよろしいですか？" }%>
+                       <%= link_to "", report_attachment_path(report_id: @report.id, id: attachment.id), method: :delete, class: "delete-image", data: { confirm: "#{index + 1}.#{attachment.image.identifier}を削除してよろしいですか？" }%>
                        <a href="<%= asset_url(attachment.image.url) %>"><%= "#{index+1}.#{attachment.image.identifier}" %></a>
                     </li>
                   <% end %>
              <% end %>
           </div> <hr>
           <bi>
+          <% if @report.team_id != nil || @report.user_id != nil %>
             <%= link_to '編集', edit_report_path(@report.id), class: 'btn btn-success mr-3', id: "report_show_edit-#{@report.id}-submit" if current_user == @report.team.owner || current_user == @report.user %>
             <%= link_to '削除', report_path(@report.id), method: :delete, data: { confirm: "ユーザー「#{@report.title}を削除します。よろしいでしょうか？」" },
-                  class: 'btn btn-danger mr-3', id: "report_show_delete-#{@report.id}-submit" if current_user == @report.team.owner %>
+                  class: 'btn btn-danger mr-3', id: "report_show_delete-#{@report.id}-submit" if current_user == @report.team.owner || current_user == @report.user %>
+          <% end %>
       </div>
     </div>
   </div>

@@ -4,7 +4,7 @@ class CreateReports < ActiveRecord::Migration[5.2]
       t.string :title, null: false
       t.datetime :created_date
       t.string :author
-      t.datetime :accrual_date
+      t.datetime :accrual_date, default: Date.current
       t.string :site_of_occurrence
       t.text :trouble_content
       t.text :first_aid
@@ -14,8 +14,8 @@ class CreateReports < ActiveRecord::Migration[5.2]
       t.boolean :checkbox_first,   default: false
       t.boolean :checkbox_interim, default: false
       t.boolean :checkbox_final,   default: false
-      t.references :user, foreign_key: true, index: true, null: false
-      t.references :team, foreign_key: true, index: true, null: false
+      t.references :user, foreign_key: { on_delete: :nullify }, index: true
+      t.references :team, foreign_key: { on_delete: :nullify }, index: true
       t.timestamps
     end
   end

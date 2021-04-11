@@ -1,3 +1,104 @@
-// Place all the styles related to the users controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+// * {
+//   outline: 1px solid #ff0000;
+// }
+
+.margin-top {
+  margin-top: 1rem;
+}
+
+.user-show-round-img {
+  border-radius: 50%;
+  border: 1px solid black;
+  width: 200px;
+  height: 200px;
+}
+
+.user-index-round-img {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+.float_right {
+  float: right;
+}
+
+.clear {
+  clear:　both;
+}
+
+.profile-wrap {
+  padding-top: 20px;
+  position:relative
+}
+
+.profile {
+  position:relative
+}
+
+.profile_date {
+  padding-left: 50px;
+}
+
+.profile_image {
+  position: absolute;
+  top: 0rem;
+  left: 30rem;
+}
+
+.delete-user-icon {
+  background-image: image-url("parts4");
+  background-repeat: no-repeat;
+  width: 20px;
+  height: 20px;
+  background-size: 20px !important;
+  color: #262626;
+  font-size: 20px;
+}
+
+.edit-user-icon {
+  background-image: image-url("parts5");
+  background-repeat: no-repeat;
+  width: 20px;
+  height: 20px;
+  background-size: 20px !important;
+  color: #262626;
+  font-size: 20px;
+}
+
+.delete-show-icon {
+  position: absolute;
+  top: 0.5rem;
+  left: 13rem;
+}
+
+.edit-show-icon {
+  position: absolute;
+  top: 0.5rem;
+  left: 11rem;
+}
+
+.table-profile {
+  position: relative;
+}
+
+.index_row_icon {
+  width: 560px;
+  margin-top: 10px;
+  float: right;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.nav-tab-report {
+  position: absolute;
+  top: 0rem;
+  left: 1rem;
+}
+
+.image-field {
+  position: absolute;
+  top: 0rem;
+  left: 25rem;
+}

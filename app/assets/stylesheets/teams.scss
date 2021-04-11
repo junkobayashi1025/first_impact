@@ -1,3 +1,161 @@
-// Place all the styles related to the teams controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+// * {
+//   outline: 1px solid #ff0000;
+// }
+
+.card-header {
+  max-width: 15rem !important;
+  max-height:25rem !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.card-text {
+  max-width: 13rem !important;
+  max-height:6rem !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+.team {
+  position:relative
+}
+
+.team_date {
+  padding-left: 20px;
+}
+
+.team-wrap {
+  padding-top: 20px;
+}
+
+.icon {
+  width: 20px;
+}
+
+.nav-tab-report {
+  position: absolute;
+  top: 0rem;
+  left: 1rem;
+}
+
+.delete-team-icon {
+  background-image: image-url("parts4");
+  background-repeat: no-repeat;
+  width: 20px;
+  height: 20px;
+  background-size: 20px !important;
+  color: #262626;
+  font-size: 20px;
+  position: absolute;
+  top: 0.5rem;
+  left: 9.5rem;
+}
+
+.edit-team-icon {
+  background-image: image-url("parts5");
+  background-repeat: no-repeat;
+  width: 20px;
+  height: 20px;
+  background-size: 20px !important;
+  color: #262626;
+  font-size: 20px;
+  position: absolute;
+  top: 0.5rem;
+  left: 7.5rem;
+}
+
+.new-report {
+  position: absolute;
+  top: 0rem;
+  left: 12rem;
+}
+
+.rectangle-img {
+  width: 15rem;
+  height: 10rem;
+  object-fit: cover;
+}
+
+.o-3column .col-md-4 {
+  padding: 10px 1px;
+}
+
+.team-owner-name {
+  position: absolute;
+  top: 0rem;
+  left: 2.5rem;
+}
+
+.team-count {
+  position: absolute;
+  top: 1.5rem;
+  left: 2.5rem;
+}
+
+.team-owner-icon {
+  background-image: image-url("parts6");
+  background-repeat: no-repeat;
+  width: 40px;
+  height: 40px;
+  background-size: 40px !important;
+  color: #262626;
+  font-size: 20px;
+  position: absolute;
+  top: 0rem;
+  left: 0rem;
+}
+
+.team-member-icon {
+  background-image: image-url("parts7");
+  background-repeat: no-repeat;
+  width: 35px;
+  height: 35px;
+  background-size: 35px !important;
+  color: #262626;
+  font-size: 20px;
+  position: absolute;
+  top: 1.5rem;
+  left: 0rem;
+}
+
+.remark-box {
+  margin: 2.5rem -0.85rem;
+  padding: 0.5rem;
+  color: #5d627b;
+  background: white;
+  border-top: solid 5px #5d627b;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+}
+
+.remark-box p {
+  margin: 0;
+  padding: 0;
+}
+
+.remark_show {
+  padding: 0.5em 1em;
+  font-weight: bold;
+  border: solid 1px #000000;
+}
+
+.remark_show p {
+  margin: 0;
+  padding: 0;
+}
+
+.box-remark label {
+  font-weight: 700;
+  font-size: 13px;
+  padding-left: 2px;
+  padding-bottom: 2px;
+}
+
+#textarea {
+  width: 350px;
+  height: 100px;
+  padding: 8px;
+  line-height: 20px;
+}

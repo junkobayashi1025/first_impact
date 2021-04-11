@@ -1,0 +1,25 @@
+ja:
+  activerecord:
+    models:
+      report: 報告書
+      team: チーム
+      user: ユーザー
+    attributes:
+      report:
+        title: タイトル
+        accrual_date: 発生日
+        trouble_content: 2-1.トラブル内容
+        first_aid: 2-2.応急対応
+        interim_measures: 2-3.暫定対策
+        due: 〆切
+        step: ステップ
+      team:
+        name: チーム名
+      user:
+        title: タイトル
+        name: 名前
+        email: メールアドレス
+        current_password: 現在のパスワード
+        password: パスワード
+        password_confirmation: 確認用パスワード
+        remember_me: ログインを記憶

@@ -3,6 +3,7 @@
   "private": true,
   "dependencies": {
     "bootstrap": "4",
-    "jquery": "^3.6.0"
+    "jquery": "^3.6.0",
+    "readmore-js": "^2.2.1"
   }
 }

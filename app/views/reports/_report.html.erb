@@ -1,25 +1,26 @@
-<% if current_user.liked_by?(report.id) %>
-   <td><%= link_to 'いいねを外す', destroy_bookmark_path(report), method: :DELETE, remote: true, class: "bookmarked hide-text" %></td>
+<% if current_user != report.user %>
+  <% if current_user.liked_by?(report.id) %>
+     <td><%= link_to 'いいねを外す', destroy_bookmark_path(report), method: :DELETE, remote: true, class: "bookmarked hide-text" %></td>
+  <% else %>
+     <td><%= link_to 'いいね', create_bookmark_path(report), method: :POST, remote: true, class: "bookmark hide-text" %></td>
+  <% end %>
 <% else %>
-   <td><%= link_to 'いいね', create_bookmark_path(report), method: :POST, remote: true, class: "bookmark hide-text" %></td>
+  <td></td>
 <% end %>
 <td><%= link_to "#{report.title}", report_path(report.id) %></td>
 <td><%= link_to "#{report.team.name}", team_path(report.team.id) %></td>
 <td><%= link_to "#{report.team.owner.name}", user_path(report.team.owner.id) %></td>
 <td><%= link_to "#{report.author}", user_path(report.user.id) %></td>
-<% unless report.checkbox_final %>
-  <% if report.checkbox_interim %>
-     <td>有効性の確認中</td>
-  <% elsif report.checkbox_first %>
-     <td>中間報告の作成中</td>
+<% if report.checkbox_final != true %>
+  <td><%= report.step %></td>
+  <td><%= report.status %></td>
+  <% if report.checkbox_interim && report.confirmed_date == nil %>
+    <td><%= "未定" %></td>
   <% else %>
-     <td>第一報告の作成中</td>
+    <td><%= report.due.strftime("%Y年 %m月 %d日") %></td>
   <% end %>
 <% end %>
-<% unless report.checkbox_final %>
-  <td><%= report.deadline_date %></td>
-<% end %>
-<td><%= report.created_at.strftime("%Y年 %m月 %d日")%></td>
+<td><%= report.created_at.strftime("%Y年 %m月 %d日") %></td>
 <td>
   <% report.tag_list.each do |tag| %>
     <% if report.checkbox_final == false %>

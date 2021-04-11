@@ -1,9 +1,11 @@
 class TeamsController < ApplicationController
   before_action :set_team, only: [:show, :edit, :update, :destroy]
+  before_action :set_q, only: [:index]
+  before_action :authenticate_user!
 
-  def index
-    @teams = Team.all
-  end
+ def index
+   @teams = @q.result(distinct: true)
+ end
 
  def new
    @team = Team.new
@@ -23,11 +25,17 @@ class TeamsController < ApplicationController
  end
 
  def show
+   threshold = DateTime.now + 3.day
+   @expired_reports = @team.reports.where('due <= ?', threshold).order(due: :asc)
+   if @expired_reports.count > 0
+     number = @expired_reports.count
+     flash[:danger] = "期限切れ、期限直前のタスクが#{number}件あります。"
+   end
  end
 
  def edit
    if @team.owner != current_user
-    redirect_to @team, notice:"編集権限がありません"
+    redirect_to @team, notice:"権限がありません"
    end
  end
 
@@ -41,10 +49,18 @@ class TeamsController < ApplicationController
  end
 
  def destroy
-    @team.destroy
-    redirect_to teams_path
-    flash[:danger] = "チーム「#{@team.name}」を解散しました"
-  end
+   undone_reports = @team.reports.where(checkbox_final: false)
+   if @team.owner != current_user
+    redirect_to @team, notice:"権限がありません"
+   elsif undone_reports.count > 0
+     redirect_to team_path(@team)
+     flash[:danger] = "未完の報告書がある為、チームを解散できません"
+   else
+      @team.destroy
+      redirect_to current_user
+      flash[:danger] = "チーム「#{@team.name}」を解散しました"
+   end
+ end
 
  def change_owner
       @team = Team.find(params[:id])
@@ -52,13 +68,6 @@ class TeamsController < ApplicationController
       @team.update(owner_id: params[:user_id])
       redirect_to @team
   end
-
-  def charge_in_person
-       @team = Team.find(params[:id])
-       @user = User.find(params[:user_id])
-       @team.update(charge_in_person_id: params[:user_id])
-       redirect_to @team
-   end
 
  private
 
@@ -68,6 +77,10 @@ class TeamsController < ApplicationController
 
  def set_team
    @team = Team.find_by(id: params[:id])
+ end
+
+ def set_q
+   @q = Team.ransack(params[:q])
  end
 
 end
