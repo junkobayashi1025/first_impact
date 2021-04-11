@@ -90,6 +90,7 @@
           <div class="tab-content">
             <div id="content1" class="tab-pane active">
               <%= render 'team_show_expired', expired_reports: @expired_reports %>
+              <%= paginate @expired_reports %>
             </div>
             <div id="content2" class="tab-pane">
               <%= render 'team_show_prepared', team: @team %>

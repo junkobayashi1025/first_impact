@@ -6,11 +6,11 @@ class ReportsController < ApplicationController
 
   def index
     if params[:tag_name]
-      @results = Report.where(checkbox_final: false).tagged_with("#{params[:tag_name]}")
+      @results = Report.where(checkbox_final: false).tagged_with("#{params[:tag_name]}").page(params[:page]).per(8)
     else
       # puts params[:q]
       # puts "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@s"
-      @results = params[:q] ? @q.result : Report.where(checkbox_final: false).order(created_date: :desc)
+      @results = params[:q] ? @q.result : Report.where(checkbox_final: false).order(created_date: :desc).page(params[:page]).per(8)
     end
 
     # binding.pry
@@ -28,9 +28,9 @@ class ReportsController < ApplicationController
 
   def archive
     if params[:tag_name]
-      @archives = Report.where(checkbox_final: true).tagged_with("#{params[:tag_name]}")
+      @archives = Report.where(checkbox_final: true).tagged_with("#{params[:tag_name]}").page(params[:page]).per(8)
     else
-      @archives = params[:q] ? @q.result : Report.where(checkbox_final: true).order(created_date: :desc)
+      @archives = params[:q] ? @q.result : Report.where(checkbox_final: true).order(created_date: :desc).page(params[:page]).per(8)
     end
   end
 
