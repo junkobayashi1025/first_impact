@@ -14,7 +14,6 @@ class TeamsController < ApplicationController
  def create
    @team = Team.new(teams_params)
    @team.owner_id = current_user.id
-   @team.charge_in_person_id = current_user.id
    if @team.save
      @team.invite_member(@team.owner)
      redirect_to team_path(@team)
@@ -72,7 +71,7 @@ class TeamsController < ApplicationController
  private
 
  def teams_params
-   params.require(:team).permit(:name, :icon, :remark, :owner_id, :charge_in_person_id)
+   params.require(:team).permit(:name, :icon, :remark, :owner_id)
  end
 
  def set_team
