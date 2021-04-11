@@ -1,3 +1,24 @@
+// * {
+//   outline: 1px solid #ff0000;
+// }
+
+.card-header {
+  max-width: 15rem !important;
+  max-height:25rem !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.card-text {
+  max-width: 13rem !important;
+  max-height:6rem !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
 .team {
   position:relative
 }
@@ -10,10 +31,8 @@
   padding-top: 20px;
 }
 
-.team-icon {
-  position: absolute;
-  top: 0.2rem;
-  right: 11rem;
+.icon {
+  width: 20px;
 }
 
 .nav-tab-report {
@@ -55,8 +74,8 @@
 }
 
 .rectangle-img {
-  width: auto;
-  height: 8rem;
+  width: 15rem;
+  height: 10rem;
   object-fit: cover;
 }
 
@@ -103,8 +122,8 @@
 }
 
 .remark-box {
-  margin-top: 3rem;
-  padding: 1rem;
+  margin: 2.5rem -0.85rem;
+  padding: 0.5rem;
   color: #5d627b;
   background: white;
   border-top: solid 5px #5d627b;
