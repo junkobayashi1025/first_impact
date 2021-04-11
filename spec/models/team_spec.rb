@@ -1,6 +1,6 @@
 require 'rails_helper'
 RSpec.describe 'Teamモデル機能', type: :model do
-  let!(:user){ FactoryBot.create(:user) }
+  let(:user){ FactoryBot.create(:user) }
 
   describe 'バリデーションのテスト' do
     context 'Teamの名前が空の場合' do
