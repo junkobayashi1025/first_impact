@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
 
   def create
     @report = Report.find(params[:report_id])
-    if current_user.assigns.ids.include?(@report.team.id)
+    if current_user.assign_teams.ids.include?(@report.team.id)
       @comment = @report.comments.build(comment_params)
       @comment.user_id = current_user.id
       @comment.save

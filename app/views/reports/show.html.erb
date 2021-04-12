@@ -156,7 +156,7 @@
                <u>5.添付資料(添付資料は最大5つまで)</u>
                   <% @report.attachments.each_with_index do |attachment, index| %>
                     <li>
-                       <%= link_to "", report_attachment_path(report_id: @report.id, id: attachment.id), method: :delete, class: "delete-image", data: { confirm: "#{index + 1}.#{attachment.image.identifier}を削除してよろしいですか？" }%>
+                       <%= link_to "", report_attachment_path(report_id: @report.id, id: attachment.id), method: :delete, id:"reports-show__report-#{attachment.id}-delete_icon", class: "delete-image", data: { confirm: "#{index + 1}.#{attachment.image.identifier}を削除してよろしいですか？" }%>
                        <a href="<%= asset_url(attachment.image.url) %>"><%= "#{index+1}.#{attachment.image.identifier}" %></a>
                     </li>
                   <% end %>

@@ -47,12 +47,9 @@ class ReportsController < ApplicationController
     @report.user_id = current_user.id
     @report.step_string
     @report.status_string
-    # @report = @team.reports.build(report_params)
-    # binding.pry
-    # @report = Report.new(report_params)
       if @report.save
-       redirect_to reports_path
-       flash[:success] = '投稿が保存されました'
+       redirect_to team_path(@report.team)
+       flash[:success] = "報告書「#{@report.title}」が保存されました"
        CreateReportMailer.create_report_mailer(@team, @report).deliver
       else
        render 'new'
@@ -92,7 +89,7 @@ class ReportsController < ApplicationController
   def destroy
     if current_user == @report.user || current_user == @report.team.owner
       if @report.destroy
-        flash[:success] = '報告書が削除されました'
+        flash[:success] = "報告書「#{@report.title}」が削除されました"
       end
     else
       flash[:danger] = '報告書の削除に失敗しました'
