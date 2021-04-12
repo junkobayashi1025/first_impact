@@ -23,10 +23,8 @@ gem 'faker'
 gem 'ransack'
 gem 'jquery-rails'
 gem 'acts-as-taggable-on', '~> 6.0'
-# gem 'mini_racer', platforms: :ruby
-# gem 'coffee-script-source', '1.8.0'
-
-
+gem 'kaminari'
+gem 'kaminari-bootstrap', '~> 3.0.1'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
@@ -34,6 +32,11 @@ group :development, :test do
   gem 'pry-rails'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'rspec-rails'
+  gem 'spring-commands-rspec'
+  gem 'factory_bot_rails'
+  gem 'faker'
+  gem 'launchy'
 end
 
 group :development do
@@ -47,7 +50,7 @@ end
 group :test do
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
-  gem 'chromedriver-helper'
+  gem 'webdrivers'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

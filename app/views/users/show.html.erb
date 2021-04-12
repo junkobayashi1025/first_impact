@@ -20,10 +20,10 @@
     <div class="row">
       <div class="col-md-8 profile_date">
         <div class="row">
-          <h4><%= @user.name %></h4>
+          <h4 id=<%= "users-show-#{@user.id}-name" %>><%= @user.name %></h4>
         </div>
         <div class="row">
-          <h4><%= @user.email %></h4>
+          <h4 id=<%= "users-show-#{@user.id}-email" %>><%= @user.email %></h4>
         </div>
       </div>
     </div>

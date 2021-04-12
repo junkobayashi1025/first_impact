@@ -1,10 +1,11 @@
-<div class="container">
+<div class="container mt-3">
   <div>
     <% if current_user == @team.owner %>
     <h3>チームメンバーの招待</h3>
     <%= form_with model: :assign, scope: :post, url: team_assigns_path(@team), local: true do |form| %>
       <%= text_field_tag :email %>
-      <%= submit_tag '招待' %>
+      <%= submit_tag '招待', id: 'invite_member_submit' %>
+      <p>※Eメールアドレスを入力してください</p>
     <% end %>
     <% end %>
   </div><hr>
@@ -26,14 +27,14 @@
       </div>
     </h3>
     <div class="col-md-8 team_date">
-      <h4><%= @team.name %></h4>
+      <h4 id=<%= "teams-show__team-#{@team.id}-name" %>><%= @team.name %></h4>
     </div>
   </div><hr>
   <div class="team-wrap">
     <h3 class="team"><u>責任者</u>
     </h3>
     <div class="col-md-8 team_date">
-      <h4><%= link_to "#{@team.owner.name}", user_path(@team.owner.id) %></h4>
+      <h4 id=<%= "teams-show__team-#{@team.id}-owner_name" %>><%= link_to "#{@team.owner.name}", user_path(@team.owner.id) %></h4>
     </div>
   </div><hr>
   <div class="team-wrap">
@@ -43,7 +44,7 @@
         <table>
           <% @team.assign_users.each do |assign_user| %>
             <tr>
-              <td><%= link_to "#{assign_user.name}", user_path(assign_user.id) %></td>
+              <td id=<%= "teams-show__user-#{assign_user.id}-member_name" %>><%= link_to "#{assign_user.name}", user_path(assign_user.id) %></td>
               <% if @team.owner == current_user || assign_user == current_user  %>
               <td><%= link_to '離脱', team_assign_path(@team, assign_user.assigns.ids), method: :delete, class: 'btn btn-info', id: "team_show_dropout_team-#{assign_user.id}-submit" %></td>
               <% end %>
@@ -62,7 +63,7 @@
     </h3>
     <div class="col-md-6 team_date remark_show">
       <% if @team.remark.present? %>
-      <p><%= safe_join(@team.remark.split("\n"),tag(:br)) %></p>
+      <p id=<%= "teams-show__team-#{@team.id}-remark" %>><%= safe_join(@team.remark.split("\n"),tag(:br)) %></p>
       <% else %>
       <p>備考欄の記入はありません</p>
       <% end %>
@@ -90,6 +91,7 @@
           <div class="tab-content">
             <div id="content1" class="tab-pane active">
               <%= render 'team_show_expired', expired_reports: @expired_reports %>
+              <%= paginate @expired_reports %>
             </div>
             <div id="content2" class="tab-pane">
               <%= render 'team_show_prepared', team: @team %>

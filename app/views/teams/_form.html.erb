@@ -17,7 +17,7 @@
       </div>
       <div class="box-remark">
         <%= f.label :remark, "備考" %><br />
-        <%= f.email_field :remark, autofocus: true, autocomplete: "remark", id: :textarea %>
+        <%= f.text_area :remark, autofocus: true, autocomplete: "remark", id: :textarea %>
       </div>
       <div class="image-field text-center">
         <h5>チーム画像</h5>
@@ -29,5 +29,5 @@
         <%= f.file_field :icon, id: :team_img %>
       </div>
      </div>
-     <%= f.submit '作成', value:'作成', class: 'btn btn-primary', id: 'team_new_submit' %>
+     <%= f.submit '作成', value:'作成', class: 'btn btn-primary', id: 'create_team_submit' %>
    <% end %>

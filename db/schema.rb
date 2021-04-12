@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 2021_04_03_114022) do
     t.string "title", null: false
     t.datetime "created_date"
     t.string "author"
-    t.datetime "accrual_date", default: "2021-04-10 00:00:00"
+    t.datetime "accrual_date", default: "2021-04-11 00:00:00"
     t.string "site_of_occurrence"
     t.text "trouble_content"
     t.text "first_aid"
@@ -111,11 +111,9 @@ ActiveRecord::Schema.define(version: 2021_04_03_114022) do
     t.string "icon"
     t.text "remark"
     t.bigint "owner_id"
-    t.bigint "charge_in_person_id"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["charge_in_person_id"], name: "index_teams_on_charge_in_person_id"
     t.index ["owner_id"], name: "index_teams_on_owner_id"
     t.index ["user_id"], name: "index_teams_on_user_id"
   end
@@ -124,7 +122,6 @@ ActiveRecord::Schema.define(version: 2021_04_03_114022) do
     t.string "name", default: "", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
-    t.string "remark"
     t.string "icon"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"

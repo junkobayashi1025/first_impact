@@ -30,7 +30,7 @@
           <%= f.password_field :password_confirmation, autofocus: true, autocomplete: "password_confirmation" %>
         </div>
         <div class="box-login">
-          <%= f.submit "アカウントを作成" %>
+          <%= f.submit "アカウントを作成", id: "create_new_account-submit" %>
           <div class="legal-text">
             ログインすることにより、(仮)の
             <%= link_to "利用規約", "#" %>

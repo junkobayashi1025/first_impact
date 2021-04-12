@@ -1,6 +1,6 @@
 <% comments.each do |comment| %>
 <% if comment.user == current_user %>
-  <p><%= link_to '', report_comment_path(comment.report_id, comment.id), method: :delete, remote: true, class: "delete-comment"  %></p>
+  <p><%= link_to '', report_comment_path(comment.report_id, comment.id), method: :delete, remote: true, class: "delete-comment", id:"comments-index__comment-#{comment.id}-comment"  %></p>
 <% end %>
   <% unless comment.id.nil? %>
   <div>

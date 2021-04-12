@@ -11,7 +11,7 @@
   </head>
 
   <body>
-    <% unless current_page?(unauthenticated_root_path) %>
+    <% unless current_page?(unauthenticated_root_path) || current_page?(new_user_registration_path) || current_page?(user_session_path) %>
     <%= render 'header' %>
     <% end %>
       <div class="container col-md-10">
@@ -27,7 +27,6 @@
         <% end %>
         </div>
        </div>
-        <!-- <div class="container"> -->
        <%= yield %>
   </body>
 </html>
