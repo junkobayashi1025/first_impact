@@ -1,110 +1,86 @@
 require 'rails_helper'
 RSpec.describe 'チーム管理機能', type: :system do
+  let!(:admin){ FactoryBot.create(:admin) }
+  let!(:user1){ FactoryBot.create(:user1) }
+  let!(:user2){ FactoryBot.create(:user2) }
+  let!(:team){ FactoryBot.create(:team, owner_id: admin.id) }
+
   before do
-    admin_user = FactoryBot.create(:admin)
     visit new_user_session_path
     fill_in 'user[email]', with: admin.email
     fill_in 'user[password]', with: admin.password
     click_on 'sign-in-submit'
-    FactoryBot.create(:task, user: admin_user)
-    FactoryBot.create(:new_task, user: admin_user)
   end
-  describe 'タスク管理機能', type: :system do
-    describe '検索機能' do
-      context 'タイトルであいまい検索をした場合' do
-        it "検索キーワードを含むタスクで絞りこまれる" do
-          visit tasks_path
-          fill_in 'title', with: 'ta'
-          click_on '検索'
-          expect(page).to have_content 'task'
-        end
-      end
-      context 'ステータス検索をした場合' do
-        it "ステータスに完全一致するタスクが絞り込まれる" do
-          visit tasks_path
-          select 'New', from: 'status'
-          click_on '検索'
-          sleep(1)
-          expect(page).to have_content 'New'
-        end
-      end
-      context 'タイトルのあいまい検索とステータス検索をした場合' do
-        it "検索キーワードをタイトルに含み、かつステータスに完全一致するタスク絞り込まれる" do
-          visit tasks_path
-          fill_in 'title', with: 'ta'
-          select 'New', from: 'status'
-          click_on '検索'
-          sleep(1)
-          expect(page).to have_content 'task'
-          expect(page).to have_content 'New'
-        end
-      end
-    end
-  end
-  describe '新規作成機能' do
-    context 'タスクを新規作成した場合' do
-      it '作成したタスクが表示される' do
-      visit new_task_path
-      task = Task.new(title: "test", content: "content", deadline: Time.current + 7.days, status: 'New', priority: 'low')
-      fill_in 'task[title]', with: task.title
-      fill_in 'task[content]', with: task.content
-      fill_in 'task[deadline]', with: task.deadline
-      select task.status, from: 'task[status]'
-      select task.priority, from: 'task[priority]'
-      click_on 'task_form_submit'
+  describe 'チーム作成機能' do
+    context 'チームを新規作成した場合' do
+      it 'チーム詳細が表示される＆ユーザーが作成したチームの責任者になる' do
+      click_on 'new-team-submit'
+      team = Team.new(name: "admin", remark: "admin", owner_id: admin.id)
+      fill_in 'team[name]', with: team.name
+      fill_in 'team[remark]', with: team.remark
+      click_on 'create_team_submit'
       sleep(1)
-      result = Task.last
-      expect(find_by_id("tasks-index__task-#{result.id}-title")).to have_content task.title
-      expect(find_by_id("tasks-index__task-#{result.id}-content")).to have_content task.content
-      expect(find_by_id("tasks-index__task-#{result.id}-status")).to have_content task.status
-      expect(find_by_id("tasks-index__task-#{result.id}-priority")).to have_content task.priority
+      result = Team.last
+      expect(find_by_id("teams-show__team-#{result.id}-name")).to have_content team.name
+      expect(find_by_id("teams-show__team-#{result.id}-owner_name")).to have_content team.owner.name
+      expect(find_by_id("teams-show__team-#{result.id}-remark")).to have_content team.remark
       end
     end
   end
   describe '一覧表示機能' do
-    context '一覧画面に遷移した場合' do
-      it '作成済みのタスク一覧が表示される' do
-       visit tasks_path
-       expect(page).to have_content 'new_task'
-      end
-    end
-    context 'タスクが作成日時の降順に並んでいる場合' do
-      it '新しいタスクが一番上に表示される' do
-        visit tasks_path
-        task_list = all('tbody tr')
-        expect(task_list[0]).to have_content 'new_task'
-        expect(task_list[1]).to have_content 'task'
-      end
-    end
-    context '終了期限でソートした場合' do
-      it 'タスクが終了期限順に並んでいる' do
-        visit tasks_path
-        click_on '終了期限'
-        sleep(1)
-        task_list = all('tbody tr')
-        expect(task_list[0]).to have_content 'task'
-        expect(task_list[1]).to have_content 'new_task'
-      end
-    end
-    context '優先順位が高い順でソートした場合' do
-      it 'タスクが優先順が高い順に並んでいる' do
-        visit tasks_path
-        click_on '優先度'
-        sleep(1)
-        task_list = all('tbody tr')
-        expect(task_list[0]).to have_content 'high'
-        expect(task_list[1]).to have_content 'low'
+    context 'チーム一覧画面に遷移した場合' do
+      it '作成済みのチーム一覧が表示される' do
+       visit teams_path
+       expect(page).to have_content 'team'
       end
     end
   end
-  describe '詳細表示機能' do
-     context '任意のタスク詳細画面に遷移した場合' do
-       it '該当タスクの内容が表示される' do
-         visit task_path(1)
-         expect(page).to have_content 'task'
-         visit task_path(2)
-         expect(page).to have_content 'new_task'
-       end
-     end
+  describe 'チーム編成機能' do
+    before do
+      click_on 'new-team-submit'
+      team = Team.new(name: "admin", remark: "admin", owner_id: admin.id)
+      fill_in 'team[name]', with: team.name
+      fill_in 'team[remark]', with: team.remark
+      click_on 'create_team_submit'
+      sleep(1)
+      fill_in 'email', with: user2.email
+      click_on 'invite_member_submit'
+    end
+    context 'チームに既存するユーザーを招待した場合' do
+      it 'チームのメンバーになる' do
+        fill_in 'email', with: user1.email
+        click_on 'invite_member_submit'
+        sleep(1)
+        expect(find_by_id("teams-show__user-#{user1.id}-member_name")).to have_content user1.name
+      end
+    end
+    context 'チームに既存しないのユーザーを招待した場合' do
+      it 'チームに招待できない' do
+        fill_in 'email', with: 'no_account_user.@example.com'
+        click_on 'invite_member_submit'
+        sleep(1)
+        expect(page).to have_content 'ユーザーは存在しません'
+      end
+    end
+    context 'チームにすでに招待ずみのメンバーを招待した場合' do
+      it 'チームに招待できない' do
+        fill_in 'email', with: user2.email
+        click_on 'invite_member_submit'
+        sleep(1)
+        expect(page).to have_content 'ユーザーは招待済みです'
+      end
+    end
+    context 'チームに所属するメンバーの離脱ボタンを押した場合' do
+      it 'そのメンバーはチームから離脱する' do
+        click_on "team_show_dropout_team-#{user2.id}-submit"
+        expect(page).to have_content "ユーザー「#{user2.name}」を削除しました"
+      end
+    end
+    context '責任権限を他のチームメンバーに移動した場合' do
+      it '指名されたメンバーが責任者になる' do
+        click_on "team_show_owner_change-#{user2.id}-submit"
+        # expect(team.owner.name).to have_content user2.name
+      end
+    end
   end
 end
