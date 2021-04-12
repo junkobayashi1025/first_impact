@@ -23,7 +23,7 @@ class UsersController < ApplicationController
   def edit
     if @user.id == current_user.id
     else
-      redirect_to user_path(@user)
+      redirect_to user_path(current_user)
       flash[:notice] = "権限がありません"
     end
   end

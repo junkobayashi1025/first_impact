@@ -23,10 +23,10 @@
    <tbody>
      <% @users.each do |user| %>
      <tr>
-       <td><%= image_tag user.icon.url, class: "user-index-round-img" %></td>
-       <td><%= link_to "#{user.name}", user_path(user.id), id: "user-index_detail-#{user.id}-submit" %></td>
-       <td><%= user.email %></td>
-       <td><%= user.created_at.strftime("%Y年 %m月 %d日") %></td>
+       <td id=<%= "users-index__user-#{user.id}-icon" %>><%= image_tag user.icon.url, class: "user-index-round-img" %></td>
+       <td id=<%= "users-index__user-#{user.id}-name" %>><%= link_to "#{user.name}", user_path(user.id), id: "user-index_detail-#{user.id}-submit" %></td>
+       <td id=<%= "users-index__user-#{user.id}-email" %>><%= user.email %></td>
+       <td id=<%= "users-index__user-#{user.id}-created_at" %>><%= user.created_at.strftime("%Y年 %m月 %d日") %></td>
      </tr>
      <% end %>
    </tbody>
