@@ -19,15 +19,16 @@ class AssignsController < ApplicationController
   def destroy
     assign = Assign.find(params[:id])
     undone_reports = assign.user.reports.where(checkbox_final: false)
-    if undone_reports.count == 0
-      if assign.user == current_user || assign.team.owner == current_user
-        destroy_message = assign_destroy(assign, assign.user)
-        redirect_to team_url(params[:team_id])
+    if
+      if undone_reports.count == 0
+        if assign.user == current_user || assign.team.owner == current_user
+          destroy_message = assign_destroy(assign, assign.user)
+          redirect_to team_url(params[:team_id])
+        end
+      else
+        redirect_to user_path(assign.user)
+        flash[:danger] = "未完の報告書があるので、ユーザー削除できません"
       end
-    else
-      redirect_to user_path(assign.user)
-      flash[:danger] = "未完の報告書があるので、ユーザー削除できません"
-    end
   end
 
   private

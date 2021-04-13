@@ -2,8 +2,12 @@
 //   outline: 1px solid #ff0000;
 // }
 
-.margin-top {
-  margin-top: 1rem;
+.border-bottom {
+  border-bottom: 1px solid #000 !important;
+}
+
+.table td, .table th {
+    border-top: 1px solid #CCCCCC !important;
 }
 
 .user-show-round-img {
@@ -101,4 +105,21 @@
   position: absolute;
   top: 0rem;
   left: 25rem;
+}
+
+.nav-link.active {
+  color: #fff !important;
+  background-color: #343a40 !important;
+  border-color: #dee2e6 #dee2e6 #fff !important;
+}
+
+.nav-tabs {
+  border-bottom: 1px solid #CCCCCC !important;
+}
+
+.user-header {
+  max-width: 8rem !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

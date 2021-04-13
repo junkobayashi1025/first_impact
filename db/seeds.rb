@@ -15,3 +15,34 @@ end
                password_confirmation: password,
                )
 end
+
+require "csv"
+require "date"
+
+CSV.foreach('db/sample_date/team_sample.csv') do |info|
+  Team.create(:name => info[0], :remark => info[1], :owner_id => info[2])
+end
+
+CSV.foreach('db/sample_date/assign_sample.csv') do |info|
+  Assign.create(:user_id => info[0], :team_id => info[1])
+end
+
+CSV.foreach('db/sample_date/report_sample.csv') do |info|
+  Report.create(:title => info[0],
+                :user_id => info[1],
+                :team_id => info[2],
+                :accrual_date => info[3],
+                :site_of_occurrence => info[4],
+                :trouble_content => info[5],
+                :first_aid => info[6],
+                :interim_measures => info[7],
+                :permanent_measures => info[8],
+                :confirmation_of_effectiveness => info[9],
+                :checkbox_first => info[10],
+                :checkbox_interim => info[11],
+                :checkbox_final => info[12],
+                :approval => info[13],
+                :step => info[14],
+                :status => info[15],
+                :due => info[16])
+end

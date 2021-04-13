@@ -1,4 +1,4 @@
-<% if current_user != report.user %>
+<% if current_user != report.user && current_user != report.team.owner %>
   <% if current_user.liked_by?(report.id) %>
      <td><%= link_to 'いいねを外す', destroy_bookmark_path(report), method: :DELETE, remote: true, class: "bookmarked hide-text" %></td>
   <% else %>
@@ -7,10 +7,10 @@
 <% else %>
   <td></td>
 <% end %>
-<td><%= link_to "#{report.title}", report_path(report.id), id: "reports-index__report-#{report.id}-title" %></td>
-<td><%= link_to "#{report.team.name}", team_path(report.team.id, id: "reports-index__report-#{report.id}-team_name" ) %></td>
+<td class="report-header"><%= link_to "#{report.title}", report_path(report.id), id: "reports-index__report-#{report.id}-title" %></td>
+<td><%= link_to "#{report.team.name}", team_path(report.team.id), id: "reports-index__report-#{report.team.id}-team_name" %></td>
 <td><%= link_to "#{report.team.owner.name}", user_path(report.team.owner.id), id: "reports-index__report-#{report.id}-team_owner_name" %></td>
-<td><%= link_to "#{report.author}", user_path(report.user.id), id: "reports-index__report-#{report.id}-report_author" %></td>
+<td><%= link_to "#{report.user.name}", user_path(report.user.id), id: "reports-index__report-#{report.id}-report_author" %></td>
 <% if report.checkbox_final != true %>
   <td><%= report.step %></td>
   <td><%= report.status %></td>
@@ -20,11 +20,10 @@
     <td><%= report.due.strftime("%Y年 %m月 %d日") %></td>
   <% end %>
 <% end %>
-<td><%= report.created_at.strftime("%Y年 %m月 %d日") %></td>
 <td>
   <% report.tag_list.each do |tag| %>
     <% if report.checkbox_final == false %>
-      <%= link_to "#{tag}", reports_path(tag_name: tag), class:"btn btn-warning" %>
+      <%= link_to "#{tag}", reports_path(tag_name: tag), class:"btn btn-warning border" %>
     <% else%>
       <%= link_to "#{tag}", archive_reports_path(tag_name: tag), class:"btn btn-warning" %>
     <% end %>

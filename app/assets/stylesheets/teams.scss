@@ -159,3 +159,10 @@
   padding: 8px;
   line-height: 20px;
 }
+
+.team-header {
+  max-width: 10rem !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

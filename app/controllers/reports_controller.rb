@@ -10,7 +10,7 @@ class ReportsController < ApplicationController
     else
       # puts params[:q]
       # puts "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@s"
-      @results = params[:q] ? @q.result : Report.where(checkbox_final: false).order(created_date: :desc).page(params[:page]).per(8)
+      @results = params[:q] ? @q.result.page(params[:page]).per(8) : Report.where(checkbox_final: false).order(created_date: :desc).page(params[:page]).per(8)
     end
 
     # binding.pry
@@ -28,9 +28,9 @@ class ReportsController < ApplicationController
 
   def archive
     if params[:tag_name]
-      @archives = Report.where(checkbox_final: true).tagged_with("#{params[:tag_name]}").page(params[:page]).per(8)
+      @archives = Report.where(checkbox_final: true).tagged_with("#{params[:tag_name]}").page(params[:page]).per(8) 
     else
-      @archives = params[:q] ? @q.result : Report.where(checkbox_final: true).order(created_date: :desc).page(params[:page]).per(8)
+      @archives = params[:q] ? @q.result.page(params[:page]).per(8) : Report.where(checkbox_final: true).order(created_date: :desc).page(params[:page]).per(8)
     end
   end
 
@@ -62,7 +62,7 @@ class ReportsController < ApplicationController
   end
 
   def edit
-    if current_user == @report.team.owner || current_user == @report.user && @report.approval == false
+    if @report.checkbox_final == false && current_user == @report.team.owner || current_user == @report.user && @report.approval == false
       @report.build_attachment_for_form
     else
       redirect_to report_path(@report)
@@ -87,7 +87,7 @@ class ReportsController < ApplicationController
   end
 
   def destroy
-    if current_user == @report.user || current_user == @report.team.owner
+    if current_user == @report.user || current_user == @report.team.owner && @report.checkbox_final == false
       if @report.destroy
         flash[:success] = "報告書「#{@report.title}」が削除されました"
       end

@@ -46,11 +46,11 @@
             <tr>
               <td id=<%= "teams-show__user-#{assign_user.id}-member_name" %>><%= link_to "#{assign_user.name}", user_path(assign_user.id) %></td>
               <% if @team.owner == current_user || assign_user == current_user  %>
-              <td><%= link_to '離脱', team_assign_path(@team, assign_user.assigns.ids), method: :delete, class: 'btn btn-info', id: "team_show_dropout_team-#{assign_user.id}-submit" %></td>
+              <td><%= link_to '離脱', team_assign_path(@team, assign_user.assigns.ids), method: :delete, class: 'btn btn-info ml-1 mr-1 mt-1', id: "team_show_dropout_team-#{assign_user.id}-submit" %></td>
               <% end %>
               <% if current_user.id == @team.owner_id && current_user != assign_user %>
               <td><%= link_to '責任権限', change_owner_team_path(@team, user_id: assign_user.id), method: :post,
-                    class: 'btn btn-primary', id: "team_show_owner_change-#{assign_user.id}-submit" %></td>
+                    class: 'btn btn-primary mt-1', id: "team_show_owner_change-#{assign_user.id}-submit" %></td>
               <% end %>
             </tr>
            <% end %>
@@ -91,7 +91,6 @@
           <div class="tab-content">
             <div id="content1" class="tab-pane active">
               <%= render 'team_show_expired', expired_reports: @expired_reports %>
-              <%= paginate @expired_reports %>
             </div>
             <div id="content2" class="tab-pane">
               <%= render 'team_show_prepared', team: @team %>

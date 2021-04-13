@@ -1,4 +1,3 @@
-<!-- <div class="d-flex flex-column align-items-left mt-3 float_right"> -->
   <div class="col-md-5 post-card float_right comment-padding-top">
     <div class="card">
       <div class="card-header">
@@ -31,7 +30,7 @@
               </div>
             <% end %>
             <div class="float_right_3">
-              <% if @report.user.id != @report.team.owner.id %>
+              <% if @report.checkbox_final != true && @report.user.id != @report.team.owner.id %>
                 <% if current_user.id == @report.user.id && @report.approval == false %>
                   <%= link_to '承認依頼', approval_request_report_path(id: @report.id), method: :POST, class: 'btn btn-primary mr-3', id: "report_show_approval_request-#{@report.id}-submit" %>
                 <% elsif current_user.id == @report.team.owner.id && @report.approval == true  %>
@@ -47,7 +46,6 @@
               <% end %>
             </div>
           <% end %>
-          <!-- if @report.team_id != nil || @report.user_id != nil  -->
       </div>
       <div class="card-body">
         <div class="float_right col-md-3.5">
@@ -60,7 +58,7 @@
             </div><br>
           <% end %>
           <div class="form-control">
-            <%= "担当者：#{@report.author}" %>
+            <%= "担当者：#{@report.user.name}" %>
           </div><br>
           <div>
             <% @report.tag_list.each do |tag| %>
@@ -92,7 +90,7 @@
                <div class="readmore-content">
                  <p><%= safe_join(@report.trouble_content.split("\n"),tag(:br)) %></p>
                </div>
-               <% if @report.trouble_content.split("\n").count > 4 %>
+               <% if @report.trouble_content.split("\n").count > 1 %>
                <label class="readmore-label" for="check1"></label>
                <% end %>
              </div><br>
@@ -102,7 +100,7 @@
                <div class="readmore-content">
                  <p><%= safe_join(@report.first_aid.split("\n"),tag(:br)) %></p>
                </div>
-               <% if @report.first_aid.split("\n").count > 4 %>
+               <% if @report.first_aid.split("\n").count > 2 %>
                <label class="readmore-label" for="check2"></label>
                <% end %>
              </div><br>
@@ -112,7 +110,7 @@
                <div class="readmore-content">
                  <p><%= safe_join(@report.interim_measures.split("\n"),tag(:br)) %></p>
                </div>
-               <% if @report.interim_measures.split("\n").count > 4 %>
+               <% if @report.interim_measures.split("\n").count > 2 %>
                <label class="readmore-label" for="check3"></label>
                <% end %>
              </div><br>
@@ -126,11 +124,15 @@
              <div class="readmore">
                <input id="check4" class="readmore-check" type="checkbox">
                <div class="readmore-content">
+                 <% unless @report.permanent_measures.nil? %>
                  <p><%= safe_join(@report.permanent_measures.split("\n"),tag(:br)) %></p>
-               </div>
-               <% if @report.permanent_measures.split("\n").count > 4 %>
-               <label class="readmore-label" for="check4"></label>
-               <% end %>
+                 <% end %>
+                </div>
+                <% unless @report.permanent_measures.nil? %>
+                <% if @report.permanent_measures.split("\n").count > 2 %>
+                <label class="readmore-label" for="check4"></label>
+                <% end %>
+                <% end %>
              </div><br>
              <u>4.有効性の確認</u>
              <% if @report.confirmed_date %>
@@ -146,10 +148,14 @@
              <div class="readmore">
                <input id="check5" class="readmore-check" type="checkbox">
                <div class="readmore-content">
-                 <p><%= safe_join(@report.confirmation_of_effectiveness.split("\n"),tag(:br)) %></p>
+               <% unless @report.confirmation_of_effectiveness.nil? %>
+               <p><%= safe_join(@report.confirmation_of_effectiveness.split("\n"),tag(:br)) %></p>
+               <% end %>
                </div>
-               <% if @report.confirmation_of_effectiveness.split("\n").count > 4 %>
+               <% unless @report.confirmation_of_effectiveness.nil? %>
+               <% if @report.confirmation_of_effectiveness.split("\n").count > 2 %>
                <label class="readmore-label" for="check5"></label>
+               <% end %>
                <% end %>
              </div><br>
              <% if @report.attachments.present? %>

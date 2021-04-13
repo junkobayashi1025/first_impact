@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="#">(仮)</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -17,7 +17,6 @@
     <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="navbarDropdown" >
       <% if user_signed_in? %>
         <%= link_to 'マイページ', user_path(current_user.id), class: 'dropdown-item' %>
-        <%= link_to "お気に入り", "", class: 'dropdown-item' %>
         <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'dropdown-item', id:'header_nav_submit' %>
       <% else %>
         <%= link_to '登録', new_user_registration_path, class: 'dropdown-item' %>
@@ -40,7 +39,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav ml-md-auto align-items-center">
       <li>
-        <%= link_to "チーム作成", new_team_path, class: "btn btn-primary", id: "new-team-submit" %>
+        <%= link_to "チーム作成", new_team_path, class: "btn btn-dark", id: "new-team-submit" %>
       </li>
     </ul>
   </div>
