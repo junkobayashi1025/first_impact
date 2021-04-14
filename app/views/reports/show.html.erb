@@ -1,21 +1,5 @@
-  <div class="col-md-5 post-card comment-padding-top">
-    <div class="card">
-      <div class="card-header">
-        <strong>コメント欄</strong>
-      </div>
-    <div class="card-body">
-        <div id="comments_area">
-          <%= render partial: 'comments/index', locals: { comments: @comments } %>
-        </div><hr>
-        <% if user_signed_in? %>
-          <%= render partial: 'comments/form', locals: { comment: @comment, report: @report } %>
-        <% end %>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="flex-column align-items-left mt-3">
-  <div class="col-xl-7 col-lg-8 col-md-10 col-sm-11 post-card">
+<div class="row mb-3 mr-3 ml-3">
+  <div class="col-md-7 post-card">
     <div class="card">
       <div class="card-header">
         <strong>報告書詳細画面</strong>
@@ -174,6 +158,21 @@
             <%= link_to '削除', report_path(@report.id), method: :delete, data: { confirm: "ユーザー「#{@report.title}を削除します。よろしいでしょうか？」" },
                   class: 'btn btn-danger mr-3', id: "report_show_delete-#{@report.id}-submit" if current_user == @report.team.owner || current_user == @report.user %>
           <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-5 post-card">
+    <div class="card">
+      <div class="card-header">
+        <strong>コメント欄</strong>
+      </div>
+    <div class="card-body">
+        <div id="comments_area">
+          <%= render partial: 'comments/index', locals: { comments: @comments } %>
+        </div><hr>
+        <% if user_signed_in? %>
+          <%= render partial: 'comments/form', locals: { comment: @comment, report: @report } %>
+        <% end %>
       </div>
     </div>
   </div>
