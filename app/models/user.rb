@@ -71,4 +71,14 @@ class User < ApplicationRecord
     Report.where(checkbox_final: true).order(updated_at: :desc).limit(5)
   end
 
+  def new_create_report_team
+    team_ids = self.assign_teams.ids
+    Report.where(team_id: team_ids).order(created_at: :desc).limit(5)
+  end
+
+  def done_report_team
+    team_ids = self.assign_teams.ids
+    Report.where(team_id: team_ids, checkbox_final: true).order(updated_at: :desc).limit(5)
+  end
+
 end

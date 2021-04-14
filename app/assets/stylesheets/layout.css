@@ -1,12 +1,28 @@
-body {
+html, body {
   background: #dcdcdc;
+  margin: 0;
+    padding: 0;
+    height: 100%
 }
 
-body,
-#wrapper {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+.wrapper {
+  position: relative;
+  min-height: 100%;
+}
+
+main {
+  padding-bottom: auto;
+}
+
+footer {
+  font: 11px Verdana;
+  color: #888;
+  padding: 8px 0;
+  border-top: 4px solid #6bb;
+  text-align: center;
+  width: 100%;
+  position: absolute;
+  bottom: -5rem;
 }
 
 aside#sidebar {
@@ -15,17 +31,8 @@ aside#sidebar {
   background-color: #e8ffff;
   padding: 5px;
   font-size: 86%;
-}
-
-footer {
-  clear: both;
-  font: 11px Verdana;
-  color: #888;
-  padding: 8px 0;
-  border-top: 4px solid #6bb;
-  text-align: center;
-  width: 100%;
-  margin-top: auto;
+  width: 120%;
+  height: auto;
 }
 
 aside#sidebar h1 {
@@ -41,17 +48,20 @@ aside#sidebar h2 {
   border-bottom: 1px dotted #080;
   margin-bottom: 0.5em;
   font-size: 120%;
+  margin-left: 0.5rem;
 }
 
 aside#sidebar h3 {
   color: #080;
   font-weight: bold;
   font-size: 100%;
+  margin-left: 0.5rem;
 }
 
 aside#sidebar ul {
   padding-left: 1em;
   list-style-type: none;
+  margin-left: 0.5rem;
 }
 
 aside#sidebar li {

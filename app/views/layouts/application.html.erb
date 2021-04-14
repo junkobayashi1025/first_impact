@@ -7,29 +7,32 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-
   </head>
 
   <body>
-      <% unless current_page?(unauthenticated_root_path) || current_page?(new_user_registration_path) || current_page?(user_session_path) %>
-      <%= render 'header' %>
-      <% end %>
-      <div class="container col-md-10 mt-3">
-        <div class="col-md-4">
-        <% if flash[:notice] %>
-        <p class="alert alert-primary"><%= flash[:notice] %></p>
+    <div class="wrapper">
+      <header>
+        <% unless current_page?(unauthenticated_root_path) || current_page?(new_user_registration_path) || current_page?(user_session_path) %>
+          <%= render 'header' %>
         <% end %>
-        <% if flash[:success] %>
-        <p class="alert alert-success"><%= flash[:success] %></p>
-        <% end %>
-        <% if flash[:danger] %>
-        <p class="alert alert-danger"><%= flash[:danger] %></p>
-        <% end %>
-        </div>
-       </div>
-       <%= yield %>
-       <footer>
-          <%= render "footer" %>
-       </footer>
-   </body>
- </html>
+      </header>
+      <main>
+        <div class="col-md-4 mt-3">
+          <% if flash[:notice] %>
+            <p class="alert alert-primary"><%= flash[:notice] %></p>
+          <% end %>
+          <% if flash[:success] %>
+            <p class="alert alert-success"><%= flash[:success] %></p>
+          <% end %>
+          <% if flash[:danger] %>
+            <p class="alert alert-danger"><%= flash[:danger] %></p>
+          <% end %>
+         </div>
+         <%= yield %>
+       </main>
+       <!-- <footer>
+         render "footer"
+       </footer> -->
+    </div>
+  </body>
+</html>
