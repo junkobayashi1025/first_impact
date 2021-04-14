@@ -11,22 +11,27 @@
   </head>
 
   <body>
-    <% unless current_page?(unauthenticated_root_path) || current_page?(new_user_registration_path) || current_page?(user_session_path) %>
-    <%= render 'header' %>
-    <% end %>
+    <div id="wrapper">
+      <% unless current_page?(unauthenticated_root_path) || current_page?(new_user_registration_path) || current_page?(user_session_path) %>
+      <%= render 'header' %>
+      <% end %>
       <div class="container col-md-10 mt-3">
         <div class="col-md-4">
         <% if flash[:notice] %>
-          <p class="alert alert-primary"><%= flash[:notice] %></p>
+        <p class="alert alert-primary"><%= flash[:notice] %></p>
         <% end %>
         <% if flash[:success] %>
-          <p class="alert alert-success"><%= flash[:success] %></p>
+        <p class="alert alert-success"><%= flash[:success] %></p>
         <% end %>
         <% if flash[:danger] %>
-          <p class="alert alert-danger"><%= flash[:danger] %></p>
+        <p class="alert alert-danger"><%= flash[:danger] %></p>
         <% end %>
         </div>
        </div>
        <%= yield %>
-  </body>
-</html>
+       <footer>
+          <%= render "footer" %>
+       </footer>
+    </div>
+   </body>
+ </html>

@@ -14,7 +14,7 @@
     <% @teams.each do |team| %>
       <div class="row mr-3 mt-2">
         <div class="card border-secondary" style="max-width: 30rem; max-height:25rem;">
-          <div class="card-header team-header">
+          <div class="card-header-index">
             <%= link_to "#{team.name}", team_path(team.id) %>
             </div>
             <%= image_tag team.icon.url, class: "card-img-top rectangle-img" %>
