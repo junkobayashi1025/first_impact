@@ -3,8 +3,7 @@
 // }
 
 .team-header {
-  max-width: 15rem !important;
-  max-height:25rem !important;
+  max-width: 10rem !important;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -18,6 +17,21 @@
   white-space: nowrap;
 }
 
+.card-header-index {
+  background-color: #FFF !important;
+  max-width: 15rem !important;
+  max-height:25rem !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: .75rem 1.25rem;
+  margin-bottom: 0;
+  border-bottom: 1px solid rgba(0,0,0,.125);
+}
+
+.title-fold {
+
+}
 
 .team {
   position:relative

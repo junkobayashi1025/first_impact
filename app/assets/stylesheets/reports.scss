@@ -58,6 +58,10 @@ li {
   float: right;
 }
 
+.float_left {
+  float: left;
+}
+
 .none_function {
   pointer-events: none;
 }
@@ -230,4 +234,11 @@ li {
 
 .readmore-check:checked ~ .readmore-content::before {
   display: none;
+}
+
+.report-header {
+  max-width: 10rem !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

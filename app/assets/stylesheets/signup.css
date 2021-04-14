@@ -13,6 +13,8 @@
 
 .box-inner {
   padding: 10px 26px;
+  background-color: #fff;
+  border: solid 2px #000;
 }
 
 h1 {

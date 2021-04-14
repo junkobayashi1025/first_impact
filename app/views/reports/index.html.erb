@@ -1,4 +1,4 @@
-<div class="container col-md-12 margin-top">
+<div class="container col-md-12 mt-3 mb-2">
   <div class="d-flex align-items-center">
     <h1>報告書一覧(作成中)</h1>
   </div>
@@ -13,7 +13,7 @@
     <br>
   <% end %>
 
-  <table class="table">
+  <table class="table mt-2">
     <thead class="thead-dark">
       <tr>
         <th></th>
@@ -24,7 +24,6 @@
         <th><%= sort_link(@q, :step, 'ステップ')%></th>
         <th><%= sort_link(@q, :status, 'ステータス')%></th>
         <th><%= sort_link(@q, :due, '提出〆切', default_order: :asc)%></th>
-        <th>作成日</th>
         <th>タグ</th>
         <th></th>
         <th></th>

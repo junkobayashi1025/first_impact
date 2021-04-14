@@ -1,93 +1,104 @@
 <div class="container">
-  <div class="profile-wrap">
-    <h3 class="profile"><u>プロフィール</u>
-      <% if @user.id == current_user.id %>
-      <div class="index_row_icon">
-        <%= link_to edit_user_path(@user), id: "user_show_edit-#{@user}-submit" do %>
-          <div class="edit-user-icon edit-show-icon mr-1"></div>
-        <% end %>
-        <%= link_to user_path(@user), method: :delete, data: { confirm: "ユーザー「#{@user.name}を削除します。よろしいでしょうか？」" },
-          id: "user_show_delete-#{@user}-submit" do %>
-          <div class="delete-user-icon delete-show-icon"></div>
-        <% end %>
-      </div>
-      <% end %>
-      <div class="text-center profile_image">
-        <h4>プロフィール画像</h4>
-        <%= image_tag @user.icon.url, class: "user-show-round-img" %>
-      </div>
-    </h3>
-    <div class="row">
-      <div class="col-md-8 profile_date">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="profile-wrap">
+        <h3 class="profile"><u>プロフィール</u>
+          <% if @user.id == current_user.id %>
+          <div class="index_row_icon">
+            <%= link_to edit_user_path(@user), id: "user_show_edit-#{@user}-submit" do %>
+              <div class="edit-user-icon edit-show-icon mr-1"></div>
+            <% end %>
+            <%= link_to user_path(@user), method: :delete, data: { confirm: "ユーザー「#{@user.name}を削除します。よろしいでしょうか？」" },
+              id: "user_show_delete-#{@user}-submit" do %>
+              <div class="delete-user-icon delete-show-icon"></div>
+            <% end %>
+          </div>
+          <% end %>
+          <div class="text-center profile_image">
+            <h4>プロフィール画像</h4>
+            <%= image_tag @user.icon.url, class: "user-show-round-img" %>
+          </div>
+        </h3>
         <div class="row">
-          <h4 id=<%= "users-show-#{@user.id}-name" %>><%= @user.name %></h4>
+          <div class="col-md-8 profile_date">
+            <div class="row">
+              <h4 id=<%= "users-show-#{@user.id}-name" %>><%= @user.name %></h4>
+            </div>
+            <div class="row">
+              <h4 id=<%= "users-show-#{@user.id}-email" %>><%= @user.email %></h4>
+            </div>
+          </div>
         </div>
-        <div class="row">
-          <h4 id=<%= "users-show-#{@user.id}-email" %>><%= @user.email %></h4>
-        </div>
-      </div>
-    </div>
-  </div><hr width="300" align="left">
-  <div class="profile-wrap">
-    <h3><u>所属チーム</u></h3>
-    <% if @user.assigns.present? %>
-      <div class="row">
-        <div class="col-md-8 profile_date">
+      </div><hr width="300" align="left">
+      <div class="profile-wrap">
+        <h3><u>所属チーム</u></h3>
+        <% if @user.assigns.present? %>
           <div class="row">
-            <table>
-              <% @user.assigns.each do |assign| %>
-                <tr>
-                  <td><%= link_to "#{assign.team.name}", team_path(assign.team.id) %></td>
-                  <td><%= link_to '編集', edit_team_path(assign.team.id), class: 'btn btn-success mr-3', id: "user_show_edit_team-#{assign.team.id}-submit" if current_user == assign.team.owner %></td>
-                  <td><%= link_to '解散', team_path(assign.team.id), method: :delete, data: { confirm: "チーム「#{assign.team.name}を削除します。よろしいでしょうか？」" },
-                        class: 'btn btn-danger', id: "user_show_delete_team-#{assign.team.id}-submit" if current_user == assign.team.owner %></td>
-                  <td><%= link_to '離脱', team_assign_path(assign.team, assign.id), method: :delete, data: { confirm: "チーム「#{assign.team.name}を離脱します。よろしいでしょうか？」" },
-                        class: 'btn btn-info', id: "user_show_dropout_team-#{assign.team.id}-submit" if current_user == assign.user && current_user != assign.team.owner %></td>
-                </tr>
-               <% end %>
-             </table>
+            <div class="col-md-8 profile_date">
+              <div class="row">
+                <table>
+                  <% @user.assigns.each do |assign| %>
+                    <tr>
+                      <td><%= link_to "#{assign.team.name}", team_path(assign.team.id) %></td>
+                      <td><%= link_to '編集', edit_team_path(assign.team.id), class: 'btn btn-success ml-1 mr-1', id: "user_show_edit_team-#{assign.team.id}-submit" if current_user == assign.team.owner %></td>
+                      <td><%= link_to '解散', team_path(assign.team.id), method: :delete, data: { confirm: "チーム「#{assign.team.name}を削除します。よろしいでしょうか？」" },
+                            class: 'btn btn-danger', id: "user_show_delete_team-#{assign.team.id}-submit" if current_user == assign.team.owner %></td>
+                      <td><%= link_to '離脱', team_assign_path(assign.team, assign.id), method: :delete, data: { confirm: "チーム「#{assign.team.name}を離脱します。よろしいでしょうか？」" },
+                            class: 'btn btn-info', id: "user_show_dropout_team-#{assign.team.id}-submit" if current_user == assign.user && current_user != assign.team.owner %></td>
+                    </tr>
+                   <% end %>
+                 </table>
+              </div>
+            </div>
+          </div>
+        <% else %>
+        <strong>所属チームはありません</strong>
+        <% end %>
+      </div><hr width="300" align="left">
+      <div class="profile-wrap mt-5">
+        <h3><u>報告書一覧</u></h3>
+          <div class="col-md-8 profile_date">
+            <div class="row nav-tab-report">
+              <main class="p-0">
+                <ul class="nav nav-tabs">
+                  <li class="nav-item">
+                    <a href="#content1" class="nav-link active" data-toggle="tab">〆切間近</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#content2" class="nav-link" data-toggle="tab">責任</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#content3" class="nav-link" data-toggle="tab">担当</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#content4" class="nav-link" data-toggle="tab">ブックマーク</a>
+                  </li>
+                </ul>
+              <div class="tab-content">
+                <div id="content1" class="tab-pane active">
+                  <%= render 'user_show_expired', expired_reports: @expired_reports %>
+                </div>
+                <div id="content2" class="tab-pane">
+                  <%= render 'user_show_owner', user: @user %>
+                </div>
+                <div id="content3" class="tab-pane">
+                  <%= render 'user_show_author', user: @user %>
+                </div>
+                <div id="content4" class="tab-pane">
+                  <%= render 'user_show_bookmark', user: @user %>
+                </div>
+              </div>
+            </main>
           </div>
         </div>
       </div>
-    <% else %>
-      <strong>所属チームはありません</strong>
-    <% end %>
-  </div><hr width="300" align="left">
-  <div class="profile-wrap">
-    <h3><u>報告書一覧</u></h3>
-      <div class="col-md-8 profile_date">
-        <div class="row nav-tab-report">
-          <main class="p-0">
-            <ul class="nav nav-tabs">
-              <li class="nav-item">
-                <a href="#content1" class="nav-link active" data-toggle="tab">〆切間近</a>
-              </li>
-              <li class="nav-item">
-                <a href="#content2" class="nav-link" data-toggle="tab">責任</a>
-              </li>
-              <li class="nav-item">
-                <a href="#content3" class="nav-link" data-toggle="tab">担当</a>
-              </li>
-              <li class="nav-item">
-                <a href="#content4" class="nav-link" data-toggle="tab">ブックマーク</a>
-              </li>
-            </ul>
-          <div class="tab-content">
-            <div id="content1" class="tab-pane active">
-              <%= render 'user_show_expired', expired_reports: @expired_reports %>
-            </div>
-            <div id="content2" class="tab-pane">
-              <%= render 'user_show_owner', user: @user %>
-            </div>
-            <div id="content3" class="tab-pane">
-              <%= render 'user_show_author', user: @user %>
-            </div>
-            <div id="content4" class="tab-pane">
-              <%= render 'user_show_bookmark', user: @user %>
-            </div>
-          </div>
-        </main>
-      </div>
     </div>
+    <% if @user.id == current_user.id %>
+      <div class="col-md-4 d-none d-md-block">
+        <aside id="sidebar">
+         <%= render "sidebar", user: @user %>
+        </aside>
+      </div>
+    <% end %>
   </div>
 </div>
