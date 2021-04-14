@@ -28,11 +28,24 @@ footer {
   margin-top: auto;
 }
 
+aside#sidebar h1 {
+  color: #080;
+  font-weight: bold;
+  font-size: 140%;
+  text-align: center;
+}
+
 aside#sidebar h2 {
   color: #080;
   font-weight: bold;
   border-bottom: 1px dotted #080;
   margin-bottom: 0.5em;
+  font-size: 120%;
+}
+
+aside#sidebar h3 {
+  color: #080;
+  font-weight: bold;
   font-size: 100%;
 }
 

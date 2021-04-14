@@ -11,7 +11,6 @@
   </head>
 
   <body>
-    <div id="wrapper">
       <% unless current_page?(unauthenticated_root_path) || current_page?(new_user_registration_path) || current_page?(user_session_path) %>
       <%= render 'header' %>
       <% end %>
@@ -32,6 +31,5 @@
        <footer>
           <%= render "footer" %>
        </footer>
-    </div>
    </body>
  </html>

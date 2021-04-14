@@ -1,13 +1,24 @@
 <%= render "shared" unless current_user %>
 
+<h1>～報告書情報～</h1>
 <h2>最新ニュース</h2>
-
+<h3>【新規作成】</h3>
 <ul>
-
+  <% @user.new_create_report.each do |reports| %>
+    <li><%= link_to "#{reports.title}", report_path(reports.id) %></li>
+  <% end %>
 </ul>
-
-<h2>会員のブログ</h2>
-
+<h3>【完了】</h3>
 <ul>
-  
+  <% @user.done_report.each do |reports| %>
+    <li><%= link_to "#{reports.title}", report_path(reports.id) %></li>
+  <% end %>
+
+</ul><hr>
+
+<h2>所属チーム情報</h2>
+<h3>【新規作成】</h3>
+<h3>【完了】</h3>
+<ul>
+
 </ul>

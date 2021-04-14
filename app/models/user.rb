@@ -63,4 +63,12 @@ class User < ApplicationRecord
     end
   end
 
+  def new_create_report
+    Report.all.order(created_at: :desc).limit(5)
+  end
+
+  def done_report
+    Report.where(checkbox_final: true).order(updated_at: :desc).limit(5)
+  end
+
 end
