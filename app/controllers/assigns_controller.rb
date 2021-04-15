@@ -19,7 +19,6 @@ class AssignsController < ApplicationController
   def destroy
     assign = Assign.find(params[:id])
     undone_reports = assign.user.reports.where(checkbox_final: false)
-    if
       if undone_reports.count == 0
         if assign.user == current_user || assign.team.owner == current_user
           destroy_message = assign_destroy(assign, assign.user)
@@ -68,5 +67,5 @@ class AssignsController < ApplicationController
 
   def find_team(team_id)
    　team = Team.find(params[:team_id])
- end
+  end
 end
