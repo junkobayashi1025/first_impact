@@ -83,9 +83,17 @@ RSpec.describe '報告書管理機能', type: :system do
         click_on "コメント投稿"
         expect(page).to have_content comment.comment
       end
+      # it '自分がコメントしたものを編集できる' do
+      #   visit report_path(report.id)
+      #   click_on "comments-index__comment-#{comment.id}-edit_comment"
+      #   comment1 = Comment.new(comment: "comment編集")
+      #   fill_in 'comment[comment]', with: comment1.comment
+      #   click_on "comments__edit-submit"
+      #   expect(page).to have_content comment.comment
+      end
       it '自分がコメントしたものを削除できる' do
         visit report_path(report.id)
-        click_on "comments-index__comment-#{comment.id}-comment"
+        click_on "comments-index__comment-#{comment.id}-delete_comment"
         expect(page).not_to have_content comment.comment
       end
     end
