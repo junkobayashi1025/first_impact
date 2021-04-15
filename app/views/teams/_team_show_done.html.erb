@@ -2,7 +2,7 @@
   <div class="panel-heading float_left">
     ※チーム内の完了した報告書
   </div>
-  <% if team.done_report.any? == true %>
+  <% if team.done_report_team.any? == true %>
     <table class="table panel-body">
       <thead class="thead-dark">
         <tr>
@@ -10,8 +10,7 @@
           <th>担当者</th>
         </tr>
       </thead>
-
-      <% team.done_report.each do |report| %>
+      <% team.done_report_team.each do |report| %>
         <tr>
           <td><%= link_to "#{report.title}", report_path(report.id) %></td>
           <td><%= link_to "#{report.user.name}", user_path(report.user.id) %></td>

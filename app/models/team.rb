@@ -22,10 +22,10 @@ class Team < ApplicationRecord
     request_reports = self.reports.where(checkbox_final: false, approval: true).order(created_at: :asc)
   end
 
-  def done_report
-    done_reports = self.reports.where(checkbox_final: true).order(updated_at: :asc)
-  end
-
+  # def done_report
+  #   done_reports = self.reports.where(checkbox_final: true).order(updated_at: :asc)
+  # end
+  #
   def new_create_report
     Report.all.order(created_at: :desc).limit(5)
   end
