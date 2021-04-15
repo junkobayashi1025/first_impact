@@ -171,7 +171,9 @@
           <%= render partial: 'comments/index', locals: { comments: @comments } %>
         </div><hr>
         <% if user_signed_in? %>
-          <%= render partial: 'comments/form', locals: { comment: @comment, report: @report } %>
+          <div id="comments_form">
+            <%= render partial: 'comments/form', locals: { comment: @comment, report: @report } %>
+          </div>
         <% end %>
       </div>
     </div>

@@ -21,7 +21,7 @@ Rails.application.routes.draw do
       post :reject
     end
     resources :bookmarks,   only: [:show, :destroy]
-    resources :comments,    only: [:create, :destroy]
+    resources :comments,    only: [:create, :edit, :update, :destroy]
     resources :attachments, only: [:create, :destroy]
   end
 

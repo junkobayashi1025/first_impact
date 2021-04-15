@@ -1,0 +1,2 @@
+$('#comments_area').html("<%= escape_javascript(render 'index', comments: @comment.report.comments ) %>");
+$('#comments_form').html("<%= escape_javascript(render 'form', report: @report, comment: @comment) %>");

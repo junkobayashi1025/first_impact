@@ -23,7 +23,7 @@
           <% unless bookmarks.report.checkbox_final == true %>
             <td><%= bookmarks.report.step %></td>
             <td><%= bookmarks.report.status %></td>
-            <% if bookmarks.report.confirmed_date.nil? %>
+            <% if bookmarks.report.confirmed_date.present? %>
               <td><%= bookmarks.report.due.strftime("%Y年 %m月 %d日") %></td>
             <% else %>
               <td>未定</td>

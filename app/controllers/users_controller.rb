@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   end
 
   def index
-   @users = @q.result(distinct: true).order(created_at: :desc).page(params[:page]).per(10)
+    @users = @q.result(distinct: true).order(created_at: :desc).page(params[:page]).per(10)
   end
 
   def show
@@ -51,16 +51,16 @@ class UsersController < ApplicationController
       else
         redirect_to user_path(@user)
         flash[:danger] = "チームに所属している為、削除できません"
-       end
+      end
     else
       redirect_to user_path(@user)
       flash[:notice] = "権限がありません"
     end
-   end
+  end
 
   private
   def set_user
-   @user = User.find(params[:id])
+    @user = User.find(params[:id])
   end
 
   def user_params

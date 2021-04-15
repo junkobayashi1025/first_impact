@@ -12,10 +12,10 @@ class BookmarksController < ApplicationController
 
   def destroy
     if current_user != @report.team.owner && current_user != @report.user
-     Bookmark.find_by(user_id: current_user.id, report_id: params[:id]).destroy
-   else
-     redirect_to reports_path, notice:"権限がありません"
-   end
+      Bookmark.find_by(user_id: current_user.id, report_id: params[:id]).destroy
+    else
+      redirect_to reports_path, notice:"権限がありません"
+    end
   end
 
   private

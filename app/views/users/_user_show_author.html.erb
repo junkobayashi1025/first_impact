@@ -23,7 +23,7 @@
           <td><%= link_to "#{report.team.owner.name}", user_path(report.team.owner.id) %></td>
           <td><%= report.step %></td>
           <td><%= report.status %></td>
-          <% if report.confirmed_date.nil? %>
+          <% if report.confirmed_date.present? %>
             <td><%= report.due.strftime("%Y年 %m月 %d日") %></td>
           <% else %>
             <td>未定</td>

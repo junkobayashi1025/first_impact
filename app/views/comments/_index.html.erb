@@ -1,6 +1,7 @@
 <% comments.each do |comment| %>
 <% if comment.user == current_user %>
-  <p><%= link_to '', report_comment_path(comment.report_id, comment.id), method: :delete, remote: true, class: "delete-comment", id:"comments-index__comment-#{comment.id}-comment"  %></p>
+  <span><%= link_to '', report_comment_path(comment.report_id, comment.id), method: :delete, remote: true, class: "delete-comment", id:"comments-index__comment-#{comment.id}-delete_comment"  %></span>
+  <span><%= link_to '', edit_report_comment_path(comment.report_id, comment.id), remote: true, class: "edit-comment", id:"comments-index__comment-#{comment.id}-edit_comment"  %></span>
 <% end %>
   <% unless comment.id.nil? %>
   <div>
@@ -8,7 +9,7 @@
       <strong><%= link_to "#{comment.user.name}さん", user_path(comment.user.id), class: "no-text-decoration black-color" %>
       </strong>
     </span>
-    <span>
+    <span id="comment_<%= comment.id %>" >
       <%= comment.comment%>
     </span>
     <span class="post-time" >

@@ -8,22 +8,8 @@ class ReportsController < ApplicationController
     if params[:tag_name]
       @results = Report.where(checkbox_final: false).tagged_with("#{params[:tag_name]}").page(params[:page]).per(8)
     else
-      # puts params[:q]
-      # puts "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@s"
       @results = params[:q] ? @q.result.page(params[:page]).per(8) : Report.where(checkbox_final: false).order(created_date: :desc).page(params[:page]).per(8)
     end
-
-    # binding.pry
-    # @results = Report.all
-    # binding.pry
-    # @results_confirmed = @results.where.not(confirmed_date:nil)
-    # @results_confirmed.each do |result_confirmed|
-    #   result_confirmed = result_confirmed.accrual_date.update(confirmed_date)
-    # end
-    # if @results.confirmed_date.present?
-    #
-    #   @results.accrual_date.update(@results.confirmed_date)
-    # end
   end
 
   def archive
@@ -47,13 +33,13 @@ class ReportsController < ApplicationController
     @report.user_id = current_user.id
     @report.step_string
     @report.status_string
-      if @report.save
-       redirect_to team_path(@report.team)
-       flash[:success] = "報告書「#{@report.title}」が保存されました"
-       CreateReportMailer.create_report_mailer(@team, @report).deliver
-      else
-       render 'new'
-      end
+    if @report.save
+      redirect_to team_path(@report.team)
+      flash[:success] = "報告書「#{@report.title}」が保存されました"
+      CreateReportMailer.create_report_mailer(@team, @report).deliver
+    else
+      render 'new'
+    end
   end
 
   def show
@@ -160,35 +146,10 @@ class ReportsController < ApplicationController
   end
 
   def set_q
-    # case params[:q][:search_item]
-    # when 1 return  @colomn = title
-    # when 2 return  @colomn = team_name
-    # when 3 return  @colomn = team_owner_name
-    # when 4 return  @colomn = author
-    # end
     @q = Report.where.not(checkbox_final: true).ransack(params[:q])
-    #飛んできたパラメータを受取る⇒変数化して、検索させたいカラムと検索ワードに分ける
-    #{
-    #  @colomn = team_owner_name
-    #  @keyword = admin
-    #}
-    #⇒
-    #ランサックのパラメーターに該当するカラムのところに検索ワードを入れる
-
-    # @ransack_q = @colom + "_cont"
-
-    # {
-    #    q = {"#{@ransack_q}"=>"admin"}
-    # }
-
-
-    # {"title_cont"=>"", "team_name_cont"=>"", "team_owner_name_cont"=>"", "author_cont"=>"", "step_cont"=>"", "status_cont"=>""}
-    # @q = Report.ransack(q)
-    # @q = Report.where(user_id: current_user.id).ransack(params[:q])
   end
 
   def set_q_archive
     @q = Report.where(checkbox_final: true).ransack(params[:q])
-    # @q = Report.where(user_id: current_user.id).ransack(params[:q])
   end
 end
