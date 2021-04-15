@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 2021_04_03_114022) do
     t.string "title", null: false
     t.datetime "created_date"
     t.string "author"
-    t.datetime "accrual_date", default: "2021-04-14 00:00:00"
+    t.datetime "accrual_date", default: "2021-04-15 00:00:00"
     t.string "site_of_occurrence"
     t.text "trouble_content"
     t.text "first_aid"
