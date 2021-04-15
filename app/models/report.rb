@@ -13,16 +13,17 @@ class Report < ApplicationRecord
   validates :trouble_content,  presence: true
   validates :first_aid,        presence: true
   validates :interim_measures, presence: true
-
-
-
-
-
-
-  enum search_item: {タイトル: 1, チーム名: 2, 責任者: 3, 担当者: 4}
+  validate  :confirmed_date_check
 
   scope :sort_by_deadline_date_asc, lambda { all.sort_by(&:deadline_date) }
   scope :sort_by_deadline_date_desc, lambda { all.sort_by(&:deadline_date).reverse }
+
+  def confirmed_date_check
+    if self.checkbox_interim && self.accrual_date + 14.days > self.confirmed_date
+      errors.add(:confirmed_date, "は3.恒久対策(提出〆切)以降の日程を設定してください")
+    end
+  end
+
 
   # def deadline_date
   #   if self.checkbox_final

@@ -28,7 +28,7 @@ class ReportsController < ApplicationController
 
   def archive
     if params[:tag_name]
-      @archives = Report.where(checkbox_final: true).tagged_with("#{params[:tag_name]}").page(params[:page]).per(8) 
+      @archives = Report.where(checkbox_final: true).tagged_with("#{params[:tag_name]}").page(params[:page]).per(8)
     else
       @archives = params[:q] ? @q.result.page(params[:page]).per(8) : Report.where(checkbox_final: true).order(created_date: :desc).page(params[:page]).per(8)
     end
@@ -71,20 +71,19 @@ class ReportsController < ApplicationController
   end
 
   def update
-   if params[:back]
-     redirect_to report_path(@report)
-   else
-     if @report.update(report_params)
+    if params[:back]
+      redirect_to report_path(@report)
+    else
+      if @report.update(report_params)
         @report.step_string
         flash[:notice] = "報告書を更新しました"
         UpdateReportMailer.update_report_mailer(@report).deliver
-     else
-        render :edit
-        flash[:danger] = "報告書を変更できませんでした"
-      end
         redirect_to report_path(@report)
+      else
+        render :edit
+       end
      end
-  end
+   end
 
   def destroy
     if current_user == @report.user || current_user == @report.team.owner && @report.checkbox_final == false

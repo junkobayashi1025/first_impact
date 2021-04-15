@@ -11,6 +11,7 @@ ja:
         trouble_content: 2-1.トラブル内容
         first_aid: 2-2.応急対応
         interim_measures: 2-3.暫定対策
+        confirmed_date: 有効性の確認(提出〆切)
         due: 〆切
         step: ステップ
       team:

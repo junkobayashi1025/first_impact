@@ -23,6 +23,9 @@ module ReportShare
       g.fixture_replacement :factory_bot, dir: "spec/factories"
     end
 
+    # field_with_errorsのレイアウトが崩れるのを防ぐ
+    config.action_view.field_error_proc = Proc.new { |html_tag, instance| html_tag }
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
