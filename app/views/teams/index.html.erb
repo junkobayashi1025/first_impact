@@ -25,7 +25,7 @@
                 <div class="team-member-icon"></div>
                 <div class="team-count"><%= "#{team.assigns.count}" %>
                   <% if current_user == team.owner %>
-                    <%= link_to edit_team_path(team), id: "team_index_edit-#{team}-submit" do %>
+                    <%= link_to edit_team_path(team), id: "team_index_edit-#{team}-submit", data: {"turbolinks" => false} do %>
                       <div class="edit-team-icon mr-1"></div>
                     <% end %>
                     <%= link_to team_path(team), method: :delete, data: { confirm: "チーム「#{team.name}を削除します。よろしいでしょうか？」" },

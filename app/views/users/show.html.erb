@@ -5,7 +5,7 @@
         <h3 class="profile"><u>プロフィール</u>
           <% if @user.id == current_user.id %>
           <div class="index_row_icon">
-            <%= link_to edit_user_path(@user), id: "user_show_edit-#{@user}-submit" do %>
+            <%= link_to edit_user_path(@user), id: "user_show_edit-#{@user}-submit", data: {"turbolinks" => false}  do %>
               <div class="edit-user-icon edit-show-icon mr-1"></div>
             <% end %>
             <%= link_to user_path(@user), method: :delete, data: { confirm: "ユーザー「#{@user.name}を削除します。よろしいでしょうか？」" },

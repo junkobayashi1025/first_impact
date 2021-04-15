@@ -15,7 +15,7 @@
         <h3 class="team"><u>チーム名</u>
           <% if current_user == @team.owner %>
             <div class="index_row_icon">
-              <%= link_to edit_team_path(@team), id: "team_show_edit-#{@team}-submit" do %>
+              <%= link_to edit_team_path(@team), id: "team_show_edit-#{@team}-submit", data: {"turbolinks" => false} do %>
                 <div class="edit-team-icon mr-1"></div>
               <% end %>
               <%= link_to team_path(@team), method: :delete, data: { confirm: "チーム「#{@team.name}を解散します。よろしいでしょうか？」" },
