@@ -10,7 +10,12 @@ Rails.application.routes.draw do
     post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
   end
 
-  resources :users
+  resources :users do
+    member do
+      get :calendar
+    end
+  end
+
   resources :reports do
     collection do
       get :archive

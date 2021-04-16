@@ -58,6 +58,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def calendar
+    @reprts = Report.where(user_id: current_user.id, checkbox_final: false).order(created_at: :desc)
+  end
+
   private
   def set_user
     @user = User.find(params[:id])
