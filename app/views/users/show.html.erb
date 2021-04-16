@@ -55,15 +55,6 @@
         <strong>所属チームはありません</strong>
         <% end %>
       </div><hr width="300" align="left">
-      </div>
-      <% if @user.id == current_user.id %>
-        <div class="col-md-4 d-none d-md-block">
-          <aside id="sidebar">
-            <%= render "sidebar", user: @user %>
-          </aside>
-        </div>
-      <% end %>
-      </div>
       <div class="profile-wrap mt-5">
         <h3><u>報告書一覧</u></h3>
           <div class="col-md-8 profile_date">
@@ -101,6 +92,13 @@
           </div>
         </div>
       </div>
-
+    </div>
+    <% if @user.id == current_user.id %>
+      <div class="col-md-4 d-none d-md-block">
+        <aside id="sidebar">
+          <%= render "sidebar", user: @user %>
+        </aside>
+      </div>
+    <% end %>
   </div>
 </div>
