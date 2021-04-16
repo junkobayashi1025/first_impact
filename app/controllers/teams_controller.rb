@@ -39,11 +39,15 @@ class TeamsController < ApplicationController
  end
 
  def update
-   if @team.update(teams_params)
+   if params[:back]
      redirect_to team_path(@team)
-     flash[:success] = "チーム「#{@team.name}」を編集しました"
    else
-     render 'edit'
+     if @team.update(teams_params)
+       redirect_to team_path(@team)
+       flash[:success] = "チーム「#{@team.name}」を編集しました"
+     else
+       render 'edit'
+     end
    end
  end
 

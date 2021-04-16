@@ -47,7 +47,8 @@
           <%= f.file_field :icon, id: :user_img %>
       </div>
      </div>
-     <%= f.submit '編集', value:'編集', class: 'btn btn-primary', id: 'user_edit_submit' %>
+     <%= f.submit '編集', value:'編集', class: 'btn btn-primary mr-3', id: 'user_edit_submit' %>
+     <%= f.submit '戻る', class:"btn btn-secondary", name: 'back' %>
    <% end %>
   </div>
 </div>
