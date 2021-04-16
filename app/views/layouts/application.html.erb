@@ -12,9 +12,7 @@
   <body>
     <div class="wrapper">
       <header>
-        <% unless current_page?(unauthenticated_root_path) || current_page?(new_user_registration_path) || current_page?(user_session_path) %>
-          <%= render 'header' %>
-        <% end %>
+        <%= render 'header' %>
       </header>
       <main>
         <div class="col-md-4 mt-3">
