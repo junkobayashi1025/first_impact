@@ -13,14 +13,21 @@ class Report < ApplicationRecord
   validates :trouble_content,  presence: true
   validates :first_aid,        presence: true
   validates :interim_measures, presence: true
+  validate  :accrual_date_check
   validate  :confirmed_date_check
 
   scope :sort_by_deadline_date_asc, lambda { all.sort_by(&:deadline_date) }
   scope :sort_by_deadline_date_desc, lambda { all.sort_by(&:deadline_date).reverse }
 
+  def accrual_date_check
+    if self.accrual_date > Date.today
+      errors.add(:accrual_date, "は#{Date.today}以前の日付を設定してください")
+    end
+  end
+
   def confirmed_date_check
-    if self.checkbox_interim && self.confirmed_date.present? && self.accrual_date + 14.day > self.confirmed_date 
-      errors.add(:confirmed_date, "は3.恒久対策(提出〆切)以降の日程を設定してください")
+    if self.checkbox_interim && self.confirmed_date.present? && self.accrual_date + 14.day > self.confirmed_date
+      errors.add(:confirmed_date, "は3.恒久対策(提出〆切)以降の日付を設定してください")
     end
   end
 
