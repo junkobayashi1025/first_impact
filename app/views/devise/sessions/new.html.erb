@@ -1,9 +1,10 @@
 <div class="container">
+  <% if flash[:alert] %>
   <div class="alert alert-danger">
     <%= alert %>
-   </div>
+  </div>
+  <% end %>
 </div>
-
 
 <div class="box">
   <div class="box-inner">

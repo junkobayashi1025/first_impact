@@ -32,51 +32,54 @@
           <% end %>
       </div>
       <div class="card-body">
-        <div class="float_right col-md-3.5">
-          <div class="form-control">
-            <%= "作成日：#{@report.created_at.strftime("%Y年 %m月 %d日")}" %>
-          </div><br>
-          <% if @report.team_id != nil || @report.user_id != nil %>
-            <div class="form-control">
-              <%= "責任者：#{@report.team.owner.name}" %>
-            </div><br>
-          <% end %>
-          <div class="form-control">
-            <%= "担当者：#{@report.user.name}" %>
-          </div><br>
-          <div>
-            <% @report.tag_list.each do |tag| %>
-            <%= link_to "#{tag}", reports_path(tag_name: tag), class:"btn btn-warning" %>
-            <% end %>
-          </div>
-        </div>
-        <strong>タイトル</strong>
-        <div class="form-control clear col-md-6">
-          <%= @report.title %>
-        </div><br>
-          <div>
-            <u>1.発生状況</u>
-             <div class="form-control col-md-4">
+        <div class="row">
+          <div class="col-md-8">
+            <strong>タイトル</strong>
+            <div class="form-control report-show-title-width ">
+              <%= @report.title %>
+             </div><br>
+             <u>1.発生状況</u>
+             <div class="form-control report-show-accural-width">
                <%= "発生日：#{@report.accrual_date.strftime("%Y年 %m月 %d日")}" %>
              </div><br>
-             <div class="form-control col-md-4">
+             <div class="form-control report-show-title-width">
                <%= "発生場所：#{@report.site_of_occurrence}" %>
              </div><br>
-             <u>2-1.トラブル内容</u>
-             <%= "(提出〆切：#{(@report.accrual_date + 7.day).strftime("%Y年 %m月 %d日")})"%>
-             <% if @report.checkbox_first %>
-               <input class="none_function" id="checkbox_first" as="boolean" type="checkbox" checked>責任者承認
-             <% else %>
-               <input class="none_function" id="checkbox_first" as="boolean" type="checkbox">責任者承認
-             <% end %>
-             <div class="readmore">
-               <input id="check1" class="readmore-check" type="checkbox">
-               <div class="readmore-content">
-                 <p><%= safe_join(@report.trouble_content.split("\n"),tag(:br)) %></p>
-               </div>
-               <% if @report.trouble_content.split("\n").count > 1 %>
-               <label class="readmore-label" for="check1"></label>
-               <% end %>
+            </div>
+            <div class="col-md-4 d-none d-md-block">
+              <div class="form-control">
+                <%= "作成日：#{@report.created_at.strftime("%Y年 %m月 %d日")}" %>
+              </div><br>
+              <% if @report.team_id != nil || @report.user_id != nil %>
+                <div class="form-control">
+                  <%= "責任者：#{@report.team.owner.name}" %>
+                </div><br>
+              <% end %>
+              <div class="form-control">
+                <%= "担当者：#{@report.user.name}" %>
+              </div><br>
+              <div>
+                <% @report.tag_list.each do |tag| %>
+                  <%= link_to "#{tag}", reports_path(tag_name: tag), class:"btn btn-warning mb-1" %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <u>2-1.トラブル内容</u>
+            <%= "(提出〆切：#{(@report.accrual_date + 7.day).strftime("%Y年 %m月 %d日")})"%>
+            <% if @report.checkbox_first %>
+              <input class="none_function" id="checkbox_first" as="boolean" type="checkbox" checked>責任者承認
+            <% else %>
+              <input class="none_function" id="checkbox_first" as="boolean" type="checkbox">責任者承認
+            <% end %>
+            <div class="readmore">
+              <input id="check1" class="readmore-check" type="checkbox">
+              <div class="readmore-content">
+                <p><%= safe_join(@report.trouble_content.split("\n"),tag(:br)) %></p>
+              </div>
+              <% if @report.trouble_content.split("\n").count > 1 %>
+                <label class="readmore-label" for="check1"></label>
+              <% end %>
              </div><br>
              <u>2-2.応急対応</u>
              <div class="readmore">
@@ -160,22 +163,21 @@
           <% end %>
       </div>
     </div>
-  </div>
-  <div class="col-md-5 post-card">
-    <div class="card">
-      <div class="card-header">
-        <strong>コメント欄</strong>
-      </div>
-    <div class="card-body">
-        <div id="comments_area">
-          <%= render partial: 'comments/index', locals: { comments: @comments } %>
-        </div><hr>
-        <% if user_signed_in? %>
-          <div id="comments_form">
-            <%= render partial: 'comments/form', locals: { comment: @comment, report: @report } %>
-          </div>
-        <% end %>
+    <div class="col-md-5 post-card d-none d-md-block">
+      <div class="card">
+        <div class="card-header">
+          <strong>コメント欄</strong>
+        </div>
+      <div class="card-body">
+          <div id="comments_area">
+            <%= render partial: 'comments/index', locals: { comments: @comments } %>
+          </div><hr>
+          <% if user_signed_in? %>
+            <div id="comments_form">
+              <%= render partial: 'comments/form', locals: { comment: @comment, report: @report } %>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
-</div>
