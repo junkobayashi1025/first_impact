@@ -9,8 +9,8 @@
           <th>タイトル</th>
           <th>チーム名</th>
           <th>責任者</th>
-          <th>担当者</th>
           <th>ステップ</th>
+          <th>ステータス</th>
           <th>提出〆切</th>
           <th></th>
         </tr>
@@ -23,7 +23,7 @@
           <td><%= link_to "#{report.team.owner.name}", user_path(report.team.owner.id) %></td>
           <td><%= report.step %></td>
           <td><%= report.status %></td>
-          <% if report.confirmed_date.present? %>
+          <% if report.due.present? %>
             <td><%= report.due.strftime("%Y年 %m月 %d日") %></td>
           <% else %>
             <td>未定</td>

@@ -59,7 +59,8 @@ class UsersController < ApplicationController
   end
 
   def calendar
-    @reprts = Report.where(user_id: current_user.id, checkbox_final: false).order(created_at: :desc)
+    @author_reports = Report.where(user_id: current_user.id, checkbox_final: false).order(created_at: :desc)
+    @team_owner_reports = Report.where(user_id: current_user.id, checkbox_final: false).order(created_at: :desc)
   end
 
   private
