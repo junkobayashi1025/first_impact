@@ -16,14 +16,17 @@
   <%= form_with(model: @user, local: true) do |f| %>
     <div class="form-group profile">
       <div class="box-name">
+        <span class="must">必須</span>
         <%= f.label :name, "名前" %><br />
         <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
       </div>
       <div class="box-email">
+        <span class="must">必須</span>
         <%= f.label :email, "Eメール" %><br />
         <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
       </div>
       <div class="box-password">
+        <span class="must">必須</span>
         <%= f.label :password, "パスワード" %><br />
         <%= f.password_field :password, autofocus: true, autocomplete: "password", placeholder:"パスワード(6文字以上)" %>
       </div>
@@ -32,7 +35,10 @@
         <%= f.password_field :password_confirmation, autofocus: true, autocomplete: "password_confirmation" %>
       </div>
       <div class="image-field text-center">
-        <h5>プロフィール画像</h5>
+        <div class="mb-1">
+          <span class="free">任意</span>
+          <span>プロフィール画像</span>
+        </div>
         <% if @user.icon.present? %>
           <%= image_tag @user.icon.url, id: :img_prev, class: "user-show-round-img" %>
         <% else %>

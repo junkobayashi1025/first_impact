@@ -16,19 +16,24 @@
   <%= form_with(model: @team, local: true) do |f| %>
     <div class="form-group profile">
       <div class="box-name">
+        <span class="must">必須</span>
         <%= f.label :name, "チーム名" %><br />
         <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
       </div>
       <div class="box-remark">
+        <span class="free">任意</span>
         <%= f.label :remark, "備考" %><br />
         <%= f.text_area :remark, autofocus: true, autocomplete: "remark", id: :textarea %>
       </div>
       <div class="image-field text-center">
-        <h5>チーム画像</h5>
+        <div class="mb-1">
+          <span class="free">任意</span>
+          <span>チーム画像</span>
+        </div>
         <% if @team.icon.present? %>
-        <%= image_tag @team.icon.url, id: :img_prev, class: 'rectangle-img' %>
+          <%= image_tag @team.icon.url, id: :img_prev, class: 'rectangle-img' %>
         <% else %>
-        <%= image_tag "default.png", id: :img_prev %>
+          <%= image_tag "default.png", id: :img_prev %>
         <% end %>
         <%= f.file_field :icon, id: :team_img %>
       </div>

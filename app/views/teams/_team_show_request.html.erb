@@ -18,7 +18,7 @@
           <td class="team-header"><%= link_to "#{report.title}", report_path(report.id) %></td>
           <td><%= link_to "#{report.user.name}", user_path(report.user.id) %></td>
           <td><%= report.step %></td>
-          <% if report.confirmed_date.nil? %>
+          <% if report.confirmed_date.present? %>
             <td><%= report.due.strftime("%Y年 %m月 %d日") %></td>
           <% else %>
             <td>未定</td>
