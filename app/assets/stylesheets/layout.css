@@ -1,13 +1,22 @@
 html, body {
   background: #dcdcdc;
   margin: 0;
-    padding: 0;
-    height: 100%
+  padding: 0;
+  height: 100%
 }
+
+/* .box-sizing {
+  font-size: 20px;
+  color: white;
+  width: 100%;
+  padding: 5px;
+  background-color: #33B1A9;
+  padding: .5rem 1rem;
+  font-size: 20rem;
+} */
 
 .wrapper {
   position: relative;
-  min-height: 100%;
 }
 
 main {
@@ -66,4 +75,73 @@ aside#sidebar ul {
 
 aside#sidebar li {
   margin-bottom: 0.3em;
+}
+
+.container-fluid {
+  height: 100%;
+  position: absolute;
+  top: 74px;
+}
+
+.side-menu h5 {
+  margin-top: -0.5rem;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+  max-width: 20rem;
+}
+
+.side-menu p {
+  margin-top: 0.5rem;
+  margin-left: 1rem;
+}
+
+.sidebar-height {
+  height: 100vh;
+}
+
+.side-title {
+  background: #33B1A9;
+  height: 70px;
+  color: #ffffff;
+  font-size: 16px;
+}
+
+.side-title a {
+  color: #ffffff;
+}
+
+.side-nav ul li {
+  display: table;
+}
+.side-nav ul li a {
+  display: table-cell;
+  vertical-align: middle;
+  height:　100%;
+  color: #F4F4F4;
+}
+
+.navbar-nav li a:hover {
+  background-color: #757575;
+}
+
+.navbar-nav li.selected {
+  background-color: #757575;
+}
+
+.navbar-nav li {
+  height: 50px;
+}
+
+.report-index {
+  margin-top: 1rem;
+  color: #6c757d;
+}
+
+.member_invite {
+  color: #ffff;
+}
+
+.member_invite_input p {
+  color: #fff;
+  width: auto;
 }

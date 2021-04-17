@@ -1,3 +1,61 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-2 px-0 bg-dark sidebar-height" >
+      <div class="side-title d-flex align-items-center pl-2">
+        <ul class="navbar-nav side-menu">
+          <p class="border-bottom">チーム名</p>
+          <h5><%= @team.name %></h5>
+        </ul>
+      </div>
+      <div class="side-nav" id="nav-bar">
+        <nav id="n">
+          <ul class="navbar-nav">
+              <li class="border-top">
+                  <a href="users/list.php" class="pl-4">・チームプロフィール</a>
+              </li>
+              <li class="">
+                <div class="pl-4 report-index"> 報告書一覧</div>
+                <ol class="navbar-nav report-item">
+                  <li class="">
+                    <a href="users/list.php" class="mt-1 pl-5">・〆切間近</a>
+                  </li>
+                  <li class="report-item">
+                    <a href="users/list.php" class="pl-5">・作成中</a>
+                  </li>
+                  <li class="report-item">
+                    <a href="users/list.php" class="pl-5">・依頼中</a>
+                  </li>
+                  <li class="report-item">
+                    <a href="users/list.php" class="pl-5">・完了</a>
+                  </li>
+                  <div class="side-nav border-top" id="nav-bar">
+                    <nav id="n">
+                      <ul class="navbar-nav">
+                        <li class="">
+                          <%= link_to '・報告書作成', new_team_report_path(@team), id: "new_report-submit", class:"pl-4" %>
+                        </li>
+                        <li class="">
+                          <div class="pl-4 member_invite">・メンバー招待</div>
+                          <div class="member_invite_input">
+                            <%= form_with model: :assign, scope: :post, url: team_assigns_path(@team), class:"ml-4", local: true do |form| %>
+                              <%= text_field_tag :email, '', :size=>"30" %>
+                              <%= submit_tag '招待', id: 'invite_member_submit' %>
+                              <p>※Eメールアドレスを入力してください</p>
+                            <% end %>
+                          </div>
+                        </li>
+                      </ul>
+                    </nav>
+                  </div>
+                </ol>
+              </li>
+            </nav>
+          </div>
+        </div>
+
+
+
+
 <div class="container mt-3">
   <div class="row">
     <div class="col-md-8">
