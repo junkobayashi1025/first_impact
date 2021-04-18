@@ -4,6 +4,7 @@ html, body {
   padding: 0;
   position: relative;
 }
+
 .table-modal a {
   color: #007bff!important;
   background-color: transparent!important;
@@ -117,6 +118,7 @@ aside#sidebar li {
 .side-nav ul li {
   display: table;
 }
+
 .side-nav ul li a {
   display: table-cell;
   vertical-align: middle;

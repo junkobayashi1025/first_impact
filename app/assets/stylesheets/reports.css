@@ -1,6 +1,6 @@
-// * {
+/* // * {
 //   outline: 1px solid #ff0000;
-// }
+// } */
 
 .report-show-title-width {
 	max-width:25rem;
@@ -162,7 +162,7 @@ li {
   border: 1px solid #ced4da;
   border-radius: .25rem;
   font-size: 1rem;
-  font-weight: 400
+  font-weight: 400;
 }
 
 .readmore-content{
@@ -192,7 +192,7 @@ li {
 }
 
 /* 続きを読むボタン */
-.readmore-label{
+.readmore-label {
   display: table;
   bottom: 5px;
   position: absolute;
@@ -207,25 +207,26 @@ li {
   border-radius: 10px;
   color: #00F;
 }
-.readmore-label:before{
+
+.readmore-label:before {
   content: '続きを読む';
 }
 
-.readmore-check{
+.readmore-check {
   display: none;
 }
 
-.readmore-check:checked ~ .readmore-label{
+.readmore-check:checked ~ .readmore-label {
   position: static;
   transform: translateX(0);
   -webkit-transform: translateX(0);
 
 }
-.readmore-check:checked ~ .readmore-label:before{
+.readmore-check:checked ~ .readmore-label:before {
   content: '閉じる';
 }
 
-.readmore-check:checked ~ .readmore-content{
+.readmore-check:checked ~ .readmore-content {
   height: auto;
 }
 

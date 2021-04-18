@@ -1,6 +1,6 @@
-// * {
+/* // * {
 //   outline: 1px solid #ff0000;
-// }
+// } */
 
 .border-bottom {
   border-bottom: 1px solid #000 !important;
@@ -34,11 +34,11 @@
 
 .profile-wrap {
   padding-top: 20px;
-  position:relative
+  position: relative;
 }
 
 .profile {
-  position:relative
+  position: relative;
 }
 
 .profile_date {
@@ -100,7 +100,7 @@
   position: absolute;
   top: 0rem;
   left: 1rem;
-  width: 200%
+  width: 200%;
 }
 
 .image-field {
