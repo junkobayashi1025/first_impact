@@ -2,22 +2,26 @@ html, body {
   background: #dcdcdc;
   margin: 0;
   padding: 0;
-  height: 100%
-}
-
-/* .box-sizing {
-  font-size: 20px;
-  color: white;
-  width: 100%;
-  padding: 5px;
-  background-color: #33B1A9;
-  padding: .5rem 1rem;
-  font-size: 20rem;
-} */
-
-.wrapper {
   position: relative;
 }
+.table-modal a {
+  color: #007bff!important;
+  background-color: transparent!important;
+}
+
+
+a {
+  text-decoration: none!important;
+}
+
+.fa-flag {
+  color: red;
+  font-size: 200%;
+}
+
+/* .wrapper {
+  position: relative;
+} */
 
 main {
   padding-bottom: auto;
@@ -31,17 +35,17 @@ footer {
   text-align: center;
   width: 100%;
   position: absolute;
-  bottom: -5rem;
+  bottom: 0rem;
 }
 
 aside#sidebar {
-  float: left;
-  width: 230px;
+  /* float: left; */
+  /* width: 250px; */
   background-color: #e8ffff;
   padding: 5px;
   font-size: 86%;
   width: 120%;
-  height: auto;
+  height: 100%;
 }
 
 aside#sidebar h1 {

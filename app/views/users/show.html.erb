@@ -102,18 +102,3 @@
     <% end %>
   </div>
 </div>
-
-<p><a class="modal-open">ここをクリックするとモーダルウインドウが表示されます</a></p>
-<div class="modal">
-  <div class="modal-cont">
-    <% if @user.id == current_user.id %>
-      <div class="col-md-4 d-none d-md-block">
-        <aside id="sidebar">
-          <%= render "sidebar", user: @user %>
-        </aside>
-      </div>
-    <% end %>
-    <div class="btn-modal-close"><a class="modal-close">閉じる</a></div>
-  </div>
-
-</div>

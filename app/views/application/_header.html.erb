@@ -37,6 +37,21 @@
       <li class="nav-item dropdown mt-2">
         <%= link_to "チーム作成", new_team_path, class: "btn btn-dark", id: "new-team-submit" %>
       </li>
+      <li>
+        <% if flash[:notice] %>
+          <p class="alert alert-primary"><%= flash[:notice] %></p>
+        <% end %>
+        <% if flash[:success] %>
+          <p class="alert alert-success"><%= flash[:success] %></p>
+        <% end %>
+        <% if flash[:danger] %>
+          <p class="alert alert-danger"><%= flash[:danger] %></p>
+        <% end %>
+        <% if flash[:alert] %>
+          <p class="alert alert-danger"><%= flash[:alert] %></p>
+        <% end %>
+      </li>
+
      </ul>
    </div>
  </nav>

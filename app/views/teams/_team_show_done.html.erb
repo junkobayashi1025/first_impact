@@ -1,9 +1,9 @@
-<div class="panel panel-default">
-  <div class="panel-heading float_left">
-    ※チーム内の完了した報告書
-  </div>
-  <% if team.done_report_team.any? == true %>
-    <table class="table panel-body">
+<div class="panel panel-default text-left">
+  <h1>※チーム内の完了した報告書</h1>
+  <% if team.done_report_team.any? == false %>
+    <strong>該当する報告書はありません</strong>
+  <% else %>
+    <table class="table table-modal panel-body">
       <thead class="thead-dark">
         <tr>
           <th>タイトル</th>
@@ -17,7 +17,5 @@
         </tr>
         <% end %>
       </table>
-    <% else %>
-      <strong>該当する報告書はありません</strong>
     <% end %>
   </div>

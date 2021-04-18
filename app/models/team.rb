@@ -37,4 +37,9 @@ class Team < ApplicationRecord
   def done_report_team
     Report.where(team_id: self.id, checkbox_final: true).order(updated_at: :desc).limit(5)
   end
+
+  def author_report_in_team
+
+    Report.where(team_id: self.id, user_id: self.assign_users.ids, checkbox_final: false)
+  end
 end

@@ -1,0 +1,59 @@
+<!-- <div class ="container mt-3"> -->
+<div class="d-flex align-items-center">
+  <h1>【チーム-プロフィール-】</h1>
+    <% if current_user == team.owner %>
+      <%= link_to '編集', edit_team_path(team), class: 'btn btn-success mb-2 mr-2', id: "team_index_edit-#{team}-submit", data: {"turbolinks" => false}%>
+      <%= link_to '解散', team_path(team), class: 'btn btn-danger mb-2 mr-2', method: :delete, data: { confirm: "チーム「#{team.name}を削除します。
+          よろしいでしょうか？」" }, id: "team_index_delete-#{team}-submit" %>
+    <% end %>
+</div>
+
+<div class="ml-3">
+  <h4 class="text-left"><%= "<チームメンバー：#{team.assigns.count}名>"%></h4>
+  <table class="table table-modal table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        <th style="width: 10%">責任者</th>
+        <th style="width: 20%">ユーザー名</th>
+        <th style="width: 20%">担当報告書数(チーム内)</th>
+        <th style="width: 5%"></th>
+        <th style="width: 10%"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <% team.assign_users.each do |assign_user| %>
+        <tr>
+          <% if team.owner == assign_user %>
+            <td><i class="fas fa-flag"></i></td>
+          <% else %>
+            <td></td>
+          <% end %>
+          <td id=<%= "teams-show__user-#{assign_user.id}-member_name" %>><%= link_to "#{assign_user.name}", user_path(assign_user.id) %></td>
+          <td><%= assign_user.reports.where(team_id:team).count %></td>
+          <% if team.owner == current_user || assign_user == current_user  %>
+            <td id="modal-td"><%= link_to '離脱', team_assign_path(team, assign_user.assigns.ids), method: :delete, class: 'btn btn-info ml-1 mr-1 mt-1', id: "team_show_dropout_team-#{assign_user.id}-submit" %></td>
+          <% else %>
+            <td></td>
+          <% end %>
+          <% if current_user.id == team.owner_id && current_user != assign_user %>
+            <td><%= link_to '権限移動', change_owner_team_path(team, user_id: assign_user.id), method: :post,
+                  class: 'btn btn-primary mt-1', id: "team_show_owner_change-#{assign_user.id}-submit" %></td>
+          <% else %>
+            <td></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <h4 class="text-left"><備考></h4>
+  <div class="profile-remark-box">
+    <% if team.remark.present? %>
+    　<p class="text-left"><%= safe_join(team.remark.split("\n"),tag(:br)) %></p>
+    <% else %>
+    　<p class="card-text">備考欄：記入なし</p>
+    <% end %>
+  </div>
+</div>

@@ -1,9 +1,9 @@
-<div class="panel panel-default">
-  <div class="panel-heading float_left">
-    ※期限切れ or 期限直前(3日以内)
-  </div>
-  <% if expired_reports.any? == true %>
-    <table class="table panel-body">
+<div class="panel panel-default text-left">
+  <h1>※期限切れ or 期限直前(3日以内)</h1>
+  <% if expired_reports.any? == false %>
+    <strong>該当する報告書はありません</strong>
+  <% else %>
+    <table class="table table-modal panel-body">
       <thead class="thead-dark">
         <tr>
           <th>タイトル</th>
@@ -22,7 +22,5 @@
         </tr>
         <% end %>
       </table>
-    <% else %>
-      <strong>該当する報告書はありません</strong>
     <% end %>
   </div>
