@@ -21,11 +21,16 @@ class ReportsController < ApplicationController
   end
 
   def new
-    @report = Report.new
-    @report.author = current_user.name
-    @report.owner = Team.find(params[:team_id]).owner.name
-    5.times { @report.attachments.build }
     @team = Team.find(params[:team_id])
+    if current_user.assign_teams.ids.include?(@team.id)
+      @report = Report.new
+      @report.author = current_user.name
+      @report.owner = Team.find(params[:team_id]).owner.name
+      5.times { @report.attachments.build }
+    else
+      redirect_to team_path(@team)
+      flash[:danger] = 'このチームに所属していない為、報告書は作成できません'
+    end
   end
 
   def create
@@ -80,7 +85,7 @@ class ReportsController < ApplicationController
     else
       flash[:danger] = '報告書の削除に失敗しました'
     end
-    redirect_to reports_path(@report.user.id)
+    redirect_to team_path(@report.team.id)
   end
 
   def approval_request
