@@ -51,7 +51,13 @@
           <p class="alert alert-danger"><%= flash[:alert] %></p>
         <% end %>
       </li>
-
-     </ul>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      <li class="ml-auto">
+        <% if flash[:expired_alert] %>
+          <p class="alert alert-danger"><%= flash[:expired_alert] %></p>
+        <% end %>
+      </li>
+    </ul>
    </div>
  </nav>

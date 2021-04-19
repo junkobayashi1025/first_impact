@@ -26,9 +26,9 @@ class TeamsController < ApplicationController
  def show
    threshold = DateTime.now + 3.day
    @expired_reports = @team.reports.where('due <= ?', threshold).order(due: :asc)
-   if @expired_reports.count > 0
+   if @expired_reports.count > 0 && current_user.assign_teams.ids.include?(@team.id)
      number = @expired_reports.count
-     flash[:danger] = "期限切れ、期限直前のタスクが#{number}件あります。"
+     flash.now[:expired_alert] = "チーム「#{@team.name}」内に、期限切れ、期限直前の報告書が#{number}件あります。"
    end
  end
 

@@ -1,10 +1,16 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-2 px-0 bg-dark sidebar-height" >
+    <div class="col-md-2 px-0 bg-dark sidebar-height" >
       <div class="side-title d-flex align-items-center pl-2">
         <ul class="navbar-nav side-menu">
-          <p class="border-bottom">チーム名</p>
-          <h5><%= @team.name %></h5>
+          <% if current_user == @team.owner %>
+            <span class="border-bottom mb-2">チーム名<i class="fab fa-font-awesome-flag"></i></span>
+          <% elsif current_user.assign_teams.ids.include?(@team.id) %>
+            <span class="border-bottom mb-2">チーム名<i class="fas fa-users"></i></span>
+          <% else %>
+            <span class="border-bottom mb-2">チーム名</span>
+          <% end %>
+          <h5 class="mb-1"><%= @team.name %></h5>
         </ul>
       </div>
       <div class="side-nav" id="nav-bar">
@@ -74,16 +80,18 @@
                       <li class="">
                         <%= link_to '・報告書作成', new_team_report_path(@team), id: "new_report-submit", class:"pl-4" %>
                       </li>
-                      <li class="">
-                        <div class="pl-4 member_invite">・メンバー招待</div>
-                        <div class="member_invite_input">
-                          <%= form_with model: :assign, scope: :post, url: team_assigns_path(@team), class:"ml-4", local: true do |form| %>
-                            <%= text_field_tag :email, '', :size=>"30" %>
-                            <%= submit_tag '招待', id: 'invite_member_submit' %>
-                            <p>※Eメールアドレスを入力してください</p>
-                          <% end %>
-                        </div>
-                      </li>
+                      <% if current_user == @team.owner %>
+                        <li class="">
+                          <div class="pl-4 member_invite">・メンバー招待</div>
+                          <div class="member_invite_input">
+                            <%= form_with model: :assign, scope: :post, url: team_assigns_path(@team), class:"ml-4", local: true do |form| %>
+                              <%= text_field_tag :email, '', :size=>"25" %>
+                              <%= submit_tag '招待', id: 'invite_member_submit' %>
+                              <p>※Eメールアドレスを入力してください</p>
+                            <% end %>
+                          </div>
+                        </li>
+                      <% end %>
                     </ul>
                   </nav>
                 </div>
@@ -91,11 +99,13 @@
             </nav>
           </div>
         </div>
-        <div class="col-md-8 mr-0 d-none d-md-block">
+        <div class="col-md-8">
           <aside id="sidebar">
             <%= render "sidebar", team: @team %>
           </aside>
         </div>
+      </div>
+    </div>
 
 
 

@@ -23,6 +23,7 @@ class ReportsController < ApplicationController
   def new
     @report = Report.new
     @report.author = current_user.name
+    @report.owner = Team.find(params[:team_id]).owner.name
     5.times { @report.attachments.build }
     @team = Team.find(params[:team_id])
   end
@@ -118,6 +119,7 @@ class ReportsController < ApplicationController
       :title,
       :created_date,
       :confirmed_date,
+      :owner,
       :author,
       :accrual_date,
       :site_of_occurrence,

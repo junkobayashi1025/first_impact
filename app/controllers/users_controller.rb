@@ -14,9 +14,9 @@ class UsersController < ApplicationController
   def show
     threshold = DateTime.now + 3.day
     @expired_reports = @user.reports.where('due <= ?', threshold).order(due: :asc)
-    if @expired_reports.count > 0
+    if @expired_reports.count > 0 && current_user == @user
       number = @expired_reports.count
-      flash[:danger] = "期限切れ、期限直前のタスクが#{number}件あります。"
+      flash.now[:expired_alert] = "「#{@user.name}」担当の期限切れ、期限直前の報告書が#{number}件あります。"
     end
   end
 
