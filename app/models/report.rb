@@ -19,6 +19,10 @@ class Report < ApplicationRecord
   scope :sort_by_deadline_date_asc, lambda { all.sort_by(&:deadline_date) }
   scope :sort_by_deadline_date_desc, lambda { all.sort_by(&:deadline_date).reverse }
 
+  def start_time
+    self.due
+  end
+
   def accrual_date_check
     if self.accrual_date > Date.today
       errors.add(:accrual_date, "は#{Date.today}以前の日付を設定してください")

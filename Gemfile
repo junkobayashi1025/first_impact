@@ -28,6 +28,7 @@ gem 'kaminari-bootstrap', '~> 3.0.1'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'dotenv-rails'
 gem "font-awesome-rails"
+gem 'simple_calendar', '~> 2.0'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

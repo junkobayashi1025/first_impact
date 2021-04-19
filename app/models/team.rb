@@ -10,6 +10,10 @@ class Team < ApplicationRecord
 
   mount_uploader :icon, ImageUploader
 
+  def start_time
+    self.reports.due
+  end
+
   def invite_member(user)
     assigns.create(user: user)
   end

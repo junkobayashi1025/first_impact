@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   resources :teams do
     member do
       post :change_owner
+      get  :calendar
     end
     resources :assigns, only: [:create, :destroy]
     resources :reports

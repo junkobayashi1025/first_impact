@@ -1,5 +1,5 @@
 class TeamsController < ApplicationController
-  before_action :set_team, only: [:show, :edit, :update, :destroy]
+  before_action :set_team, only: [:show, :edit, :update, :destroy, :calendar]
   before_action :set_q, only: [:index]
   before_action :authenticate_user!
 
@@ -70,6 +70,14 @@ class TeamsController < ApplicationController
    @user = User.find(params[:user_id])
    @team.update(owner_id: params[:user_id])
    redirect_to @team
+ end
+
+ def calendar
+   if params[:back]
+     redirect_to team_path(@team)
+   else
+    @reports = Report.where(team_id: @team.id, checkbox_final: false)
+   end
  end
 
  private
