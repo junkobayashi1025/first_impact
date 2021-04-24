@@ -6,7 +6,7 @@ class ReportsController < ApplicationController
 
   def index
     if params[:tag_name]
-      @results = Report.where(checkbox_final: false).tagged_with("#{params[:tag_name]}").page(params[:page]).per(8)
+      @results = Report.includes([:user, :taggings]).includes([team: :owner]).where(checkbox_final: false).tagged_with("#{params[:tag_name]}").page(params[:page]).per(8)
     else
       @results = params[:q] ? @q.result.page(params[:page]).per(8) : Report.includes([:user, :taggings]).includes([team: :owner]).where(checkbox_final: false).order(created_date: :desc).page(params[:page]).per(8)
     end
@@ -14,9 +14,9 @@ class ReportsController < ApplicationController
 
   def archive
     if params[:tag_name]
-      @archives = Report.where(checkbox_final: true).tagged_with("#{params[:tag_name]}").page(params[:page]).per(8)
+      @archives = Report.includes([:taggings]).where(checkbox_final: true).tagged_with("#{params[:tag_name]}").page(params[:page]).per(8)
     else
-      @archives = params[:q] ? @q.result.page(params[:page]).per(8) : Report.where(checkbox_final: true).order(created_date: :desc).page(params[:page]).per(8)
+      @archives = params[:q] ? @q.result.page(params[:page]).per(8) : Report.includes([:taggings]).where(checkbox_final: true).order(created_date: :desc).page(params[:page]).per(8)
     end
   end
 
@@ -153,10 +153,10 @@ class ReportsController < ApplicationController
   end
 
   def set_q
-    @q = Report.where.not(checkbox_final: true).ransack(params[:q])
+    @q = Report.includes([:user, :taggings]).includes([team: :owner]).where.not(checkbox_final: true).ransack(params[:q])
   end
 
   def set_q_archive
-    @q = Report.where(checkbox_final: true).ransack(params[:q])
+    @q = Report.includes([:taggings]).where(checkbox_final: true).ransack(params[:q])
   end
 end

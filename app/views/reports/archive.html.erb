@@ -3,7 +3,7 @@
     <h1>報告書一覧(アーカイブ)</h1>
   </div>
 
-  <%= search_form_for @q, url: reports_path do |f| %>
+  <%= search_form_for @q, url: archive_reports_path do |f| %>
     <%= f.search_field :title_cont, placeholder:"タイトル名.." %>
     <%= f.search_field :author_cont, placeholder:"担当者.." %>
     <%= f.submit '検索' %>
