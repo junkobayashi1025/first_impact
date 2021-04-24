@@ -8,7 +8,7 @@ class ReportsController < ApplicationController
     if params[:tag_name]
       @results = Report.where(checkbox_final: false).tagged_with("#{params[:tag_name]}").page(params[:page]).per(8)
     else
-      @results = params[:q] ? @q.result.page(params[:page]).per(8) : Report.where(checkbox_final: false).order(created_date: :desc).page(params[:page]).per(8)
+      @results = params[:q] ? @q.result.page(params[:page]).per(8) : Report.includes([:user, :taggings]).includes([team: :owner]).where(checkbox_final: false).order(created_date: :desc).page(params[:page]).per(8)
     end
   end
 
