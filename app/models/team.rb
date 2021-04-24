@@ -23,23 +23,23 @@ class Team < ApplicationRecord
   end
 
   def request_report
-    request_reports = self.reports.where(checkbox_final: false, approval: true).order(created_at: :asc)
+    request_reports = self.reports.includes([:user]).where(checkbox_final: false, approval: true).order(created_at: :asc)
   end
 
   def new_create_report
-    Report.all.order(created_at: :desc).limit(5)
+    Report.all.includes([:user, :team]).order(created_at: :desc).limit(5)
   end
 
   def done_report
-    Report.where(checkbox_final: true).order(updated_at: :desc).limit(5)
+    Report.includes([:user, :team]).where(checkbox_final: true).order(updated_at: :desc).limit(5)
   end
 
   def new_create_report_team
-    Report.where(team_id: self.id).order(created_at: :desc).limit(5)
+    Report.includes([:user]).where(team_id: self.id).order(created_at: :desc).limit(5)
   end
 
   def done_report_team
-    Report.where(team_id: self.id, checkbox_final: true).order(updated_at: :desc).limit(5)
+    Report.includes([:user]).where(team_id: self.id, checkbox_final: true).order(updated_at: :desc).limit(5)
   end
 
   def author_report_in_team
