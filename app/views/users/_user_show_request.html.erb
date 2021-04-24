@@ -1,6 +1,6 @@
 <div class="panel panel-default text-left">
 <h1>※チーム内で依頼中の報告書</h1>
-  <% if team.request_report.any? == false %>
+  <% if user.request_report.any? == false %>
     <strong>該当する報告書はありません</strong>
   <% else %>
     <table class="table table-modal panel-body">
@@ -13,9 +13,9 @@
         </tr>
       </thead>
 
-      <% team.request_report.each do |report| %>
+      <% user.request_report.each do |report| %>
         <tr>
-          <td class="team-header"><%= link_to "#{report.title}", report_path(report.id) %></td>
+          <td class="user-header"><%= link_to "#{report.title}", report_path(report.id) %></td>
           <td><%= link_to "#{report.user.name}", user_path(report.user.id) %></td>
           <td><%= report.step %></td>
           <% if report.due.present? %>

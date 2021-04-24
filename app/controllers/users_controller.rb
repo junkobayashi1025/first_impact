@@ -62,6 +62,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def calendar
+    if params[:back]
+      redirect_to user_path(@user)
+    else
+     @reports = Report.where(user_id: @user.id, checkbox_final: false)
+    end
+  end
+
   private
   def set_user
     @user = User.find(params[:id])

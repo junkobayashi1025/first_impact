@@ -52,6 +52,10 @@ class User < ApplicationRecord
     author_reports = self.reports.where(checkbox_final: false).order(created_at: :asc)
   end
 
+  def request_report
+    request_reports = self.reports.where(checkbox_final: false, approval: true).order(created_at: :asc)
+  end
+
   def self.guest
     find_or_create_by!(email: 'guest1@example.com') do |user|
       user.password = user.email
