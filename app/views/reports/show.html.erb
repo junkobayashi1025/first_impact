@@ -145,9 +145,9 @@
                  <% end %>
                  </div>
                  <% unless @report.confirmation_of_effectiveness.nil? %>
-                 <% if @report.confirmation_of_effectiveness.split("\n").count > 2 %>
-                 <label class="readmore-label" for="check5"></label>
-                 <% end %>
+                   <% if @report.confirmation_of_effectiveness.split("\n").count > 2 %>
+                   <label class="readmore-label" for="check5"></label>
+                   <% end %>
                  <% end %>
                </div><br>
                <% if @report.attachments.present? %>
