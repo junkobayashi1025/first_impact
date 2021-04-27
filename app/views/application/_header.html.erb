@@ -50,6 +50,7 @@
         <% if flash[:alert] %>
           <p class="alert alert-danger"><%= flash[:alert] %></p>
         <% end %>
+        <%= yield(:message) %>
       </li>
     </ul>
     <ul class="navbar-nav ml-auto">

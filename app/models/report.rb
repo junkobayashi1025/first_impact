@@ -16,8 +16,11 @@ class Report < ApplicationRecord
   validate  :accrual_date_check
   validate  :confirmed_date_check
 
+  scope :deadline_approaching, -> { where('due <= ?', DEADLINE_APPROACH_THRESHOLD_DAYS.since) }
   scope :sort_by_deadline_date_asc, lambda { all.sort_by(&:deadline_date) }
   scope :sort_by_deadline_date_desc, lambda { all.sort_by(&:deadline_date).reverse }
+
+  DEADLINE_APPROACH_THRESHOLD_DAYS = 3.days
 
   def start_time
     self.due
@@ -63,11 +66,32 @@ class Report < ApplicationRecord
     end
   end
 
+  # ステータス定義の案
+  # APPROVE_STATUS = [
+  #   APPROVE_STATUS_CREATING = 'create',
+  #   APPROVE_STATUS_APPROVED = 'approve',
+  # ]
+
+  # enumerize :ap, in: [:male, :female]
   def status_string
     if self.approval
       return self.update(status: "承認依頼中")
     else
       return self.update(status: "作成中")
+    end
+  end
+
+  def active?
+    team || user
+  end
+
+
+
+  def status_for(user)
+    if user.id == user.id && approval == false
+
+    elsif user.id == team.owner.id && approval == true
+
     end
   end
 end

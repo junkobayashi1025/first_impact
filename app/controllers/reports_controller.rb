@@ -6,17 +6,23 @@ class ReportsController < ApplicationController
 
   def index
     if params[:tag_name]
-      @results = Report.includes([:user, :taggings]).includes([team: :owner]).where(checkbox_final: false).tagged_with("#{params[:tag_name]}").page(params[:page]).per(8)
+      @results = Report.includes(:user, :taggings, team: :owner).where(checkbox_final: false).tagged_with("#{params[:tag_name]}").page(params[:page])
     else
-      @results = params[:q] ? @q.result.page(params[:page]).per(8) : Report.includes([:user, :taggings]).includes([team: :owner]).where(checkbox_final: false).order(created_date: :desc).page(params[:page]).per(8)
+      @results = params[:q] ? @q.result.page(params[:page]) : Report.includes([:user, :taggings]).includes([team: :owner]).where(checkbox_final: false).order(created_date: :desc).page(params[:page]).per(8)
     end
+
+    # tag_nameが入っているのと入っていないので差分の部分だけの追加処理にしたい
+    # ransackの機能を使うことでparams[:q]のあるなしで場合分けは必要なくなりそう
+    # if params[:tag_name]
+    #   @results =
+    # end
   end
 
   def archive
     if params[:tag_name]
       @archives = Report.includes([:taggings]).where(checkbox_final: true).tagged_with("#{params[:tag_name]}").page(params[:page]).per(8)
     else
-      @archives = params[:q] ? @q.result.page(params[:page]).per(8) : Report.includes([:taggings]).where(checkbox_final: true).order(created_date: :desc).page(params[:page]).per(8)
+      @archives = params[:q] ? @q.result.page(params[:page]): Report.includes([:taggings]).where(checkbox_final: true).order(created_date: :desc).page(params[:page]).per(8)
     end
   end
 

@@ -3,22 +3,16 @@
     <div class="card">
       <div class="card-header">
         <strong>報告書詳細画面</strong>
-        <% if @report.team_id != nil || @report.user_id != nil %>
+        <% if @report.active? %>
           <% if current_user != @report.user && current_user != @report.team.owner && @report.checkbox_final != true %>
-            <div class="float_right_3" id="report_show_<%= @report.id %>">
-              <% if current_user.liked_by?(@report.id) %>
-                <%= link_to 'いいねを外す', destroy_bookmark_path(id: @report), method: :DELETE, remote: true, class: "bookmarked hide-text" %>
-              <% else %>
-                <%= link_to 'いいね', create_bookmark_path(id: @report), method: :POST, remote: true, class: "bookmark hide-text" %>
-              <% end %>
-              </div>
+            <%= render 'like' %>
             <% end %>
             <% unless @report.checkbox_final == true %>
               <div class="float_right_3">
                 <% if @report.checkbox_final != true && @report.user.id != @report.team.owner.id %>
-                  <% if current_user.id == @report.user.id && @report.approval == false %>
+                  <% if current_user.id == @report.user.id && @report.approval_request == false %>
                     <%= link_to '承認依頼', approval_request_report_path(id: @report.id), method: :POST, class: 'btn btn-primary mr-3', id: "report_show_approval_request-#{@report.id}-submit" %>
-                  <% elsif current_user.id == @report.team.owner.id && @report.approval == true  %>
+                  <% elsif current_user.id == @report.team.owner.id && @report.approval_request == true  %>
                     <%= link_to '承認', approval_report_path(id: @report.id), method: :POST, class: 'btn btn-success mr-3', id: "report_show_approval-#{@report.id}-submit" %>
                     <%= link_to '拒否', reject_report_path(id: @report.id), method: :POST, class: 'btn btn-danger mr-3', id: "report_show_reject-#{@report.id}-submit" %>
                   <% elsif @report.approval == false %>

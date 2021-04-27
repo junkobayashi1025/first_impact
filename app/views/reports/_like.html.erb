@@ -1,0 +1,7 @@
+<div class="float_right_3" id="report_show_<%= @report.id %>">
+  <% if current_user.liked_by?(@report.id) %>
+    <%= link_to 'いいねを外す', destroy_bookmark_path(id: @report), method: :DELETE, remote: true, class: "bookmarked hide-text" %>
+  <% else %>
+    <%= link_to 'いいね', create_bookmark_path(id: @report), method: :POST, remote: true, class: "bookmark hide-text" %>
+  <% end %>
+</div>
