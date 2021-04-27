@@ -1,3 +1,5 @@
+<% if @expired_reports.count > 0 %>
+  <% content_for(:message, "チーム「#{@team.name}」内に、期限切れ、期限直前の報告書が#{@expired_reports.count}件あります。") %>
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-2 px-0 bg-dark sidebar-height" >

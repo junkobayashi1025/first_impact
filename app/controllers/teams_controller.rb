@@ -2,6 +2,7 @@ class TeamsController < ApplicationController
   before_action :set_team, only: [:show, :edit, :update, :destroy, :calendar]
   before_action :set_q, only: [:index]
   before_action :authenticate_user!
+  before_action :reject_unless_owner, only: %i[edit update destroy]
 
  def index
    @teams = @q.result(distinct: true).page(params[:page]).per(8)
@@ -12,30 +13,23 @@ class TeamsController < ApplicationController
  end
 
  def create
-   @team = Team.new(teams_params)
-   @team.owner_id = current_user.id
+   @team = current_user.teams.new(teams_params)
+   # @team = Team.new(teams_params)
+   # @team.owner_id = current_user.id
    if @team.save
      @team.invite_member(@team.owner)
-     redirect_to team_path(@team)
-     flash[:notice] = "チーム「#{@team.name}」を作成しました"
+     redirect_to team_path(@team), notice: "チーム「#{@team.name}」を作成しました"
+     # flash[:notice] = "チーム「#{@team.name}」を作成しました"
    else
      render 'new'
    end
  end
 
  def show
-   threshold = DateTime.now + 3.day
-   @expired_reports = @team.reports.where('due <= ?', threshold).order(due: :asc)
-   if @expired_reports.count > 0 && current_user.assign_teams.ids.include?(@team.id)
-     number = @expired_reports.count
-     flash.now[:expired_alert] = "チーム「#{@team.name}」内に、期限切れ、期限直前の報告書が#{number}件あります。"
-   end
+   @expired_reports = current_user.assign_teams.reports.deadline_approaching.order(due: :asc)
  end
 
  def edit
-   if @team.owner != current_user
-     redirect_to @team, notice:"権限がありません"
-   end
  end
 
  def update
@@ -53,9 +47,7 @@ class TeamsController < ApplicationController
 
  def destroy
    undone_reports = @team.reports.where(checkbox_final: false)
-   if @team.owner != current_user
-     redirect_to @team, notice:"権限がありません"
-   elsif undone_reports.count > 0
+   if undone_reports.count > 0
      redirect_to team_path(@team)
      flash[:danger] = "未完の報告書がある為、チームを解散できません"
    else
@@ -93,5 +85,11 @@ class TeamsController < ApplicationController
  def set_q
    @q = Team.ransack(params[:q])
  end
+
+  def reject_unless_owner
+    if @team.owner != current_user
+      redirect_to @team, notice:"権限がありません"
+    end
+  end
 
 end
