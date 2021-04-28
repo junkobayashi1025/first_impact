@@ -19,157 +19,162 @@
       </div>
       <div class="card-body">
         <%= form_with model: @report, local: true, class: "upload-images p-0 border-0" do |f| %>
-           <div class="float_right">
-             <div class="form-group">
-               <%= f.label :作成日 %>
-             <div class="form-control">
-               <%= @report.created_at.strftime("%Y年 %m月 %d日") %>
-             </div>
-             </div>
-            <hr>
+        <div class="float_right">
+          <div class="form-group">
+            <%= f.label :作成日 %>
             <div class="form-control">
-              <%= "責任者：#{@report.team.owner.name}" %>
-            </div><br>
-            <div class="form-control">
-              <%= "担当者：#{@report.user.name}" %>
+              <%= @report.created_at.strftime("%Y年 %m月 %d日") %>
             </div>
-           </div>
-           <div class="form-group  col-md-6">
-             <% if @report.checkbox_first == false %>
-               <span class="must">必須</span><%= f.label :タイトル %>
-             <% else %>
-               <%= f.label :タイトル %>
-             <% end %>
-             <%= f.text_field :title, class: 'form-control' %>
-           </div>
-           <div class="form-group clear col-md-6">
-             <span class="free">任意</span><%= f.label :タグ %>
-  　　　　　　<%= f.text_field :tag_list, value: @report.tag_list.join(','), class: "form-control" %>
-             <p>※　,(カンマ)で複数のタグ作成</p>
-           </div>
-           <u>1.発生状況</u>
-           <div class="form-group  col-md-6">
-             <% if @report.checkbox_first == false %>
-               <span class="must">必須</span><%= f.label :発生日 %>
-             <% else %>
-               <%= f.label :発生日 %>
-             <% end %>
-  　　　　　　<%= f.date_field :accrual_date, class: 'form-control' %>
-           </div>
-           <div class="form-group  col-md-6">
-             <span class="free">任意</span><%= f.label :発生場所 %>
-  　　　　　　<%= f.text_field :site_of_occurrence, class: 'form-control' %>
-           </div>
-           <div class="field">
-           </div>
-           <div class="form-group clear">
-             <% if @report.checkbox_first == false %>
-               <span class="must">必須</span><u>2-1.トラブル内容</u>
-             <% else %>
-               <u>2-1.トラブル内容</u>
-             <% end %>
-             <%= "(提出〆切：#{(@report.accrual_date + 7.day).strftime("%Y年 %m月 %d日")})"%>
-             <% if current_user == @report.team.owner %>
-               <%= f.check_box :checkbox_first, id: :checkbox_first,:as => :boolean %>
-               <%= f.label :責任者承認 %>
-             <% else %>
-               <% if @report.checkbox_first %>
-                 <input class="none_function" id="checkbox_first" as="boolean" type="checkbox" checked>責任者承認
-               <% else %>
-                 <input class="none_function" id="checkbox_first" as="boolean" type="checkbox">責任者承認
-               <% end %>
-             <% end %>
-  　　　　　　<%= f.text_area :trouble_content, class: 'form-control', rows:5 %>
-           </div>
-           <div class="form-group">
-             <% if @report.checkbox_first == false %>
-               <span class="must">必須</span><u>2-2.応急対応</u>
-             <% else %>
-               <u>2-2.応急対応</u>
-             <% end %>
-              <%= "(提出〆切：#{(@report.accrual_date + 7.day).strftime("%Y年 %m月 %d日")})"%>
-  　　　　　　 <%= f.text_area :first_aid, class: 'form-control mt-2', rows:5 %>
-           </div>
-           <div class="form-group">
-             <% if @report.checkbox_first == false %>
-               <span class="must">必須</span><u>2-3.暫定対策</u>
-             <% else %>
-               <u>2-3.暫定対策</u>
-             <% end %>
-             <%= "(提出〆切：#{(@report.accrual_date + 7.day).strftime("%Y年 %m月 %d日")})"%>
-  　　　　　　<%= f.text_area :interim_measures, class: 'form-control mt-2', rows:5%>
-           </div>
-           <div class="form-group report">
-             <% if @report.checkbox_first && @report.checkbox_interim == false  %>
-               <span class="must">必須</span><u>3.恒久対策</u>
-             <% else %>
-               <u>3.恒久対策</u>
-             <% end %>
-             <%= "(提出〆切：#{(@report.accrual_date + 14.day).strftime("%Y年 %m月 %d日")})"%>
-             <% if current_user == @report.team.owner %>
-               <%= f.check_box :checkbox_interim, id: :checkbox_interim,:as => :boolean %>
-               <%= f.label :責任者承認 %>
-             <% else %>
-               <% if @report.checkbox_interim %>
-                 <input class="none_function" id="checkbox_interim" as="boolean" type="checkbox" checked>責任者承認
-               <% else %>
-                 <input class="none_function" id="checkbox_interim" as="boolean" type="checkbox">責任者承認
-               <% end %>
-             <% end %>
-             <% if @report.checkbox_first %>
-  　　　　　　  <%= f.text_area :permanent_measures, class: 'form-control', rows:5 %>
-             <% else %>
-               <span class="balloon">「2.1トラブルの内容」において、責任者の承認が得られるまで記入できません</span>
-               <%= f.text_area :permanent_measures, class: 'form-control none_function', rows:5 %>
-             <% end %>
-           　</div>
-             <div class="form-group report">
-               <% if @report.checkbox_first && @report.checkbox_interim && @report.checkbox_final == false  %>
-                <span class="must">必須</span><u>4.有効性の確認</u>
-               <% else %>
-                <u>4.有効性の確認</u>
-               <% end %>
-               <% if current_user == @report.team.owner %>
-                 <span>(提出〆切：</span>
-                 <span><%= f.date_field :confirmed_date %></span>
-                 <span>)</span>
-                 <span><%= f.check_box :checkbox_final, id: :checkbox_final,:as => :boolean %></span>
-                 <%= f.label :責任者承認 %>
-               <% else %>
-                 <% if @report.checkbox_final %>
-                   <input class="none_function" id="checkbox_final" as="boolean" type="checkbox" checked>責任者承認
-                 <% else %>
-                   <input class="none_function" id="checkbox_final" as="boolean" type="checkbox">責任者承認
-                 <% end %>
-               <% end %>
-               <% if @report.checkbox_interim %>
-  　　　　　　    <%= f.text_area :confirmation_of_effectiveness, class: 'form-control', rows:5 %>
-               <% else %>
-                 <span class="balloon">「3.恒久対策」において、責任者の承認が得られるまで記入できません</span>
-                 <%= f.text_area :confirmation_of_effectiveness, class: 'form-control none_function', rows:5 %>
-               <% end %>
-             </div>
-             <% if @report.attachments %>
-               <div class ="mb-3">
-                 <span class="free">任意</span><u>5.添付資料(添付資料は最大5つまで)</u><br>
-                 <div class="mt-2">
-                   <%= f.fields_for :attachments do |i| %>
-                     <% if i.object.id.nil? %>
-                       <%= i.file_field :image %><br>
-                     <% elsif i.object.image.present? %>
-                       <li>
-                         <a href="<%= asset_url(i.object.image.url) %>"><%= "#{i.index + 1}. #{i.object.image.identifier}" %></a>
-                       </li>
-                     <% end %>
-                   <% end %>
-                 </div>
-               </div>
-              <% end %><hr>
-              <%= f.hidden_field :team_id %>
-              <%= f.submit "変更", class:"btn btn-primary mr-3", id:"reports-edit-submit" %>
-              <%= f.submit '戻る', class:"btn btn-secondary", name: 'back' %>
-           <% end %>
-         </div>
-       </div>
-     </div>
-   </div>
+          </div>
+          <hr>
+          <div class="form-control">
+            <%= "責任者：#{@report.team.owner.name}" %>
+          </div><br>
+          <div class="form-control">
+            <%= "担当者：#{@report.user.name}" %>
+          </div>
+        </div>
+        <div class="form-group  col-md-6">
+          <% if @report.checkbox_first == false %>
+            <span class="must">必須</span><%= f.label :タイトル %>
+          <% else %>
+            <%= f.label :タイトル %>
+          <% end %>
+          <%= f.text_field :title, class: 'form-control' %>
+        </div>
+        <div class="form-group clear col-md-6">
+          <span class="free">任意</span><%= f.label :タグ %>
+          <%= f.text_field :tag_list, value: @report.tag_list.join(','), class: "form-control" %>
+          <p>※ ,(カンマ)で複数のタグ作成</p>
+        </div>
+        <u>1.発生状況</u>
+        <div class="form-group  col-md-6">
+          <% if @report.checkbox_first == false %>
+            <span class="must">必須</span><%= f.label :発生日 %>
+          <% else %>
+            <%= f.label :発生日 %>
+          <% end %>
+          <%= f.date_field :accrual_date, class: 'form-control' %>
+        </div>
+        <div class="form-group  col-md-6">
+          <span class="free">任意</span><%= f.label :発生場所 %>
+          <%= f.text_field :site_of_occurrence, class: 'form-control' %>
+        </div>
+        <div class="field"></div>
+        <div class="form-group clear">
+          <% if @report.checkbox_first == false %>
+            <span class="must">必須</span>
+            <u>2-1.トラブル内容</u>
+          <% else %>
+            <u>2-1.トラブル内容</u>
+          <% end %>
+          <%= "(提出〆切：#{(@report.accrual_date + 7.day).strftime("%Y年 %m月 %d日")})"%>
+          <% if current_user == @report.team.owner %>
+            <%= f.check_box :checkbox_first, id: :checkbox_first,:as => :boolean %>
+            <%= f.label :責任者承認 %>
+          <% else %>
+            <% if @report.checkbox_first %>
+              <input class="none_function" id="checkbox_first" as="boolean" type="checkbox" checked="checked">責任者承認
+            <% else %>
+              <input class="none_function" id="checkbox_first" as="boolean" type="checkbox">責任者承認
+            <% end %>
+          <% end %>
+          <%= f.text_area :trouble_content, class: 'form-control', rows:5 %>
+        </div>
+        <div class="form-group">
+          <% if @report.checkbox_first == false %>
+            <span class="must">必須</span>
+            <u>2-2.応急対応</u>
+          <% else %>
+            <u>2-2.応急対応</u>
+          <% end %>
+          <%= "(提出〆切：#{(@report.accrual_date + 7.day).strftime("%Y年 %m月 %d日")})"%>
+          <%= f.text_area :first_aid, class: 'form-control mt-2', rows:5 %>
+        </div>
+        <div class="form-group">
+          <% if @report.checkbox_first == false %>
+            <span class="must">必須</span>
+            <u>2-3.暫定対策</u>
+          <% else %>
+            <u>2-3.暫定対策</u>
+          <% end %>
+          <%= "(提出〆切：#{(@report.accrual_date + 7.day).strftime("%Y年 %m月 %d日")})"%>
+          <%= f.text_area :interim_measures, class: 'form-control mt-2', rows:5%>
+        </div>
+        <div class="form-group report">
+          <% if @report.checkbox_first && @report.checkbox_interim == false  %>
+            <span class="must">必須</span>
+            <u>3.恒久対策</u>
+          <% else %>
+            <u>3.恒久対策</u>
+          <% end %>
+          <%= "(提出〆切：#{(@report.accrual_date + 14.day).strftime("%Y年 %m月 %d日")})"%>
+          <% if current_user == @report.team.owner %>
+            <%= f.check_box :checkbox_interim, id: :checkbox_interim,:as => :boolean %>
+            <%= f.label :責任者承認 %>
+          <% else %>
+            <% if @report.checkbox_interim %>
+              <input class="none_function" id="checkbox_interim" as="boolean" type="checkbox" checked="checked">責任者承認
+            <% else %>
+              <input class="none_function" id="checkbox_interim" as="boolean" type="checkbox">責任者承認
+            <% end %>
+          <% end %>
+          <% if @report.checkbox_first %>
+            <%= f.text_area :permanent_measures, class: 'form-control', rows:5 %>
+          <% else %>
+            <span class="balloon">「2.1トラブルの内容」において、責任者の承認が得られるまで記入できません</span>
+            <%= f.text_area :permanent_measures, class: 'form-control none_function', rows:5 %>
+          <% end %>
+        </div>
+        <div class="form-group report">
+          <% if @report.checkbox_first && @report.checkbox_interim && @report.checkbox_final == false  %>
+            <span class="must">必須</span>
+            <u>4.有効性の確認</u>
+          <% else %>
+            <u>4.有効性の確認</u>
+          <% end %>
+          <% if current_user == @report.team.owner %>
+            <span>(提出〆切：</span>
+            <span><%= f.date_field :confirmed_date %></span>
+            <span>)</span>
+            <span><%= f.check_box :checkbox_final, id: :checkbox_final,:as => :boolean %></span>
+            <%= f.label :責任者承認 %>
+          <% else %>
+            <% if @report.checkbox_final %>
+              <input class="none_function" id="checkbox_final" as="boolean" type="checkbox" checked="checked">責任者承認
+            <% else %>
+              <input class="none_function" id="checkbox_final" as="boolean" type="checkbox">責任者承認
+            <% end %>
+          <% end %>
+          <% if @report.checkbox_interim %>
+            <%= f.text_area :confirmation_of_effectiveness, class: 'form-control', rows:5 %>
+          <% else %>
+            <span class="balloon">「3.恒久対策」において、責任者の承認が得られるまで記入できません</span>
+            <%= f.text_area :confirmation_of_effectiveness, class: 'form-control none_function', rows:5 %>
+          <% end %>
+        </div>
+        <% if @report.attachments %>
+          <div class="mb-3">
+            <span class="free">任意</span>
+            <u>5.添付資料(添付資料は最大5つまで)</u><br>
+            <div class="mt-2">
+              <%= f.fields_for :attachments do |i| %>
+              <% if i.object.id.nil? %>
+                <%= i.file_field :image %><br>
+                <% elsif i.object.image.present? %>
+                  <li>
+                    <a href="<%= asset_url(i.object.image.url) %>"><%= "#{i.index + 1}. #{i.object.image.identifier}" %></a>
+                  </li>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        <% end %><hr>
+        <%= f.hidden_field :team_id %>
+        <%= f.submit "変更", class:"btn btn-primary mr-3", id:"reports-edit-submit" %>
+        <%= f.submit '戻る', class:"btn btn-secondary", name: 'back' %>
+      <% end %>
+    </div>
+  </div>
+</div>
+</div>

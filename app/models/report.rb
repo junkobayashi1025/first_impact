@@ -24,27 +24,25 @@ class Report < ApplicationRecord
   end
 
   def accrual_date_check
-    if self.accrual_date > Date.today
-      errors.add(:accrual_date, "は#{Date.today}以前の日付を設定してください")
-    end
+    self.accrual_date > Date.today
+    errors.add(:accrual_date, "は#{Date.today}以前の日付を設定してください")
   end
 
   def confirmed_date_check
-    if self.checkbox_interim && self.confirmed_date.present? && self.accrual_date + 14.day > self.confirmed_date
-      errors.add(:confirmed_date, "は3.恒久対策(提出〆切)以降の日付を設定してください")
-    end
+    self.checkbox_interim && self.confirmed_date.present? && self.accrual_date + 14.day > self.confirmed_date
+    errors.add(:confirmed_date, "は3.恒久対策(提出〆切)以降の日付を設定してください")
   end
 
   def build_attachment_for_form
-   self.attachments.build if saved_attachments.length < 5 && unsaved_attachments.length == 0
+    self.attachments.build if saved_attachments.length < 5 && unsaved_attachments.length == 0
   end
 
   def saved_attachments
-   self.attachments.select(&:id)
+    self.attachments.select(&:id)
   end
 
   def unsaved_attachments
-   self.attachments.select { |attachment| attachment.id.nil? }
+    self.attachments.select { |attachment| attachment.id.nil? }
   end
 
   def bookmarked_by(user)

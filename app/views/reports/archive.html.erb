@@ -4,30 +4,30 @@
   </div>
 
   <%= search_form_for @q, url: archive_reports_path do |f| %>
-    <%= f.search_field :title_cont, placeholder:"タイトル名.." %>
-    <%= f.search_field :author_cont, placeholder:"担当者.." %>
-    <%= f.submit '検索' %>
-    <%= link_to 'クリア', archive_reports_url %>
-    <br>
-  <% end %>
+  <%= f.search_field :title_cont, placeholder:"タイトル名.." %>
+  <%= f.search_field :author_cont, placeholder:"担当者.." %>
+  <%= f.submit '検索' %>
+  <%= link_to 'クリア', archive_reports_url %>
+  <br>
+<% end %>
 
-  <table class="table mt-2">
-    <thead class="thead-dark">
-      <tr>
-        <th>タイトル</th>
-        <th>担当者</th>
-        <th>責任者</th>
-        <th>完了日</th>
-        <th>タグ</th>
-     </tr>
-   </thead>
-   <tbody>
-     <% @archives.each do |report| %>
-       <tr id="report_index_<%= report.id %>">
-         <%= render 'report_archive', report: report %>
-       </tr>
-     <% end %>
-   </tbody>
-  </table>
-  <%= paginate @archives %>
+<table class="table mt-2">
+  <thead class="thead-dark">
+    <tr>
+      <th>タイトル</th>
+      <th>担当者</th>
+      <th>責任者</th>
+      <th>完了日</th>
+      <th>タグ</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @archives.each do |report| %>
+      <tr id="report_index_<%= report.id %>">
+        <%= render 'report_archive', report: report %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @archives %>
 </div>

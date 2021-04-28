@@ -3,38 +3,38 @@
     <h1>報告書一覧(作成中)</h1>
   </div>
   <%= search_form_for @q, url: reports_path do |f| %>
-    <%= f.search_field :title_cont, placeholder:"タイトル名.." %>
-    <%= f.search_field :team_name_cont, placeholder:"チーム名.." %>
-    <%= f.search_field :team_owner_name_cont, placeholder:"責任者.." %>
-    <%= f.search_field :author_cont, placeholder:"担当者.." %>
-    <%= f.submit '検索' %>
-    <%= link_to 'クリア', @repotrs_path %>
-    <br>
-  <% end %>
+  <%= f.search_field :title_cont, placeholder:"タイトル名.." %>
+  <%= f.search_field :team_name_cont, placeholder:"チーム名.." %>
+  <%= f.search_field :team_owner_name_cont, placeholder:"責任者.." %>
+  <%= f.search_field :author_cont, placeholder:"担当者.." %>
+  <%= f.submit '検索' %>
+  <%= link_to 'クリア', @repotrs_path %>
+  <br>
+<% end %>
 
-  <table class="table mt-2">
-    <thead class="thead-dark">
-      <tr>
-        <th></th>
-        <th>タイトル</th>
-        <th>チーム名</th>
-        <th>責任者</th>
-        <th>担当者</th>
-        <th><%= sort_link(@q, :step, 'ステップ')%></th>
-        <th><%= sort_link(@q, :status, 'ステータス')%></th>
-        <th><%= sort_link(@q, :due, '提出〆切', default_order: :asc)%></th>
-        <th>タグ</th>
-        <th></th>
-        <th></th>
-     </tr>
-   </thead>
-   <tbody>
-     <% @results.each do |report| %>
-       <tr id="report_index_<%= report.id %>">
-         <%= render 'report', report: report %>
-       </tr>
-     <% end %>
-   </tbody>
-  </table>
-  <%= paginate @results %>
+<table class="table mt-2">
+  <thead class="thead-dark">
+    <tr>
+      <th></th>
+      <th>タイトル</th>
+      <th>チーム名</th>
+      <th>責任者</th>
+      <th>担当者</th>
+      <th><%= sort_link(@q, :step, 'ステップ')%></th>
+      <th><%= sort_link(@q, :status, 'ステータス')%></th>
+      <th><%= sort_link(@q, :due, '提出〆切', default_order: :asc)%></th>
+      <th>タグ</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @results.each do |report| %>
+      <tr id="report_index_<%= report.id %>">
+        <%= render 'report', report: report %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @results %>
 </div>

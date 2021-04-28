@@ -1,11 +1,10 @@
 <!-- <div class ="container mt-3"> -->
 <div class="d-flex align-items-center">
   <h1>【チーム-プロフィール-】</h1>
-    <% if current_user == team.owner %>
-      <%= link_to '編集', edit_team_path(team), class: 'btn btn-success mb-2 mr-2', id: "team_index_edit-#{team}-submit", data: {"turbolinks" => false}%>
-      <%= link_to '解散', team_path(team), class: 'btn btn-danger mb-2 mr-2', method: :delete, data: { confirm: "チーム「#{team.name}を削除します。
-          よろしいでしょうか？」" }, id: "team_index_delete-#{team}-submit" %>
-    <% end %>
+  <% if current_user == team.owner %>
+    <%= link_to '編集', edit_team_path(team), class: 'btn btn-success mb-2 mr-2', id: "team_index_edit-#{team}-submit", data: {"turbolinks" => false}%>
+    <%= link_to '解散', team_path(team), class: 'btn btn-danger mb-2 mr-2', method: :delete, data: { confirm: "チーム「#{team.name}を削除します。 よろしいでしょうか？」" }, id: "team_index_delete-#{team}-submit" %>
+  <% end %>
 </div>
 
 <div class="ml-3">
@@ -26,7 +25,9 @@
       <% team.assign_users.each do |assign_user| %>
         <tr>
           <% if team.owner == assign_user %>
-            <td><i class="fas fa-flag"></i></td>
+            <td>
+              <i class="fas fa-flag"></i>
+            </td>
           <% else %>
             <td></td>
           <% end %>
@@ -38,8 +39,7 @@
             <td></td>
           <% end %>
           <% if current_user.id == team.owner_id && current_user != assign_user %>
-            <td><%= link_to '権限移動', change_owner_team_path(team, user_id: assign_user.id), method: :post,
-                  class: 'btn btn-primary mt-1', id: "team_show_owner_change-#{assign_user.id}-submit" %></td>
+            <td><%= link_to '権限移動', change_owner_team_path(team, user_id: assign_user.id), method: :post, class: 'btn btn-primary mt-1', id: "team_show_owner_change-#{assign_user.id}-submit" %></td>
           <% else %>
             <td></td>
           <% end %>
@@ -48,12 +48,13 @@
     </tbody>
   </table>
 
-  <h4 class="text-left"><備考></h4>
-  <div class="profile-remark-box">
-    <% if team.remark.present? %>
-    　<p class="text-left"><%= safe_join(team.remark.split("\n"),tag(:br)) %></p>
-    <% else %>
-    　<p class="card-text">備考欄：記入なし</p>
-    <% end %>
+  <h4 class="text-left">
+    <備考></h4>
+    <div class="profile-remark-box">
+      <% if team.remark.present? %>
+        <p class="text-left"><%= safe_join(team.remark.split("\n"),tag(:br)) %></p>
+      <% else %>
+        <p class="card-text">備考欄：記入なし</p>
+      <% end %>
+    </div>
   </div>
-</div>

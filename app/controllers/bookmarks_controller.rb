@@ -1,5 +1,4 @@
 class BookmarksController < ApplicationController
-  before_action :authenticate_user!
   before_action :report_params, only: [:create, :destroy]
 
   def create

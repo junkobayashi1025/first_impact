@@ -4,10 +4,10 @@
   </div>
 
   <%= search_form_for @q, url: users_path do |f| %>
-    <%= f.search_field :name_or_email_cont, placeholder:"キーワード.." %>
-    <%= f.submit '検索' %>
-    <%= link_to 'クリア', @teams_path %>
-    <br>
+  <%= f.search_field :name_or_email_cont, placeholder:"キーワード.." %>
+  <%= f.submit '検索' %>
+  <%= link_to 'クリア', @teams_path %>
+  <br>
   <% end %>
 
   <table class="table mt-2">
@@ -18,18 +18,18 @@
         <th>メールアドレス</th>
         <th>登録日時</th>
 
-     </tr>
-   </thead>
-   <tbody>
-     <% @users.each do |user| %>
-     <tr class="border-bottom">
-       <td id=<%= "users-index__user-#{user.id}-icon" %>><%= image_tag user.icon.url, class: "user-index-round-img" %></td>
-       <td id=<%= "users-index__user-#{user.id}-name" %>><%= link_to "#{user.name}", user_path(user.id), id: "user-index_detail-#{user.id}-submit" %></td>
-       <td id=<%= "users-index__user-#{user.id}-email" %>><%= user.email %></td>
-       <td id=<%= "users-index__user-#{user.id}-created_at" %>><%= user.created_at.strftime("%Y年 %m月 %d日") %></td>
-     </tr>
-     <% end %>
-   </tbody>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+      <tr class="border-bottom">
+        <td id=<%= "users-index__user-#{user.id}-icon" %>><%= image_tag user.icon.url, class: "user-index-round-img" %></td>
+        <td id=<%= "users-index__user-#{user.id}-name" %>><%= link_to "#{user.name}", user_path(user.id), id: "user-index_detail-#{user.id}-submit" %></td>
+        <td id=<%= "users-index__user-#{user.id}-email" %>><%= user.email %></td>
+        <td id=<%= "users-index__user-#{user.id}-created_at" %>><%= user.created_at.strftime("%Y年 %m月 %d日") %></td>
+      </tr>
+      <% end %>
+    </tbody>
   </table>
   <%= paginate @users %>
 </div>

@@ -3,17 +3,17 @@
     <h1>アカウント編集</h1>
   </div>
   <% if @user.errors.any? %>
-    <div id="error_explanation" class="alert alert-danger">
-      <h4><%= @user.errors.count %>件のエラーがあります。</h4>
-      <ul>
-        <% @user.errors.full_messages.each do|msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
+  <div id="error_explanation" class="alert alert-danger">
+    <h4><%= @user.errors.count %>件のエラーがあります。</h4>
+    <ul>
+      <% @user.errors.full_messages.each do|msg| %>
+      <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
   <% end %>
   <div class="col-md-4">
-  <%= form_with(model: @user, local: true) do |f| %>
+    <%= form_with(model: @user, local: true) do |f| %>
     <div class="form-group profile">
       <div class="box-name">
         <span class="must">必須</span>
@@ -40,15 +40,15 @@
           <span>プロフィール画像</span>
         </div>
         <% if @user.icon.present? %>
-          <%= image_tag @user.icon.url, id: :img_prev, class: "user-show-round-img" %>
+        <%= image_tag @user.icon.url, id: :img_prev, class: "user-show-round-img" %>
         <% else %>
-          <%= image_tag "default.png", id: :img_prev %>
+        <%= image_tag "default.png", id: :img_prev %>
         <% end %>
-          <%= f.file_field :icon, id: :user_img %>
+        <%= f.file_field :icon, id: :user_img %>
       </div>
-     </div>
-     <%= f.submit '編集', value:'編集', class: 'btn btn-primary mr-3', id: 'user_edit_submit' %>
-     <%= f.submit '戻る', class:"btn btn-secondary", name: 'back' %>
-   <% end %>
+    </div>
+    <%= f.submit '編集', value:'編集', class: 'btn btn-primary mr-3', id: 'user_edit_submit' %>
+    <%= f.submit '戻る', class:"btn btn-secondary", name: 'back' %>
+    <% end %>
   </div>
 </div>

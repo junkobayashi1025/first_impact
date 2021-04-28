@@ -1,8 +1,8 @@
 <% if current_user != report.user && current_user != report.team.owner %>
   <% if current_user.liked_by?(report.id) %>
-     <td><%= link_to 'いいねを外す', destroy_bookmark_path(report), method: :DELETE, remote: true, class: "bookmarked hide-text" %></td>
+    <td><%= link_to 'いいねを外す', destroy_bookmark_path(report), method: :DELETE, remote: true, class: "bookmarked hide-text" %></td>
   <% else %>
-     <td><%= link_to 'いいね', create_bookmark_path(report), method: :POST, remote: true, class: "bookmark hide-text" %></td>
+    <td><%= link_to 'いいね', create_bookmark_path(report), method: :POST, remote: true, class: "bookmark hide-text" %></td>
   <% end %>
 <% else %>
   <td></td>
@@ -30,5 +30,5 @@
   <% end %>
 </td>
 <td><%= link_to '編集', edit_report_path(report.id), class: 'btn btn-success mr-3', id: "report_index_edit-#{report.id}-submit" if current_user == report.team.owner || current_user == report.user %></td>
-<td><%= link_to '削除', report_path(report.id), method: :delete, data: { confirm: "ユーザー「#{report.title}を削除します。よろしいでしょうか？」" },
-      class: 'btn btn-danger mr-3', id: "report_index_delete-#{report.id}-submit" if current_user == report.team.owner || current_user == report.user %></td>
+<td><%= link_to '削除', report_path(report.id), method: :delete, data: { confirm: "ユーザー「#{report.title}を削除します。よろしいでしょうか？」" }, class: 'btn btn-danger mr-3', id: "report_index_delete-#{report.id}-submit" if current_user == report.team.owner ||
+  current_user == report.user %></td>

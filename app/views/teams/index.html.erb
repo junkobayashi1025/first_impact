@@ -1,4 +1,4 @@
-<div class ="container mt-3">
+<div class="container mt-3">
   <div class="d-flex align-items-center">
     <h1>チーム一覧</h1>
   </div>
@@ -16,36 +16,35 @@
         <div class="card border-secondary" style="max-width: 30rem; max-height:25rem;">
           <div class="card-header-index">
             <%= link_to "#{team.name}", team_path(team.id) %>
-            </div>
-            <%= image_tag team.icon.url, class: "card-img-top rectangle-img" %>
-            <div class="card-body mt-1 team">
-              <div class="card-title">
-                <div class="team-owner-icon"></div>
-                <div class="team-owner-name"><%= link_to "#{team.owner.name}", user_path(team.owner.id) %></div>
-                <div class="team-member-icon"></div>
-                <div class="team-count"><%= "#{team.assigns.count}" %>
-                  <% if current_user == team.owner %>
-                    <%= link_to edit_team_path(team), id: "team_index_edit-#{team}-submit", data: {"turbolinks" => false} do %>
-                      <div class="edit-team-icon mr-1"></div>
-                    <% end %>
-                    <%= link_to team_path(team), method: :delete, data: { confirm: "チーム「#{team.name}を削除します。よろしいでしょうか？」" },
-                        id: "team_index_delete-#{team}-submit" do %>
-                      <div class="delete-team-icon"></div>
-                    <% end %>
-                  <% end %>
-                </div>
-              </div>
-              <div class="remark-box">
-                <% if team.remark.present? %>
-                <p class="card-text"><%= safe_join(team.remark.split("\n"),tag(:br)) %></p>
-                <% else %>
-                <p class="card-text">備考欄：記入なし</p>
+          </div>
+          <%= image_tag team.icon.url, class: "card-img-top rectangle-img" %>
+          <div class="card-body mt-1 team">
+            <div class="card-title">
+              <div class="team-owner-icon"></div>
+              <div class="team-owner-name"><%= link_to "#{team.owner.name}", user_path(team.owner.id) %></div>
+              <div class="team-member-icon"></div>
+              <div class="team-count"><%= "#{team.assigns.count}" %>
+                <% if current_user == team.owner %>
+                  <%= link_to edit_team_path(team), id: "team_index_edit-#{team}-submit", data: {"turbolinks" => false} do %>
+                  <div class="edit-team-icon mr-1"></div>
                 <% end %>
-              </div>
-            </div>
+                <%= link_to team_path(team), method: :delete, data: { confirm: "チーム「#{team.name}を削除します。よろしいでしょうか？」" }, id: "team_index_delete-#{team}-submit" do %>
+                <div class="delete-team-icon"></div>
+              <% end %>
+            <% end %>
           </div>
         </div>
-      <% end %>
+        <div class="remark-box">
+          <% if team.remark.present? %>
+            <p class="card-text"><%= safe_join(team.remark.split("\n"),tag(:br)) %></p>
+          <% else %>
+            <p class="card-text">備考欄：記入なし</p>
+          <% end %>
+        </div>
+      </div>
     </div>
-    <%= paginate @teams %>
   </div>
+  <% end %>
+  </div>
+<%= paginate @teams %>
+</div>

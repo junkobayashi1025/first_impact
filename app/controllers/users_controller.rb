@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :set_q, only: [:index]
-  before_action :authenticate_user!
 
   def current_user_home
     redirect_to current_user
@@ -13,7 +12,7 @@ class UsersController < ApplicationController
 
   def show
     threshold = DateTime.now + 3.day
-    @expired_reports = @user.reports.where('due <= ?', threshold).order(due: :asc)
+    @expired_reports = @user.reports.includes([:team]).where('due <= ?', threshold).order(due: :asc)
     if @expired_reports.count > 0 && current_user == @user
       number = @expired_reports.count
       flash.now[:expired_alert] = "「#{@user.name}」担当の期限切れ、期限直前の報告書が#{number}件あります。"

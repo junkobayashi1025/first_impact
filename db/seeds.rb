@@ -5,19 +5,23 @@ User.find_or_create_by!(email: 'admin@example.com') do |user|
   user.password_confirmation = 'admin@example.com'
 end
 
-20.times do |n|
-  name = Faker::Name.name
-  email = Faker::Internet.email
-  password = email
-  User.create!(name: name,
-               email: email,
-               password: password,
-               password_confirmation: password,
-               )
-end
+# 20.times do |n|
+#   name = Faker::Name.name
+#   email = Faker::Internet.email
+#   password = email
+#   User.create!(name: name,
+#                email: email,
+#                password: password,
+#                password_confirmation: password,
+#                )
+# end
 
 require "csv"
 require "date"
+
+CSV.foreach('db/sample_date/user_sample.csv') do |info|
+  User.create(:name => info[0], :email => info[1], :password => info[2])
+end
 
 CSV.foreach('db/sample_date/team_sample.csv') do |info|
   Team.create(:name => info[0], :remark => info[1], :owner_id => info[2])
@@ -44,5 +48,7 @@ CSV.foreach('db/sample_date/report_sample.csv') do |info|
                 :approval => info[13],
                 :step => info[14],
                 :status => info[15],
-                :due => info[16])
+                :due => info[16],
+                :owner => info[17],
+                :author => info[18])
 end

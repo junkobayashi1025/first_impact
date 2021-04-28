@@ -3,35 +3,35 @@
     ※報告書の担当者になっているもの
   </div>
   <% if @user.author_report.any? == true %>
-    <table class="table panel-body">
-      <thead class="thead-dark">
-        <tr>
-          <th>タイトル</th>
-          <th>チーム名</th>
-          <th>責任者</th>
-          <th>担当者</th>
-          <th>ステップ</th>
-          <th>提出〆切</th>
-          <th></th>
-        </tr>
-      </thead>
+  <table class="table panel-body">
+    <thead class="thead-dark">
+      <tr>
+        <th>タイトル</th>
+        <th>チーム名</th>
+        <th>責任者</th>
+        <th>担当者</th>
+        <th>ステップ</th>
+        <th>提出〆切</th>
+        <th></th>
+      </tr>
+    </thead>
 
-      <% @user.author_report.each do |report| %>
-        <tr>
-          <td class="user-header"><%= link_to "#{report.title}", report_path(report.id) %></td>
-          <td class="user-header"><%= link_to "#{report.team.name}", team_path(report.team.id) %></td>
-          <td><%= link_to "#{report.team.owner.name}", user_path(report.team.owner.id) %></td>
-          <td><%= report.step %></td>
-          <td><%= report.status %></td>
-          <% if report.due.present? %>
-            <td><%= report.due.strftime("%Y年 %m月 %d日") %></td>
-          <% else %>
-            <td>未定</td>
-          <% end %>
-        </tr>
+    <% @user.author_report.each do |report| %>
+    <tr>
+      <td class="user-header"><%= link_to "#{report.title}", report_path(report.id) %></td>
+      <td class="user-header"><%= link_to "#{report.team.name}", team_path(report.team.id) %></td>
+      <td><%= link_to "#{report.team.owner.name}", user_path(report.team.owner.id) %></td>
+      <td><%= report.step %></td>
+      <td><%= report.status %></td>
+      <% if report.due.present? %>
+      <td><%= report.due.strftime("%Y年 %m月 %d日") %></td>
+      <% else %>
+      <td>未定</td>
       <% end %>
-    </table>
+    </tr>
+    <% end %>
+  </table>
   <% else %>
-    <strong>該当する報告書はありません</strong>
+  <strong>該当する報告書はありません</strong>
   <% end %>
 </div>

@@ -2,7 +2,6 @@ class ReportsController < ApplicationController
   before_action :set_report, only: [:show, :edit, :update, :destroy, :approval_request, :approval, :reject]
   before_action :set_q, only: [:index]
   before_action :set_q_archive, only: [:archive]
-  before_action :authenticate_user!
 
   def index
     if params[:tag_name]
@@ -25,7 +24,8 @@ class ReportsController < ApplicationController
     if current_user.assign_teams.ids.include?(@team.id)
       @report = Report.new
       @report.author = current_user.name
-      @report.owner = Team.find(params[:team_id]).owner.name
+      report_owner_id = Team.find(params[:team_id]).owner_id
+      @report.owner = User.find(report_owner_id).name
       5.times { @report.attachments.build }
     else
       redirect_to team_path(@team)
@@ -73,9 +73,9 @@ class ReportsController < ApplicationController
         redirect_to report_path(@report)
       else
         render :edit
-       end
-     end
-   end
+      end
+    end
+  end
 
   def destroy
     if current_user == @report.user || current_user == @report.team.owner && @report.checkbox_final == false
