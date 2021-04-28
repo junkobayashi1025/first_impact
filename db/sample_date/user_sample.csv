@@ -1,4 +1,4 @@
-name,email,password,admin,user_id
+name,email,password,admin,id
 admin,admin@example.com,admin@example.com,TRUE,1
 中川 サンタマリア,nakagawa_stmaria@example.com,nakagawa_stmaria@example.com,FALSE,2
 吉川 真奈美,yoshikawa_manami@example.com,yoshikawa_manami@example.com,FALSE,3
