@@ -24,13 +24,15 @@ class Report < ApplicationRecord
   end
 
   def accrual_date_check
-    self.accrual_date > Date.today
-    errors.add(:accrual_date, "は#{Date.today}以前の日付を設定してください")
+    if self.accrual_date > Date.today
+      errors.add(:accrual_date, "は#{Date.today}以前の日付を設定してください")
+    end
   end
 
   def confirmed_date_check
-    self.checkbox_interim && self.confirmed_date.present? && self.accrual_date + 14.day > self.confirmed_date
-    errors.add(:confirmed_date, "は3.恒久対策(提出〆切)以降の日付を設定してください")
+    if self.checkbox_interim && self.confirmed_date.present? && self.accrual_date + 14.day > self.confirmed_date
+      errors.add(:confirmed_date, "は3.恒久対策(提出〆切)以降の日付を設定してください")
+    end
   end
 
   def build_attachment_for_form

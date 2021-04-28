@@ -85,4 +85,17 @@ class User < ApplicationRecord
     Report.where(team_id: team_ids, checkbox_final: true).order(updated_at: :desc).limit(5)
   end
 
+  def done_report_user
+    Report.where(user_id: self.id, checkbox_final: true).order(updated_at: :desc)
+  end
+
+  def bookmark_report_updated
+    Report.where(user_id: self.id, checkbox_final: false).order(updated_at: :desc).limit(5)
+  end
+
+  def bookmark_report_done
+    Report.where(user_id: self.id, checkbox_final: true).order(updated_at: :desc).limit(5)
+  end
+
+
 end

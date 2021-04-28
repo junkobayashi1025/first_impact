@@ -1,30 +1,30 @@
 <div class="panel panel-default text-left">
-  <h1>※チーム内で依頼中の報告書</h1>
+  <h1>※依頼中の報告書(担当)</h1>
   <% if user.request_report.any? == false %>
-  <strong>該当する報告書はありません</strong>
+    <strong>該当する報告書はありません</strong>
   <% else %>
-  <table class="table table-modal panel-body">
-    <thead class="thead-dark">
-      <tr>
-        <th>タイトル</th>
-        <th>担当者</th>
-        <th>ステップ</th>
-        <th>提出〆切</th>
-      </tr>
-    </thead>
+    <table class="table table-modal panel-body">
+      <thead class="thead-dark">
+        <tr>
+          <th>タイトル</th>
+          <th>責任者</th>
+          <th>ステップ</th>
+          <th>提出〆切</th>
+        </tr>
+      </thead>
 
-    <% user.request_report.each do |report| %>
-    <tr>
-      <td class="user-header"><%= link_to "#{report.title}", report_path(report.id) %></td>
-      <td><%= link_to "#{report.user.name}", user_path(report.user.id) %></td>
-      <td><%= report.step %></td>
-      <% if report.due.present? %>
-      <td><%= report.due.strftime("%Y年 %m月 %d日") %></td>
-      <% else %>
-      <td>未定</td>
+      <% user.request_report.each do |report| %>
+        <tr>
+          <td class="user-header"><%= link_to "#{report.title}", report_path(report.id) %></td>
+          <td><%= link_to "#{report.team.owner.name}", user_path(report.team.owner.id) %></td>
+          <td><%= report.step %></td>
+          <% if report.due.present? %>
+            <td><%= report.due.strftime("%Y年 %m月 %d日") %></td>
+          <% else %>
+            <td>未定</td>
+          <% end %>
+        </tr>
       <% end %>
-    </tr>
-    <% end %>
-  </table>
+    </table>
   <% end %>
 </div>

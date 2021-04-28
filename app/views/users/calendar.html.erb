@@ -1,0 +1,51 @@
+<div class="container mt-3">
+  <h1><%= "ユーザー：#{@user.name}の報告書〆切カレンダー"%></h1>
+  <hr>
+  <div class="float_right">
+    <div class="">
+      <i class="far fa-circle" style="color: red;"></i>
+      <span>作成中</span>
+      <i class="fa fa-circle notification-circle" style="color: red;"></i>
+      <span>承認依頼中</span>
+    </div>
+    <div class="">
+      <span style="color: white; background-color: #66b7ec;">第一報</span>
+      <span style="color: white; background-color: #51a1a2;">中間報告</span>
+      <span style="color: white; background-color: #d5848b;">有効性確認</span>
+    </div>
+  </div>
+
+  <%= month_calendar events: @reports.where(checkbox_final:false) do |date, reports| %>
+  <%= date.day %>
+  <% reports.each do |report| %>
+    <div>
+      <% if report.checkbox_interim %>
+        <% if report.approval %>
+          <i class="fa fa-circle notification-circle" style="color: red;"></i>
+          <%= link_to "#{report.title}", report_path(report.id), style:"color: white; background-color: #d5848b;" %>
+        <% else %>
+          <i class="far fa-circle" style="color: red;"></i>
+          <%= link_to "#{report.title}", report_path(report.id), style:"color: white; background-color: #d5848b;" %>
+        <% end %>
+        <% elsif report.checkbox_first %>
+          <% if report.approval %>
+            <i class="fa fa-circle notification-circle" style="color: red;"></i>
+            <%= link_to "#{report.title}", report_path(report.id), style:"color: white; background-color: #51a1a2;" %>
+          <% else %>
+            <i class="far fa-circle" style="color: red;"></i>
+            <%= link_to "#{report.title}", report_path(report.id), style:"color: white; background-color: #51a1a2;" %>
+          <% end %>
+        <% else %>
+          <% if report.approval %>
+            <i class="fa fa-circle notification-circle" style="color: red;"></i>
+            <%= link_to "#{report.title}", report_path(report.id), style:"color: white; background-color: #66b7ec;" %>
+          <% else %>
+            <i class="far fa-circle" style="color: red;"></i>
+            <%= link_to "#{report.title}", report_path(report.id), style:"color: white; background-color: #66b7ec;" %>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+  <%= link_to '戻る', user_path(@user), id: "calendar-back-submit", class:"btn btn-secondary" %>
+</div>

@@ -1,0 +1,21 @@
+<div class="panel panel-default text-left">
+  <h1>※完了した報告書(担当)</h1>
+  <% if user.done_report_user.any? == false %>
+    <strong>該当する報告書はありません</strong>
+  <% else %>
+    <table class="table table-modal panel-body">
+      <thead class="thead-dark">
+        <tr>
+          <th>タイトル</th>
+          <th>責任者</th>
+        </tr>
+      </thead>
+      <% user.done_report_user.each do |report| %>
+        <tr>
+          <td><%= link_to "#{report.title}", report_path(report.id) %></td>
+          <td><%= "#{report.owner}" %></td>
+        </tr>
+      <% end %>
+    </table>
+  <% end %>
+</div>

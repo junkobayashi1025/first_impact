@@ -11,7 +11,9 @@ Rails.application.routes.draw do
   end
 
   resources :users do
-    get  :calendar
+    member do
+      get  :calendar
+    end
   end
 
   resources :reports do

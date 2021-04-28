@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :calendar]
   before_action :set_q, only: [:index]
 
   def current_user_home
@@ -65,7 +65,7 @@ class UsersController < ApplicationController
     if params[:back]
       redirect_to user_path(@user)
     else
-     @reports = Report.where(user_id: @user.id, checkbox_final: false)
+      @reports = Report.where(user_id: @user.id, checkbox_final: false)
     end
   end
 

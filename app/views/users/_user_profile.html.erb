@@ -1,0 +1,48 @@
+<!-- <div class ="container mt-3"> -->
+<div class="d-flex ml-3 text-left profile">
+  <h4>
+    <プロフィール></h4>
+    <% if current_user == user %>
+      <%= link_to '編集', edit_user_path(user), class: 'btn btn-success mb-2 mr-2', id: "user_index_edit-#{user}-submit", data: {"turbolinks" => false}%>
+      <%= link_to '削除', user_path(user), class: 'btn btn-danger mb-2 mr-2', method: :delete, data: { confirm: "チーム「#{user.name}を削除します。 よろしいでしょうか？」" }, id: "user_index_delete-#{user}-submit" %>
+    <% end %>
+</div>
+
+<div class="text-center profile_image">
+  <%= image_tag @user.icon.url, class: "user-show-round-img" %>
+</div>
+
+<div class="ml-5 text-left">
+  <h4 id=<%= "users-show-#{@user.id}-name" %>><%= @user.name %></h4>
+  <h4 id=<%= "users-show-#{@user.id}-email" %>><%= @user.email %></h4>
+</div><br>
+
+
+
+
+
+<div class="ml-3">
+  <h4 class="text-left">
+    <所属チーム></h4>
+  <table class="table table-modal table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        <th style="width: 20%">チーム名</th>
+        <th style="width: 1%"></th>
+        <th style="width: 1%"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% user.assigns.each do |assign| %>
+        <tr>
+          <td><%= link_to "#{assign.team.name}", team_path(assign.team.id) %></td>
+          <td><%= link_to '解散', team_path(assign.team.id), method: :delete, data: { confirm: "チーム「#{assign.team.name}を削除します。よろしいでしょうか？」" }, class: 'btn btn-danger ml-1 mr-1 mt-1', id: "user_show_delete_team-#{assign.team.id}-submit" if current_user ==
+            assign.team.owner %></td>
+          <td><%= link_to '離脱', team_assign_path(assign.team, assign.id), method: :delete, data: { confirm: "チーム「#{assign.team.name}を離脱します。よろしいでしょうか？」" }, class: 'btn btn-info ml-1 mr-1 mt-1', id: "user_show_dropout_team-#{assign.team.id}-submit" if
+            current_user == assign.user && current_user != assign.team.owner %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
