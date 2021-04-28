@@ -20,11 +20,11 @@ require "csv"
 require "date"
 
 CSV.foreach('db/sample_date/user_sample.csv') do |info|
-  User.create(:name => info[0], :email => info[1], :password => info[2], :admin => info[3])
+  User.create(:name => info[0], :email => info[1], :password => info[2], :admin => info[3], :user_id => info[4])
 end
 
 CSV.foreach('db/sample_date/team_sample.csv') do |info|
-  Team.create(:name => info[0], :remark => info[1], :owner_id => info[2])
+  Team.create(:name => info[0], :remark => info[1], :owner_id => info[2], :team_id => info[3])
 end
 
 CSV.foreach('db/sample_date/assign_sample.csv') do |info|

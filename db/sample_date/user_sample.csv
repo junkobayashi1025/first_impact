@@ -1,18 +1,18 @@
-name,email,password,admin
-admin,admin@example.com,admin@example.com,TRUE
-中川 サンタマリア,nakagawa_stmaria@example.com,nakagawa_stmaria@example.com,FALSE
-吉川 真奈美,yoshikawa_manami@example.com,yoshikawa_manami@example.com,FALSE
-吉田 郁恵,yoshida_ikue@example.com,yoshida_ikue@example.com,FALSE
-山元 満,yamamoto_mitsuru@example.com,yamamoto_mitsuru@example.com,FALSE
-今川 徹,imagawa_tohru@example.com,imagawa_tohru@example.com,FALSE
-岩村 あや子,iwamura_ayako@example.com,iwamura_ayako@example.com,FALSE
-三浦 雅之,miura_masayuki@example.com,miura_masayuki@example.com,FALSE
-三村 みあ,mimura_mia@example.com,mimura_mia@example.com,FALSE
-北野 みき,kitano_miki@example.com,kitano_miki@example.com,FALSE
-沼田 惇,numata_atsushi@example.com,numata_atsushi@example.com,FALSE
-福山 華子,fukuyama_hanako@example.com,fukuyama_hanako@example.com,FALSE
-ともさか ケンイチ,tomosaka_kenichi@example.com,tomosaka_kenichi@example.com,FALSE
-花岡 竜也,hanaoka_tatsuya@example.com,hanaoka_tatsuya@example.com,FALSE
-菅澤 光,sugasawa_hikaru@example.com,sugasawa_hikaru@example.com,FALSE
-渡辺 杏,watanabe_ann@example.com,watanabe_ann@example.com,FALSE
-石山 朝陽,ishiyama_asahi@example.com,ishiyama_asahi@example.com,FALSE
+name,email,password,admin,user_id
+admin,admin@example.com,admin@example.com,TRUE,1
+中川 サンタマリア,nakagawa_stmaria@example.com,nakagawa_stmaria@example.com,FALSE,2
+吉川 真奈美,yoshikawa_manami@example.com,yoshikawa_manami@example.com,FALSE,3
+吉田 郁恵,yoshida_ikue@example.com,yoshida_ikue@example.com,FALSE,4
+山元 満,yamamoto_mitsuru@example.com,yamamoto_mitsuru@example.com,FALSE,5
+今川 徹,imagawa_tohru@example.com,imagawa_tohru@example.com,FALSE,6
+岩村 あや子,iwamura_ayako@example.com,iwamura_ayako@example.com,FALSE,7
+三浦 雅之,miura_masayuki@example.com,miura_masayuki@example.com,FALSE,8
+三村 みあ,mimura_mia@example.com,mimura_mia@example.com,FALSE,9
+北野 みき,kitano_miki@example.com,kitano_miki@example.com,FALSE,10
+沼田 惇,numata_atsushi@example.com,numata_atsushi@example.com,FALSE,11
+福山 華子,fukuyama_hanako@example.com,fukuyama_hanako@example.com,FALSE,12
+ともさか ケンイチ,tomosaka_kenichi@example.com,tomosaka_kenichi@example.com,FALSE,13
+花岡 竜也,hanaoka_tatsuya@example.com,hanaoka_tatsuya@example.com,FALSE,14
+菅澤 光,sugasawa_hikaru@example.com,sugasawa_hikaru@example.com,FALSE,15
+渡辺 杏,watanabe_ann@example.com,watanabe_ann@example.com,FALSE,16
+石山 朝陽,ishiyama_asahi@example.com,ishiyama_asahi@example.com,FALSE,17
