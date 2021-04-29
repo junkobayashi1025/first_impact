@@ -1,0 +1,117 @@
+<header>
+  <div class="header-content">
+    <div class="header-content-inner">
+      <p>
+        <span class="wow bounceInDown  animated" style="visibility: visible; animation-name: bounceInDown;">
+          <%= image_tag asset_path('logo.png'), class:'top-images img-fluid' %>
+        </span>
+      </p>
+      <h1 id="mcopy" style="font-size: 28px;">報告書共有ステーション</h1>
+      <hr class="green">
+      <p id="dscr">
+        <br>
+        <span>
+          <i class="fas fa-check"></i>
+        </span>
+        チーム内で報告書の情報を共有することで、適切な報告書の運用管理ができます<br>
+        <span>
+          <i class="fas fa-check"></i>
+        </span>
+        過去の全報告書が保管されており、対策案作成時に参考にすることができます<br>
+      </p>
+      <a href="#about" class="btn-gradient-radius">もっと詳しく</a>
+      <%= link_to "無料登録", new_user_session_path, class:'btn-gradient-radius'%>
+    </div>
+
+  </div>
+</header>
+<section id="about">
+  <div class="container">
+    <div class="row">
+      <div class=" text-center">
+        <h2 class="section-heading">できること</h2>
+        <hr class="white">
+        <p id="remembering" style="font-size: 18px;">
+          チーム内にて作成した報告書の進捗状況や提出〆切等を<br>
+          メンバー間で情報共有することができます<br>
+          <br>
+          <br>
+
+          <span class="ow bounceInUp animated_">
+            <span><%= image_tag asset_path('top_image1.png'), class:'top-images img-fluid' %></span>
+            <i class="fa fa-info-circle"></i>
+            チーム詳細ページ<br></span><br>
+          提出〆切日はカレンダーで確認できるだけでなく、期日が近づくとメッセージにて知らせてくれます<br>
+
+          <br>
+          <span class="ow bounceInUp animated_">
+            <span><%= image_tag asset_path('top_image2.png'), class:'top-images img-fluid' %></span>
+            <i class="fa fa-info-circle"></i>
+            報告書作成ページ
+          </span><br>
+          <br>
+          報告書の提出は3段階(第一報、中間報告、有効性の確認)となっており、<br>
+          段階ごとに、チーム責任者の承認をもらわないと、<br>
+          次ステップに移れず報告書に記入することができません<br>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="feature">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h2 class="section-heading">報告書共有ステーションを利用すれば、適切な報告書の運用管理ができます</h2>
+        <hr class="primary">
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+
+      <div class="col-lg-4 col-md-4 col-sm-6 text-center">
+        <div class="service-box">
+          <i class="fas fa-users fa-4x wow bounceIn text-primary" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: bounceIn;"></i>
+          <h3>情報の共有</h3>
+          <p class="text-muted">チーム内にて、情報の共有化</p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-6 text-center">
+        <div class="service-box">
+          <i class="fas fa-search-plus fa-4x wow bounceIn text-primary" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: bounceIn;"></i>
+          <h3>類似案件の検索</h3>
+          <p class="text-muted">対策案の参考に</p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-6 text-center">
+        <div class="service-box">
+          <i class="fa fa-camera fa-4x wow bounceIn text-primary" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: bounceIn;"></i>
+          <h3>写真の添付</h3>
+          <p class="text-muted">伝えづらい状況を写真で説明</p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-6 text-center">
+        <div class="service-box">
+          <i class="fa fa-comment-o fa-4x wow bounceIn text-primary" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: bounceIn;"></i>
+          <h3>コメントの共有</h3>
+          <p class="text-muted">コメント情報が一目瞭然</p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-6 text-center">
+        <div class="service-box">
+          <i class="far fa-check-square fa-4x wow bounceIn text-primary" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: bounceIn;"></i>
+          <h3>提出〆切の通知</h3>
+          <p class="text-muted">提出遅れを防ぐ</p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-6 text-center">
+        <div class="service-box">
+          <i class="fa fa-folder-open fa-4x wow bounceIn text-primary" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: bounceIn;"></i>
+          <h3>全報告書を保管</h3>
+          <p class="text-muted">全報告書を一括管理</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
