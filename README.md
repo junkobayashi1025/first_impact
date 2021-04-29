@@ -2,7 +2,6 @@
 
 # 報告書共有ステーション
 https://warm-tor-13687.herokuapp.com/
-<br>
 <img src="./public/images/img/TOP.png" alt="TOP画面">
 
 ## 概要
