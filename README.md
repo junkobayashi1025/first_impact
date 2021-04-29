@@ -37,6 +37,12 @@ https://warm-tor-13687.herokuapp.com/
 ## できること詳細
 #### 報告書一覧(作成中)ページ
 https://docs.google.com/spreadsheets/d/1bmyBLmHnn4NFDbJqat0Ty4VN9wqgdejzqYHz7MBw4fU/edit#gid=1823805619
+#### 報告書一覧(アーカイブ)ページ
+https://docs.google.com/spreadsheets/d/1bmyBLmHnn4NFDbJqat0Ty4VN9wqgdejzqYHz7MBw4fU/edit#gid=1910614996
+#### チーム詳細ページ
+https://docs.google.com/spreadsheets/d/1bmyBLmHnn4NFDbJqat0Ty4VN9wqgdejzqYHz7MBw4fU/edit#gid=172898706
+#### 報告書作成ページ
+https://docs.google.com/spreadsheets/d/1bmyBLmHnn4NFDbJqat0Ty4VN9wqgdejzqYHz7MBw4fU/edit#gid=823170295
 
 ## バージョン情報
 - Ruby 2.6.5
