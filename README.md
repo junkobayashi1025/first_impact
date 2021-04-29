@@ -2,7 +2,7 @@
 
 # 報告書共有ステーション
 https://warm-tor-13687.herokuapp.com/
-<img src="./public/images/images/TOP.png" alt="TOP画面">
+<img src="./public/images/TOP.png" alt="TOP画面">
 
 ## 概要
 社内、工場にてトラブル(※1)が発生した際、作成される報告書の記録や進捗状況の確認、また報告書の内容にコメントを残すことができるツール						
