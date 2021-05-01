@@ -1,5 +1,5 @@
 # 報告書共有ステーション
-https://warm-tor-13687.herokuapp.com/
+https://warm-tor-13687.herokuapp.com
 <img src="./public/images/TOP.png" alt="TOP画面">
 
 ## 制作の背景
